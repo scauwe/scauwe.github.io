@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>VanCauwenberge.info</title>
+	<meta name="viewport" content="width=800">
+	<meta name="description" content="Vancauwenberge.info IDM extentions">
+<style type="text/css">
+body {
+  margin: 0;
+  font-size: .9em;
+  line-height: 1.4;
+  color: #333333;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 0.4em;
+}
+.content{
+  margin-left: 0;
+  margin-right: 0;
+  background: #fff;
+  padding-left: 4em;
+  padding-right: 0em;
+  padding-top: 4em;
+  padding-bottom: 0em;
+  position: relative;
+  left:-2em;
+  top:-2em;
+  width:100%;
+  clear: left;
+}
+.donate{
+  position: fixed; 
+  top: 3.2em; /** 2.8+0.4 em**/
+  left: 2.8em;
+  width: 10em; 
+  border:1px solid #000000;
+  padding: 0.7em;
+  z-index: 999;
+}
+.center{
+  display: block;
+  margin: auto;
+}
+.imagecaption{
+  background-color: #EFEFEF;
+  padding: 1.4em;
+}
+.imagecaption a img{
+  border: 1px solid #A9A9A9;
+}
+</style>
+
+<!--http://users.tpg.com.au/j_birch/plugins/superfish/download/-->
+<!-- link to the CSS files for this menu type -->
+<link rel="stylesheet" media="screen" href="superfish.css">
+<link rel="stylesheet" media="screen" href="superfish-navbar.css">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<!-- link to the JavaScript files (hoverIntent is optional) -->
+<!-- if you use hoverIntent, use the updated r7 version (see FAQ) -->
+<script src="hoverIntent.js"></script>
+<script src="superfish.js"></script>
+<script type="text/javascript">
+var menu;
+
+function selectMenu(item){
+	//Destroy the old menu in order to reset the current path
+	if (menu !== undefined)
+		$(menu).superfish('destroy');
+	
+	//Hide all donate buttons
+	$('.donate').hide();
+	//Hide all content
+	$('.content').hide('slow');
+	//Remove all active classes
+	$('li.active').removeClass('active');
+
+	//Get the identifier of the menu to show
+	var path = $(item).attr('href');
+	var id = path.split('#');
+	id = id[id.length-1];
+	//Now show selected item
+	$('#menu_'+id).addClass('active');
+
+	
+	$('a[href="'+path+'"]')
+	  .parents('li')  // gets all list items that are ancestors of the link
+	  .addClass('active');
+
+/*	$(item)
+	  .parents('li')  // gets all list items that are ancestors of the link
+	  .addClass('active');*/
+	  
+	$('#text_'+id).show('slow');
+
+	//Show corresponding donate button
+	id = id.split("_");
+	id = id[0];
+	$('#donate_'+id).show();
+	
+	//reinitialize Superfish menu	
+	menu = $('ul.sf-menu').superfish({
+		pathClass: 'active',
+		animation: {opacity:'show',height:'show'}
+	});
+	
+}
+
+$(document).ready(function(){
+	$('a[href^="#"]').click(function() {
+		selectMenu(this);
+	});
+	
+	/*
+	$(".sf-menu a").click(function() {
+		selectMenu(this);
+		//return false;
+	});
+	*/
+	
+	//Set the initial selected menu based on the url tag
+	var pathName = window.location.href;
+	var path = pathName.split('#');
+	path = path[1];
+	
+	//Default to path_0 if no hash in url
+	if (path === undefined || path=='') {
+		path="about_Me";
+	}
+	selectMenu(
+	  $("ul.sf-menu")
+	  .find("a[href$='#" + path + "']") // gets all links that match the href
+	  .parents('li')  // gets all list items that are ancestors of the link
+	  .children('a'));  // walks down one level from all selected li's
+});
+
+</script>
+
+</head>
+
+<body>
+
+<!-- DONATE BUTTONS -->
+<!-- DONATE BUTTONS -->
+<!-- DONATE BUTTONS -->
+
+<div id="donate_enhTrace" class="donate">
+<p>Support the <b>Enhanced Trace</b> plugin by making a donation</p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input style="display: block;margin: 0 auto;text-align: center;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+</div>
+
+<div id="donate_ae" class="donate">
+<p>Support the <b>Association Editor</b> plugin by making a donation</p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input style="display: block;margin: 0 auto;text-align: center;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+</div>
+
+<div id="donate_txtdriver" class="donate">
+<p>Support the <b>Generic File Driver</b> by making a donation</p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input style="display: block;margin: 0 auto;text-align: center;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+</div>
+
+
+<div id="donate_unlock" class="donate">
+<p>Support the <b>Package Unlocker</b> plugin by making a donation</p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input style="display: block;margin: 0 auto;text-align: center;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+</div>
+
+
+<!-- MENU -->
+<!-- MENU -->
+<!-- MENU -->
+
+
+<div id="parent" style="position:relative;">
+	<div id="menuwrap" style="position:relative;width:800px;margin-left: auto ;  margin-right: auto ;padding:0px;">
+		<div id="menu">
+					<ul id="sample-menu-4" class="sf-menu sf-navbar">
+						<li>
+							<a href="#">About</a>
+							<ul>
+								<li><a href="#about_Me">Me</a></li>
+								<li><a href="#about_License">License</a></li>
+								<li><a href="#about_Support">Support</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="#enhTrace">Enhanced trace</a>
+							<ul>
+								<li><a href="#enhTrace_Intro">Intro</a></li>
+								<li><a href="#enhTrace_Usage">User Guide</a></li>
+								<li><a href="#enhTrace_Installation">Installation</a></li>
+								<li><a href="#enhTrace_History">History &amp; limitations</a></li>
+								<li><a href="#enhTrace_Roadmap">Roadmap</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="#ae">Association Editor</a>
+							<ul>
+								<li><a href="#ae_intro">Intro</a></li>
+								<li><a href="#ae_installation">Installation</a></li>
+								<li><a href="#ae_usage">User Guide</a></li>
+								<li><a href="#ae_history">Version History</a></li>
+								<li><a href="#ae_limitations">Known Limitations</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="#txtdriver">Generic File Driver</a>
+							<ul>
+								<li><a href="#txtdriver_intro">Introduction</a></li>
+								<li><a href="#txtdriver_history">Version History</a></li>
+								<li><a href="#txtdriver_installation">Installation</a></li>
+								<li><a href="#txtdriver_policies">Policies</a></li>
+								<li><a href="#txtdriver_configuration">Configuration</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="#unlock">Package Unlocker</a>
+							<ul>
+								<li><a href="#unlock_introduction">Intro</a></li>
+								<li><a href="#unlock_installation">Installation</a></li>
+							</ul>
+						</li>
+					</ul>
+		<!--menu div-->
+		</div>
+
+<!-- ABOUT -->
+<!-- ABOUT -->
+<!-- ABOUT -->
+	
+<div id="text_about_Me" class="content" style="display:none;">
+<h3>About - Me</h3>
+<p>You can read about me on <a href="https://be.linkedin.com/in/stefaanvancauwenberge">linkedin</a>.</p>
+</div>
+
+<div id="text_about_License" class="content" style="display:none;position:relative;width:100%;clear: left;">
+<h3>About - License</h3>
+<p>The software is provided 'as is' under the <a href="http://mozilla.org/MPL/2.0/">MPL (Mozilla Public License) 2.0</a>. Please read the full license to know the limitations.</p>
+</div>
+
+<div id="text_about_Support" class="content" style="display:none;position:relative;width:100%;clear: left;">
+<h3>About - Support</h3>
+<p>Support is based on best effort. I am in the process of moving my code to github. Once their, support will be via github. Until then, you can leave a message on the corresponding cool tools page.</p>
+<p>If you want to support me, a donation will always help.</p>
+<p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+</p>
+</div>
+
+<!-- ENHANCED TRACE -->
+<!-- ENHANCED TRACE -->
+<!-- ENHANCED TRACE -->
+
+<div id="text_enhTrace" class="content" style="display:none;">
+<h3>Enhanced Trace</h3>
+<ul>
+<li><a href="#enhTrace_Intro">Introduction</a></li>
+<li><a href="#enhTrace_Usage">User Guide</a></li>
+<li><a href="#enhTrace_Installation">Installation</a></li>
+<li><a href="#enhTrace_History">History &amp; Limitations</a></li>
+<li><a href="#enhTrace_Roadmap">Roadmap</a></li>
+</ul>
+</div>
+
+<div id="text_enhTrace_Intro" class="content" style="display:none;position:relative;width:100%;clear: left;">
+<h3>Introduction</h3>
+<p>Tracing IDM drivers can be difficult, especially if you have a lot of policies. Designer has a colored trace view, but mixes all drivers. The log files on the server are missing the nice colors. </p>
+<p>This IDM designer plugin tries to make tracing IDM drivers simpler. It provides the following features:
+<ul>
+	<li>Simple context menu to start the trace.</li>
+	<li>Parse the IDM trace and present an outline tree view.</li>
+	<li>Filter the trace per driver.</li>
+	<li>Drill down on an event with a fish-bone overview.</li>
+</ul>
+</p>
+</div>
+
+
+<div id="text_enhTrace_Usage" class="content" style="display:none;position:relative;width:100%;clear: left;">
+<h3>User Guide</h3>
+<h4><a name="start"></a>Starting the trace</h4>
+<p>Note: The Enhanced Trace plugin is optimized for <strong>trace level 3</strong>.</p>
+
+<p>The trace is server specific. It uses an extended LDAP operation to a specific server to get the trace data directly from eDirectory running on that given server. Right click on the server object (in the outline view) running your driver, select Live -&gt; Trace. This will open and start the enhanced trace on the selected server.
+<br/>
+
+<span class="center imagecaption" style="width: 260px;">
+	<a href="https://www.netiq.com/communities/cool-solutions/wp-content/uploads/sites/2/2015/06/EnhTraceStart.png">
+		<img  src="https://www.netiq.com/communities/cool-solutions/wp-content/uploads/sites/2/2015/06/EnhTraceStart.png" alt="Start Enhanced trace" />
+		<br/>
+		<span  class="center" style="text-align: center">Start Enhanced trace</span>
+	</a>
+</span>
+</p>
+
+<p>Note that the trace will start using the properties defined on the given server object. If no information is found for eg dns or IP address information, it will fall back to the IDVault properties. So, on a multi-server environment, make sure to complete the DNS or host address name of the server!</p>
+
+<p>When you start the trace, you will get a screen similar to the standard trace screen.
+
+<span class="center imagecaption" style="width: 500px;">
+	<a href="https://www.netiq.com/communities/cool-solutions/wp-content/uploads/sites/2/2015/06/EnhTraceLive.png">
+		<img  src="https://www.netiq.com/communities/cool-solutions/wp-content/uploads/sites/2/2015/06/EnhTraceLive-500x274.png" alt="Enhanced trace live editor view" />
+		<br/>
+		<span  class="center" style="text-align: center">Enhanced trace live editor view</span>
+	</a>
+</span>
+
+</p>
+<h3>Outline Tree view</h3>
+<p>As soon as the trace starts, it will parse the received trace messages and present a tree view in the outline pane. Each node represents a trace step. The plugin tries to group trace messages, not only per driver and event, but also create a hierarchy of trace messages.</p>
+<p>
+The top level event gives a short summary: type of event, object class, object cn, association and worst status in the event.</p>
+
+<p>The highlighted event below is for a publisher event of the JDBC driver 'Corner'. It shows an add event of the USER table, with cn (in JDBC terms the primary key of the table) equal to 33300.
+
+<span class="center imagecaption" style="width: 258px;">
+	<a href="https://www.netiq.com/communities/cool-solutions/wp-content/uploads/sites/2/2015/06/EnhTraceTreeView.png">
+		<img  src="https://www.netiq.com/communities/cool-solutions/wp-content/uploads/sites/2/2015/06/EnhTraceTreeView.png" alt="Enhanced trace tree view" />
+		<br/>
+		<span  class="center" style="text-align: center">Enhanced trace tree view</span>
+	</a>
+</span>
+
+
+</p>
+<h4><a name="filter"></a>Filter trace</h4>
+<p>You can filter the traces to a given driver. Note: the names are not the driver names, but the trace names as defined on the driver. If not specified, this defaults to the driver name.</p>
+<h4></a>Drill down through the events</h4>
+<p>You can drill down through the events and zoom in. Whatever event you click on, you will always drill down just one level.</p>
+
+<p>Note that this is a drill down feature: eg: on a high level, every command performed in eg the command transformation policy, will be traced as being part of the command transformation policy, even if that command passes the output transformation. If you drill down on the subcommand, it will be split up into it's individual components and thus have trace messages in the output transformation.</p>
+<h5>Outline view</h5>
+<p>The outline view of the drilled down event shows the fish-bone. The blocks are colored if an trace message for that block is found.
+
+
+<span class="center imagecaption" style="width: 258px;">
+	<a href="https://www.netiq.com/communities/cool-solutions/wp-content/uploads/sites/2/2015/06/DrillDownFishbone.png">
+		<img  src="https://www.netiq.com/communities/cool-solutions/wp-content/uploads/sites/2/2015/06/DrillDownFishbone.png" alt="Drill down fishbone view" />
+		<br/>
+		<span  class="center" style="text-align: center">Drill down fishbone view</span>
+	</a>
+</span>
+
+
+
+</p>
+<p>
+Quick navigation options:
+<ul>
+	<li>Clicking on a fish-bone block jumps to the first event of that block.</li>
+	<li>Context menus on the blocks allow you to quickly jump to:
+<ul>
+	<li>a specific policy. All policies that contain a trace message are listed.</li>
+	<li>a status message. All status messages traced within the policy set are listed.</li>
+	<li>a trace message. All trace messages traced within the policy set are listed.</li>
+</ul>
+</li>
+	<li>The overlay icons indicate the worst status message in a given block. Clicking on the overlay icon will jump to that status message. In the screenshot, both the publisher creation and association processor show a 'warning' status icon. In this example, clicking on the icon in the association processor would reveal unresolvable association references, while the creation policy would reveal a veto of the event.</li>
+</ul>
+</p>
+<h5>Editor view</h5>
+<p>The editor view displays the actual trace messages. You can copy the single message or message tree, message details (XDS document) or both. Double clicking a message will drill down one level (if possible).
+
+
+<span class="center imagecaption" style="width: 500px;">
+	<a href="https://www.netiq.com/communities/cool-solutions/wp-content/uploads/sites/2/2015/06/EnhTraceDetail.png">
+		<img  src="https://www.netiq.com/communities/cool-solutions/wp-content/uploads/sites/2/2015/06/EnhTraceDetail-500x170.png" alt="Enhanced trace detail editor view" />
+		<br/>
+		<span  class="center" style="text-align: center">Enhanced trace detail editor view</span>
+	</a>
+</span>
+
+
+
+</p>
+<p>
+The editor view contains both a refresh and rescan button:
+<ul>
+	<li>refresh will refresh and reanalyze the current event. This is in case you opened the detailed view before the event completed.</li>
+	<li>rescan will search for the latest event in the live trace with the same signature as the current event (experimental).</li>
+</ul>
+</p>
+</div>
+
+
+
+
+
+
+<div id="text_enhTrace_Installation" class="content" style="display:none;">
+<h3>Installation</h3>
+<p>I am in the process of moving all plugins and extentions to <a href="https://github.com/scauwe/">github</a>, including an IDM update site. This extentions is the first one avaialable via the IDM/eclipse update feature. In order to install this plugin, add the following site as an update site to IDM:<br/>
+<pre>https://vancauwenberge.info/idm</pre><br/>
+and try to update you IDM packages. This will now find this plugin. Select it and perform te update.
+</p>
+</div>
+
+
+
+<div id="text_enhTrace_History" class="content" style="display:none;">
+<h3>History</h3>
+<h4>July 2015, version 0.1.0</h4>
+<ul>
+	<li>Initial release</li>
+	<li><a name="limitations"></a>Known limitations:
+<ul>
+	<li>When running this plugin in a server with lots of drivers (eg &gt;20), and each driver is tracing at level 3, the plugin can become a performance bottleneck, stressing Designer. Potential solution: apply the tree-view filter to the editor view as well (or: move the filter from the tree to the editor view).</li>
+	<li>Initial opening of the enhanced trace editor is slow.</li>
+	<li>Bigger XDS messages can get truncated in the trace. Under investigation. This is possible caused by the fact that these trace messages are broken down by eDirectory into several partial events, without any method to correlate between the two (or more) parts. The plugin is thus unable to find back the 'parent' event of the current partial event.</li>
+	<li>Only tested in Designer 4.0 and 4.5 on Windows and Linux. If you are running something else, feel free to provide feedback.</li>
+	<li>The label of the filter policy set (both on subscriber as on publisher) in the outline view is not visible if no trace messages are found for the given filter.</li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+<div id="text_enhTrace_Roadmap" class="content" style="display:none;">
+<h3>Roadmap</h3>
+<p>I'd love to add the following features:
+<ul>
+	<li>Save and open the traces.</li>
+	<li>Search in the events.</li>
+	<li>Option to directly open and focus the policy editor from a corresponding trace message (I am dreaming, I know). I think that this one will require changes to NetIQ's (undocumented) designer data model.</li>
+</ul>
+</p>
+</div>
+
+<!-- ASSOCIATION EDITOR -->
+<!-- ASSOCIATION EDITOR -->
+<!-- ASSOCIATION EDITOR -->
+
+<div id="text_ae" class="content" style="display:none;">
+<h3>Association Editor</h3>
+<ul>
+<li><a href="#ae_intro">Introduction</a></li>
+<li><a href="#ae_installation">Installation</a></li>
+<li><a href="#ae_usage">User Guide</a></li>
+<li><a href="#ae_history">History</a></li>
+<li><a href="#ae_limitations">Known Limitations</a></li>
+</ul>
+</div>
+
+
+<div id="text_ae_intro" class="content" style="display:none;">
+<h3>Introduction</h3>
+You all know the <a href="http://www.novell.com/coolsolutions/tools/15754.html" target="_blank"><b>DAModifier tool</b></a>? Nice tool, but it depends on the Novell Client and Windows OS. This designer plug-in allows you to do similar actions: import, modify or export IDM driver associations.
+</div>
+
+
+<div id="text_ae_installation" class="content" style="display:none;">
+<h3>Installation</h3>
+<p>I am in the process of migrating all my plugins to <a href="https://github.com/scauwe/">github</a>, including an automated update site. This plugin is however not yet migrated. Download is available from <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/designer-association-modifier-plugin/">Cool solutions</a>. Cool solutions does not allow upload of jars, so rename the attached zip to .jar and copy the jar to the plugins folder of your designer and restart designer if already running. I tested this with Designer 4.0.1 and 4.0.2 in Linux and Windows.</p>
+</div>
+
+
+<div id="text_ae_usage" class="content" style="display:none;">
+<h3>User Guide</h3>
+<h4>Open Dialogue</h4>
+<p>Right click on a driver object in the outline view or the driver connection in the modeler view and select Live ? Association Editor or right click on the application (in modeler or outline view) and select Driver > Live > Association Editor.
+
+<span class="center imagecaption" style="width: 245px;">
+	<a href="http://community.netiq.com/cfs-file.ashx/__key/CommunityServer.Components.UserFiles/00.00.02.71.07.Attached+Files/0486.associationeditormenu.png">
+		<img  src="http://community.netiq.com/resized-image.ashx/__size/550x0/__key/CommunityServer.Components.UserFiles/00.00.02.71.07.Attached+Files/0486.associationeditormenu.png" alt="New menu entry: Association Editor" />
+		<br/>
+		<span  class="center" style="text-align: center">New menu entry: Association Editor</span>
+	</a>
+</span>
+</p>
+<p>A dialogue will pop-up where you can select what you want to do.</p>
+<h4><b>Export associations.</b></h4>
+<p>Export associations will export the associations of the selected driver to a tab separated file. This file will contain the object DN (lpdap format), the associations state and the association value. Enter the required information (search base, ldap filter, association status and the target file) and press Start.
+
+<span class="center imagecaption" style="width: 549px;">
+	<a href="http://community.netiq.com/cfs-file.ashx/__key/CommunityServer.Components.UserFiles/00.00.02.71.07.Attached+Files/5734.associationeditorexport_5F00_0.png">
+		<img  src="http://community.netiq.com/resized-image.ashx/__size/550x0/__key/CommunityServer.Components.UserFiles/00.00.02.71.07.Attached+Files/5734.associationeditorexport_5F00_0.png" alt="Export associations dialog" />
+		<br/>
+		<span  class="center" style="text-align: center">Export associations dialog</span>
+	</a>
+</span>
+
+
+</p>
+<h4>Modify associations</h4>
+<p>
+This allows modification of the association status. Enter the required information (search base, ldap filter, 'from' association status, 'to' association status) and press Start. Optionally, a log file is generated. This log file (tab separated) contains the object DN, the old state, the association value and the action taken.
+
+
+<span class="center imagecaption" style="width: 549px;">
+	<a href="http://community.netiq.com/cfs-file.ashx/__key/CommunityServer.Components.UserFiles/00.00.02.71.07.Attached+Files/8510.associationeditormodify_5F00_0.png">
+		<img  src="http://community.netiq.com/resized-image.ashx/__size/550x0/__key/CommunityServer.Components.UserFiles/00.00.02.71.07.Attached+Files/8510.associationeditormodify_5F00_0.png" alt="Modify associations dialog" />
+		<br/>
+		<span  class="center" style="text-align: center">Modify associations dialog</span>
+	</a>
+</span>
+
+
+</p>
+<h4>Import associations</h4>
+<p>This allows for importing associations. Enter the required information (file to import) and press Start. Optionally, you can limit the import to a 'test only'. This will generate a log file of the actions it would take. The file to import is a tab separated file with the following columns: object dn (ldap), association state, association value (same format as the export option). Optionally (unless 'validate only' is checked) a log file is generated. This log file (tab separated) is the same as the input file, but adds an action column containing the action taken (or that would be taken in case of 'validate only'). Note: when 'validate only' is not selected, importing will always delete the current associations for the object. It does not add associations to the existing objects.
+
+<span class="center imagecaption" style="width: 549px;">
+	<a href="http://community.netiq.com/cfs-file.ashx/__key/CommunityServer.Components.UserFiles/00.00.02.71.07.Attached+Files/7065.associationeditorimport_5F00_0.png">
+		<img  src="http://community.netiq.com/resized-image.ashx/__size/550x0/__key/CommunityServer.Components.UserFiles/00.00.02.71.07.Attached+Files/7065.associationeditorimport_5F00_0.png" alt="Import associations dialog" />
+		<br/>
+		<span  class="center" style="text-align: center">Import associations dialog</span>
+	</a>
+</span>
+
+
+
+</p>
+<h4>Processing</h4>
+<p>
+After pressing start, a monitor dialog is displayed, showing the progress. Upon completion, a summary dialog is shown. Note: processing can be run in the background, allowing you to continue your work. The progress view will display the result. Clicking the link will display the same summary as above (when running in the foreground).
+
+
+<span class="center imagecaption" style="width: 550px;">
+	<a href="http://community.netiq.com/cfs-file.ashx/__key/CommunityServer.Components.UserFiles/00.00.02.71.07.Attached+Files/8686.associationeditorstatus.png">
+		<img  src="http://community.netiq.com/resized-image.ashx/__size/550x0/__key/CommunityServer.Components.UserFiles/00.00.02.71.07.Attached+Files/8686.associationeditorstatus.png" alt="Import associations dialog" />
+		<br/>
+		<span  class="center" style="text-align: center">Import associations dialog</span>
+	</a>
+</span>
+
+
+</p>
+</div>
+
+
+<div id="text_ae_history" class="content" style="display:none;">
+<h3>Version History</h3>
+Version 0.3.1, 23-June-2015
+<ul>
+	<li>Bug fix: fixed issue with backslash during import of associations.</li>
+</ul>
+Version 0.3.0, 21-June-2015
+<ul>
+	<li>Bug fix: fixed NPE during import of associations.</li>
+</ul>
+Version 0.2.0, 5-March-2014
+<ul>
+	<li>Bug fix: fixed issues with modifying the state of not-associated objects.</li>
+	<li>Enh.: remember last settings.</li>
+</ul>
+Version 0.1.0, 14-SEPT-2012
+<ul>
+	<li>First release (beta).</li>
+</ul>
+</div>
+
+
+
+<div id="text_ae_limitations" class="content" style="display:none;">
+<h3>Know limitations</h3>
+<p>
+ldap paged search is somehow not fully implemented in eDirectory. Some ldap searches will return duplicate entries when using paged searches. This is a known eDirectory issue. In order to work around this somehow, the search is sometimes split up into multiple searches. Still, no guarantee is given that objects will not be synchronized twice.
+</p>
+</div>
+
+
+
+<!-- GENERIC FILE DRIVER -->
+<!-- GENERIC FILE DRIVER -->
+<!-- GENERIC FILE DRIVER -->
+
+
+<div id="text_txtdriver" class="content" style="display:none;">
+<h3>Generic File Driver</h3>
+	<ul>
+		<li><a href="#txtdriver_intro">Introduction</a></li>
+		<li><a href="#txtdriver_history">Version History</a></li>
+		<li><a href="#txtdriver_installation">Installation</a></li>
+		<li><a href="#txtdriver_policies">Policies</a></li>
+		<li><a href="#txtdriver_configuration">Configuration</a></li>
+	</ul>
+</div>
+
+
+<div id="text_txtdriver_intro" class="content" style="display:none;">
+<h3>Introduction</h3>
+<p>The Generic File Driver is similar to the Text Driver shipped with IDM, but has more options, and has the capability to read virtually any file type. Out of the box, the following file types are supported: XML, CSV and XLS (the latter using POI from Apache).</p>
+<p>
+Main differentiators to NetIQ's driver:
+<ul>
+	<li>Produces and consumes regular NDS documents (no need for XSLT conversion).</li>
+	<li>Accepts add, modify or instance documents on the subscriber channel.</li>
+	<li>Auto-query back for missing attributes on modify commands.</li>
+	<li>GCV (Ecmascript) for generating associations and source DN's.</li>
+	<li>Publisher channels processes files in a streaming mode. A maximum of 20 records are prefetched/buffered in memory (whenever support by the file type: CSV and XML).</li>
+	<li>Publisher channel supports interruption (driver stop command) during file processing.</li>
+	<li>Publisher channel can add metadata about the file or record processed (eg: record number, filename, last record indicator, etc).</li>
+</ul>
+</p>
+<p>
+The original version I wrote in 2007 is located at <a href="http://www.novell.com/coolsolutions/tools/18671.html">http://www.novell.com/coolsolutions/tools/18671.html</a>. This update comes with an IDM 4 package making the installation simpler and has some new features and fixes (see <a href="#txtdriver_history">Version History</a>).
+<br/>
+See the referenced version for a list of the initial features.
+</p>
+</div>
+
+
+<div id="text_txtdriver_history" class="content" style="display:none;">
+<h3>Version History</h3>
+<h4>version 0.8A, 3-MARCH-2015 (package 0.7)</h4>
+<ul>
+	<li>Shim feature – general – reverted back to java 1.6 compatible ‘move file’ operation.</li>
+</ul>
+<h4>version 0.8, 14-SEPT-2014 (package 0.7)</h4>
+<ul>
+	<li>Package bug: fixed typo in example xslt template for XML publisher files. See <a href="https://forums.netiq.com/showthread.php?51448-Driver-assoications-showing-up-in-CSV-data-output&amp;p=247317#post247317">forum thread</a>.</li>
+	<li>Technical – general refactoring of the shim.</li>
+	<li>Shim feature - publisher - added option to remove old publisher files. Disabled by default for backward compatibility.</li>
+	<li>Shim feature - publisher - added option to disable the publisher channel.</li>
+	<li>Shim feature - publisher - added additional options in the command to generate ("Dynamic Input based" and "Delete")</li>
+	<li>Shim feature - subscriber - added option to disable the "max number of records in generated files" by setting it to 0 (zero).</li>
+	<li>Shim feature - subscriber - when a modify command is 'empty' (=all fields defined in the schema are missing), but the content indicates that the output file should be closed (eg: the file close field is set to true), no query back is performed in order to add a record to the output file. It is assumed that the only purpose of this modify command is to close the output file.</li>
+	<li>Shim feature - general - added option to replace illegal ECMA script characters in field names (eg for calculating the association). Disabled by default for backward compatibility.</li>
+	<li>Shim feature - general - added option to include the driver’s ECMA script libraries into the shim (for complex ECMA script operation). Disabled by default for backward compatibility.</li>
+</ul>
+<h4>version 0.7b, 14-MAY-2014 (package 0.6)</h4>
+<ul>
+	<li>Shim bug: case issue with the new configuration parameter to configure the command generated on the publisher channel</li>
+</ul>
+<h4>version 0.7, 07-MAY-2014 (package 0.6)</h4>
+<ul>
+	<li>Shim bug: specifying no encoding on the XML reader caused an Exception (see also this <a href="https://www.netiq.com/communities/cool-solutions/using-the-generic-file-driver-in-identity-manager-idm-with-xml-input-files/">cool solution post</a>)</li>
+	<li>Shim feature: added option to configure the command generated on the publisher channel (add, modify or dynamic).</li>
+	<li>Package bug: xml and xls file readers had invalid class names (see the same <a href="https://www.netiq.com/communities/cool-solutions/using-the-generic-file-driver-in-identity-manager-idm-with-xml-input-files/">cool solutions post</a>)</li>
+	<li>Package feature: changed xls entry field to multi-line</li>
+</ul>
+<h4>version 0.6, 28-FEB-2014 (package 0.5)</h4>
+<ul>
+	<li><span style="font-size: 14px;line-height: 1.5em">Shim/package feature: Added configuration parameter to use <a href="http://quartz-scheduler.org/">Quartz scheduler</a> to close subscriber generated files using a cron-like expression string.</span></li>
+	<li>Shim feature: Added <a href="http://slf4j.org/">slf4j</a> binding (separate jar) for Idm tracing, allowing Quartz logs to be shown in idm trace files.</li>
+	<li>Shim bug: possible NPE when the publisher folder becomes unreachable (eg due to network outage).</li>
+	<li>Shim feature: Added option for every strategy to receive driver shutdown notification by implementing IShutdown.</li>
+	<li>Shim bug/feature: Return an empty instance document when we receive an associated query on the subscriber channel. Reason: support of the merge attribute filter rules in case of a 'sync' event.</li>
+</ul>
+<h4>version 0.5, 21-JAN-2013 (package 0.4)</h4>
+<ul>
+	<li>Shim bug: Fixed an issue wrt the driver not adding the metadata on the publisher channel.</li>
+</ul>
+<h4>version 0.4, 24-APR-2012 (package 0.4)</h4>
+<ul>
+	<li>Shim bug: Fixed an issue with the driver schema (appeared to be hard coded).</li>
+	<li>Shim feature: Added beta support for query back. Query back only supported on publisher channel (when reading in a file). Feedback welcome.</li>
+	<li>Package bug: Fixed an issue that caused the driver configuration not to be imported when the package was imported.</li>
+	<li>Package bug: Changed creation policy from validating the Given Name to validating the Surname.</li>
+	<li>Package feature: Added package 'Delimited Text Driver Password Synchronization Package' as an optional package for this driver.</li>
+	<li>Package feature: Added remote loader prompts to the package.</li>
+</ul>
+<h4>version 0.3, 12-OCT-2011</h4>
+<ul>
+	<li>Shim feature: automatic association and src-dn calculation (using ecmascript in the driver configuration). No longer need for style sheets for just creating association and src-dn values. The driver shim now does this for you.</li>
+	<li>Shim bug: fixed missing remove-all-values on the publisher documents.</li>
+	<li>Shim feature: added the ability (csv output files) to flush the file buffer after every record written (useful for when you are developing/testing your driver).</li>
+	<li>Shim feature: when receiving a modify event on the subscriber channel, the shim will query back for all missing attribute values in order to be able to write a complete record (no need for a stylesheet to query for missing attributes and keeping this stylesheet in sync with the schema).</li>
+	<li>Shim bug/feature: the subscriber channel now fully support add, modify and instance events. Instance and add events are assumed to contain all data and do not perform a query back. Only the modify event performs a query back</li>
+</ul>
+</div>
+
+
+
+
+<div id="text_txtdriver_installation" class="content" style="display:none;">
+<h3>Installation</h3>
+<p>I am in the process of migrating all my plugins to <a href="https://github.com/scauwe/">github</a>, including an automated update site. This plugin is however not yet migrated (and since it also contains a shim will never be 100% available via an Eclipse/Designer update site). Download is available from <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/generic-file-driver-idm-v-003/">Cool solutions</a>.</p>
+<p>The attached zip file (GenFileDriver_0_8A.zip) contains (beside some documentation) 2 main jar files and a lib folder. One jar is the package, one jar is the shim. The lib folder contains optional jars.</p>
+
+<p><b>Shim: GenFileDriverShim_0.7.jar</b>
+Copy the shim to you eDirectory server (DirXML's classes folder). If you want to use XLS support, also download poi from Apache. Restart eDirectory after this.
+<br/>
+<b>Note:</b> if you have an older version of the shim, be sure to delete that jar.
+</p>
+<p><b>Package: SVCGENFILEB_0.0.7.20140914233029.jar</b>
+Import this package into your designer project. Drag and drop the "Delimited Text" driver that is located under "Tools" and select the "Generic File Base" package, answering all the questions as needed.<br/>
+From this point on, you can use and modify it as any other driver.
+</p>
+<p>
+<b>lib folder</b>:
+This folder contains some optional jars. These are only required if you plan to use quartz scheduler to close the generated files using a cron-like string. Jars required when doing this are: quartz-2.2.1.jar, slf4j-api-1.7.5.jar and slf4j-idmTrace.jar.
+</p>
+</div>
+
+
+<div id="text_txtdriver_policies" class="content" style="display:none;">
+<h3>Policies</h3>
+<p>The example driver configuration has only 3 policies; all of them on the publisher channel. If required, you could add the password policies as available from the standard text driver (by creating your own copy from Novell's package and adding this to the driver).</p>
+<p>
+<b>SVCGENFILEB-pub-mp</b><br/>
+Match on Internet Email Address if any available.
+</p>
+<p>
+<b>SVCGENFILEB-pub-cp</b><br/>
+Checks for mandatory attributes:
+<ul>
+<li>Surname: required due to eDir constraints</li>
+<li>Internet Email Address: required due to use in matching policy</li>
+</ul>
+</p>
+<p>
+<b>SVCGENFILEB-pub-pp</b><br/>
+Placement based on a driverset GCV (idv.dit.data.users).
+</p>
+</div>
+
+
+<div id="text_txtdriver_configuration" class="content" style="display:none;">
+<h3>Configuration</h3>
+<p>All configuration options should have a good description. Most of them are also described on the <a href="http://www.novell.com/coolsolutions/tools/18671.html">initial release</a> page.</p>
+<p>The zip file itself contains a PDF describing all configuration parameters.
+</div>
+
+<!-- PACKAGE UNLOCKER -->
+<!-- PACKAGE UNLOCKER -->
+<!-- PACKAGE UNLOCKER -->
+
+<div id="text_unlock" class="content" style="display:none;">
+	<ul>
+		<li><a href="#unlock_introduction">Intro</a></li>
+		<li><a href="#unlock_installation">Installation</a></li>
+	</ul>
+</div>
+
+<div id="text_unlock_introduction" class="content" style="display:none;">
+<h3>Introduction</h3>
+<p>When you are working with Designer and you create new packages, you can only modify the package in the project that created the package. Luckily, Designer allows you to use subversion, so you can share the project, resulting in all connected designer instances to share the same project, and thus being able to 'own' the same packages.</p>
+<p>
+But what if you do not have subversion, or you are at a client that does not allow access to your subversion repository? In this case, you can import the custom packages, but you are unable to modify the content of the package or create a new version of this package. You can only copy a specific version to a new package, breaking your package structure.</p>
+<p>
+This Designer extension allows you to mark a package (any package!) as 'Local', thus allowing you to create a new version of your package or add new content to the package.</p>
+<p>
+Note: only use this on packages that you are actually owning. If not, the vendor of the package might release a conflicting version (and then you'll have a mess to clean up).
+</p>
+</div>
+
+<div id="text_unlock_installation" class="content" style="display:none;">
+<h3>Installation</h3>:
+<p>I am in the process of migrating all my plugins to <a href="https://github.com/scauwe/">github</a>, including an automated update site. This plugin is however not yet migrated. Download is available from <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/unlocking-designer-project-you-created/">Cool solutions</a>.</p>
+<p>
+Steps:
+<ol>
+	<li>Unzip the referenced file to the Designer 4 'plugins' folder, resulting in the following folder structure:
+<pre>[Designer root]\plugins\info.vancauwenberge.idm.1.0.0</pre>
+</li>
+	<li>(Re)start designer, making sure your project is in 'developer' mode.</li>
+	<li>If you right-click on a locked package, you should have an additional menu item: <i>”Mark as 'Local'”</i>.</li>
+	<li>Selecting this menu item, will request a confirmation of your action. Pressing 'OK' will unlock the package, allowing you to create a new version.</li>
+</ol>
+</p>
+<p>
+<i>Note</i>: this plugin also adds a log viewer to you packages: right click on any package and select <i>“View changelog”</i>. This is a log of the package as defined by the actions created by Novell.
+</p>
+</div>
+
+
+	<!--header menuwrap-->
+	</div>
+
+
+
+</div>
+
+</body>
+</html>
