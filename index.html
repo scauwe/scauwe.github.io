@@ -48,6 +48,45 @@ body {
 .imagecaption a img{
   border: 1px solid #A9A9A9;
 }
+table {
+	width:100%;
+	border-top:1px solid #AAAAAA;
+	border-right:1px solid #AAAAAA;
+	margin:1em auto;
+	border-collapse:collapse;
+	/* Warning: Needed for oldIE support, but words are broken up letter-by-letter */
+   -ms-word-break: break-all;
+   word-break: break-all;
+
+   /* Non standard for webkit */
+   word-break: break-word;
+
+   -webkit-hyphens: auto;
+   -moz-hyphens: auto;
+   -ms-hyphens: auto;
+   hyphens: auto;
+}
+th, td {
+	color:black;
+	border-bottom:1px solid #AAAAAA;
+	border-left:1px solid #AAAAAA;
+	padding:.3em 1em;
+	text-align:left;
+}
+label {
+    display*: inline-block;
+    width*: 5em;
+  }
+.tooltip {
+	display:none;
+	position:absolute;
+	border:1px solid #333;
+	background-color:#161616;
+	border-radius:5px;
+	padding:10px;
+	color:#fff;
+	font-size:12px Arial;
+}  
 </style>
 
 <!--http://users.tpg.com.au/j_birch/plugins/superfish/download/-->
@@ -60,6 +99,9 @@ body {
 <!-- link to the JavaScript files (hoverIntent is optional) -->
 <!-- if you use hoverIntent, use the updated r7 version (see FAQ) -->
 <script src="hoverIntent.js"></script>
+<!--script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
+<script src="jquery.tooltipster.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script-->
 <script src="superfish.js"></script>
 <script type="text/javascript">
 var menu;
@@ -133,8 +175,124 @@ $(document).ready(function(){
 	  .find("a[href$='#" + path + "']") // gets all links that match the href
 	  .parents('li')  // gets all list items that are ancestors of the link
 	  .children('a'));  // walks down one level from all selected li's
+	  
+        
+	// Convert every 'title' attribute to a pre-formatted tooltip element
+	//Based on http://www.alessioatzeni.com/blog/simple-tooltip-with-jquery-only-text/
+	
+	$('*[title]').hover(function(){
+	        // Hover over code
+	        var title = $(this).attr('title');
+	        $(this).data('tipText', title).removeAttr('title');
+	        var par = $('<p class="tooltip"></p>')
+	        .appendTo('body')
+	        .fadeIn('slow');
+	        var pre = $('<pre/>')
+	        .text(title)
+	        .appendTo(par);
+	}, function() {
+	        // Hover out code
+	        $(this).attr('title', $(this).data('tipText'));
+	        $('.tooltip').remove();
+	}).mousemove(function(e) {
+	        var mousex = e.pageX + 20; //Get X coordinates
+	        var mousey = e.pageY + 10; //Get Y coordinates
+	        $('.tooltip')
+	        .css({ top: mousey, left: mousex })	
+	});
+	
+
+
+	//Convert every 'title' attribute to copy
+/*	$('*[title]').each(function(i){
+        	var clip = new ZeroClipboard.Client();
+	        ZeroClipboard.setMoviePath("https://jonrohan.github.com/ZeroClipboard/javascripts/ZeroClipboard.swf");
+	        clip.setHandCursor(true);
+
+	        var code = $j("#" + $(this).attr('title')).html();
+	        clip.glue($(this));
+	        clip.addEventListener('mouseDown', function (client) {
+	            clip.setText(code);
+	        });
+
+	        //Add a complete event to let the user know the text was copied
+	        clip.addEventListener('complete', function (client, text) {
+	            alert("Copied text to clipboard: " + code);
+	        });
+	    });
+
+*/
+
+//ZeroClipboard.config( { swfPath: "http://zeroclipboard.org/javascripts/zc/v2.2.0/ZeroClipboard.swf?noCache=1439075667231" } );
+
+//http://stackoverflow.com/questions/25754186/zeroclipboard-mouse-events-dont-fire
+/*
+var ZCView = Backbone.View.extend({
+    events: {
+        'mouseenter': function() {
+            console.log('mouseenter');
+            alert('mouseenter');
+        },
+        'mouseover': function() {
+            console.log('mouseover');
+            alert('mouseover');
+        }
+    },
+    initialize: function() {
+        var client = new ZeroClipboard(this.el);
+
+        client.on("ready", function() {
+            console.log('ready');
+            alert('ready');
+        });
+        client.on("beforecopy", function() {
+            console.log('beforecopy');
+            alert('beforecopy');
+        });
+    }
+});
+*/
+//var v = new ZCView({el: '#src'});
+//var v = new ZCView({el: '.clip_button'});
+
+/*
+      var client = new ZeroClipboard( $('.clip_button') );
+      //var client = new ZeroClipboard( $('*[title]') );
+
+      client.on( 'ready', function(event) {
+        // console.log( 'movie is loaded' );
+
+        client.on( 'copy', function(event) {
+          event.clipboardData.setData('text/plain', event.target.title);
+        } );
+
+        client.on( 'aftercopy', function(event) {
+          console.log('Copied text to clipboard: ' + event.data['text/plain']);
+        } );
+      } );
+
+      client.on( 'error', function(event) {
+        // console.log( 'ZeroClipboard error of type "' + event.name + '": ' + event.message );
+        ZeroClipboard.destroy();
+      } );
+      
+      client.on('onMouseOver', function(){
+   	 alert("mouseOver"); // code to show tool tip goes here
+	});
+
+	client.on('onMouseOut', function(){
+	    console.log("mouseOut"); // code to hide tool tip goes here
+	});
+
+*/
+
+
 });
 
+
+
+
+      
 </script>
 
 </head>
@@ -235,7 +393,13 @@ $(document).ready(function(){
 								<li><a href="#txtdriver_history">Version History</a></li>
 								<li><a href="#txtdriver_installation">Installation</a></li>
 								<li><a href="#txtdriver_policies">Policies</a></li>
-								<li><a href="#txtdriver_configuration">Configuration</a></li>
+								<li><a href="#txtdriver_configuration">Configuration</a>
+									<ul>
+										<li><a href="#txtdriver_configuration_driver">Driver</a></li>
+										<li><a href="#txtdriver_configuration_subscriber">Subscriber</a></li>
+										<li><a href="#txtdriver_configuration_publisher">Publisher</a></li>
+									</ul>
+								</li>
 							</ul>
 						</li>
 						<li>
@@ -428,7 +592,7 @@ The editor view contains both a refresh and rescan button:
 <h3>Installation</h3>
 <p>I am in the process of moving all plugins and extentions to <a href="https://github.com/scauwe/">github</a>, including an IDM update site. This extentions is the first one avaialable via the IDM/eclipse update feature. In order to install this plugin, add the following site as an update site to IDM:<br/>
 <pre>https://raw.githubusercontent.com/scauwe/IDMSite/master/</pre><br/>
-and try to update you IDM packages. This will now find this plugin. Select it and perform te update.
+and try to update you IDM packages. This will now find this plugin. Select it and perform the update.
 </p>
 </div>
 
@@ -745,15 +909,1152 @@ Placement based on a driverset GCV (idv.dit.data.users).
 
 <div id="text_txtdriver_configuration" class="content" style="display:none;">
 <h3>Configuration</h3>
-<p>All configuration options should have a good description. Most of them are also described on the <a href="http://www.novell.com/coolsolutions/tools/18671.html">initial release</a> page.</p>
-<p>The zip file itself contains a PDF describing all configuration parameters.
+<p>All configuration options should have a good description. For completeness, the configuration is also described here:</p>
+<p><ul>
+<li><a href="#txtdriver_configuration_driver">Driver</a></li>
+<li><a href="#txtdriver_configuration_subscriber">Subscriber</a</li>
+<li><a href="#txtdriver_configuration_publisher">Publisher</a></li>
+</ul></p>
 </div>
+
+
+
+
+<div id="text_txtdriver_configuration_driver" class="content" style="display:none;">
+<h3>Driver Configuration</h3>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			Schema
+		</td>
+		<td>
+			Field Names (Field1,Field2,Field3)
+		</td>
+		<td>
+			LastName,FirstName,Title,Email,<br/>WorkPhone,Fax,WirelessP
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			objectClass
+		</td>
+		<td>
+			Object Class Name
+		</td>
+		<td>
+			User
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			association-field-script
+		</td>
+		<td>
+			ECMA script for generating the association associations (parameters are in the application scope). If non is provided, you are responsible for creating the association.
+		</td>
+		<td>
+			Email
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			source-field-script
+		</td>
+		<td>
+			ECMA script for generating the src-dn attribute (parameters are in the application scope). If non is provided, you are responsible for creating the association.
+		</td>
+		<td>
+			FirstName +' '+ LastName
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			js-processing
+		</td>
+		<td>
+			What should be done with invalid characters in the javascript field identifiers (eg: what if one of the fieldnames contains a space as
+			in &quot;Full Name&quot;).
+			<ul><li>NoProcessing: do nothing. You are responsible of making sure that all field names are valid java identifiers (including those not used in you java script).</li>
+			<li>Replace: all illegal characters will be replaced be the given character</li></ul>
+		</td>
+		<td>
+			NoProcessing
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			js-replacement-char
+		</td>
+		<td>
+			In case of ‘Replace’: character to use to replace the illegal characters.
+		</td>
+		<td>
+			_
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			include-ecma-libraries
+		</td>
+		<td>
+			Should the shim include the ECMA script libraries linked to the driver for evaluating the various ECMA script. Set this to 'no' if the configuration does not depend on the ECMA script libraries (ECMA script configuration parameters above only contain simple, one-line scripts). Optimization parameter.
+		</td>
+		<td>
+			True
+		</td>
+	</tr>
+</table>
+</div>
+
+
+
+
+<div id="text_txtdriver_configuration_subscriber" class="content" style="display:none;">
+<h3>Subscriber Configuration</h3>
+<h4>Common Subscriber Options</h4>
+<p>These options are common for the subscriber, independent of the strategies used.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>sub_FileStartStrategy</p>
+		</td>
+		<td>
+			<p>Subscriber:
+			File Start Strategy (Class):<br>Current
+			implementations:<br>info.vancauwenberge.filedriver.filestart.BasicNewFileDecider</p>
+		</td>
+		<td>
+			<p>info.vancauwenberge.filedriver.filestart.BasicNewFileDecider</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>sub_FileNameStrategy</p>
+		</td>
+		<td>
+			<p style="margin-bottom: 0cm">Subscriber:
+			File Name Strategy (Class):<br>Current
+			implementations:<br>info.vancauwenberge.filedriver.filename.GUIDFileNameStrategy<br>info.vancauwenberge.filedriver.filename.SimpleDateFormatFileNameStrategy</p>
+			<p>info.vancauwenberge.filedriver.filename.EcmaScriptFileNameStrategy</p>
+		</td>
+		<td>
+			<p>info.vancauwenberge.filedriver.filename.SimpleDateFormatFileNameStrategy</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>sub_FileWriteStrategy</p>
+		</td>
+		<td>
+			<p>Subscriber:
+			File Write Strategy (Class):<br>Current
+			implementations:<br>info.vancauwenberge.filedriver.filewriter.CSVFileWriter<br>info.vancauwenberge.filedriver.filewriter.XMLFileWriter<br>info.vancauwenberge.filedriver.filewriter.XLSFileWriter</p>
+		</td>
+		<td>
+			<p>info.vancauwenberge.filedriver.filewriter.XMLFileWriter</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>sub_WorkDir</p>
+		</td>
+		<td>
+			<p>Subscriber:
+			Work directory. All files will be created initially in the
+			directory. When the files are closed, they are moved to the
+			sub_DestFolder.</p>
+		</td>
+		<td>
+			<p>C:\workspace\DirXMLFileD
+			river\temp</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>sub_DestFolder</p>
+		</td>
+		<td>
+			<p>Subscriber:
+			Destination directory:</p>
+		</td>
+		<td>
+			<p>C:\workspace\DirXMLFileDriver</p>
+		</td>
+	</tr>
+</table>
+<h4>Strategy-specific Subscriber Options</h4>
+<h5>BasicNewFileDecider</h5>
+<p>This strategy decides when a new file should be started. The BasicNewFileDecider has several options included: maximum number of records, maximum age of the file, idle time or a manual control based on a field in the Add event received.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>newFile_MaxRecords</p>
+		</td>
+		<td>
+			<p>NewFile:
+			Maximum number of data records in a file. Whenever this maximum is
+			reached, a new file is started (unless overruled by
+			newFile_FieldName).</p>
+			<p>Set
+			0 to disable this.</p>
+		</td>
+		<td>
+			<p>100</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>newFile_MaxFileAge</p>
+		</td>
+		<td>
+			<p>NewFile:
+			Maximum 'age' of a file (in seconds). The age counter starts from
+			writing the first record to the file. As soon as the file is older
+			then the given age, the next record will be written in a new
+			file.<br>Set 0 to disable this.</p>
+		</td>
+		<td>
+			<p>60</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>newFile_InactiveSaveInterval</p>
+		</td>
+		<td>
+			<p>NewFile:
+			Save file after nnn seconds of inactivity. As soon as the driver
+			does not receive new events whitin the given amount of seconds,
+			the file is closed. A new file is started as soon as a new record
+			needs to be written.<br>Set 0 to disable this.</p>
+		</td>
+		<td>
+			<p>0</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>newFile_FieldName</p>
+		</td>
+		<td>
+			<p>NewFile:
+			Fieldname used to manually control the creation of new files. If
+			the value of this field is 'true', a new file will be started for
+			adding the current record. Any other value will not start a new
+			file. Note: as soon as this field is present, it overrules the
+			maxRecord check. If you want both (manual and maxrecord), only set
+			the field when it should be set to 'true'.</p>
+		</td>
+		<td>
+			<p><br/>
+
+			</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>newFile_CronExpression</p>
+		</td>
+		<td>
+			<p>Cron
+			string (Quartz) to schedule file closure.</p>
+			<p>Leave
+			empty to disable quartz scheduling.</p>
+			<p>Note:
+			If enabled, this requires the addition of other jar's from the lib
+			folder into you eDirectory classes folder: quartz.jar,
+			slf4j-api.jar and slf4j-idmTrace.jar.</p>
+			<p><br/>
+
+			</p>
+		</td>
+		<td>
+			<p><br/>
+
+			</p>
+		</td>
+	</tr>
+</table>
+<h5>GUIDFileNameStrategy</h5>
+<p>The GUIDFileNameStrategy generates filenames containing a unique GUID. You have the option to prefix the GUID and to postfix the GUID. The postfix is typically a file extentions. The new filename will be &lt;prefix>GUID&lt;postfix></p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>GUIDNamer_FilePostFix</p>
+		</td>
+		<td>
+			<p>GUID
+			FileNamer: Optional postfix for the filename (eg: file extention).</p>
+		</td>
+		<td>
+			<p>.csv.out</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>GUIDNamer_FilePreFix</p>
+		</td>
+		<td>
+			<p>GUID
+			FileNamer: Optional prefix for the filename.</p>
+		</td>
+		<td>
+			<p>NEW_FILE_</p>
+		</td>
+	</tr>
+</table>
+<h5>SimpleDateFormatFileNameStrategy</h5>
+<p>The SimpleDateFormatFileNameStrategy generates filesnames containing a date/time. Internally, a SimpleDateFormat is used.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>simpleDateNamer_FormatString</p>
+		</td>
+		<td>
+			<p>Date
+			FileNamer: Date format string(according to java.util.SimpleDateFormat).</p>
+		</td>
+		<td>
+			<p>'NEW'_'FILE'_yyyyMMdd-HHmmssSSS.'out'</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>simpleDateNamer_TimeZone</p>
+		</td>
+		<td>
+			<p>GUID
+			FileNamer: Timezone for the dataformatter. Leave blank to use
+			system default timezone.</p>
+		</td>
+		<td>
+			<p><br/>
+
+			</p>
+		</td>
+	</tr>
+</table>
+<h5>EcmaScriptFileNameStrategy</h5>
+<p>The EcmaScriptFileNameStrategy uses an ECMA script expression to generate the file name. All record fields are defined as contextual parameters in the ECMA script.</p>
+<p>Eg: if your schema has a field ‘Email’, you can write the ECMA script Email+”.csv”, generating a file name like test@example.com.csv.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>ecmaNamer_script.js</p>
+		</td>
+		<td>
+			<p>The
+			ecma script</p>
+		</td>
+		<td>
+			<p>Email+”.csv”,</p>
+		</td>
+	</tr>
+</table>
+<h5>CSVFileWriter</h5>
+<p>The CSVFileWriter writes records in a CSV format. You can specify the seperator independent from the seperator from the CSV reader.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>csvWriter_WriteHeader</p>
+		</td>
+		<td>
+			<p>CSVWriter:
+			Write a header record(true/false):</p>
+		</td>
+		<td>
+			<p>true</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>csvWriter_Seperator</p>
+		</td>
+		<td>
+			<p>CSVWriter:
+			Seperator character:</p>
+		</td>
+		<td>
+			<p>,</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>csvWriter_ForcedEncoding</p>
+		</td>
+		<td>
+			<p>CSVWriter:
+			Forced file encoding. Leave blank to use system default encoding.:</p>
+		</td>
+		<td>
+			<p>UTF-8</p>
+		</td>
+	</tr>
+</table>
+<h5>XMLFileWriter</h5>
+<p>The XMLFileWriter writes the data in an XML file. The format is the same is what is expected in the XMLFileReader. Optionally a post xslt can be applied to get a different format.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>xmlWriter_RootName</p>
+		</td>
+		<td>
+			<p>XMLWriter:
+			Root element name.:</p>
+		</td>
+		<td>
+			<p>root</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>xmlWriter_RecordName</p>
+		</td>
+		<td>
+			<p>XMLWriter:
+			Record element name:</p>
+		</td>
+		<td>
+			<p>record</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>xmlWriter_ForcedEncoding</p>
+		</td>
+		<td>
+			<p>XMLWriter:
+			Forced file encoding. Leave blank to use system default encoding.:</p>
+		</td>
+		<td>
+			<p>UTF-8</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>xmlWriter_PostXSL</p>
+		</td>
+		<td>
+			<p>XMLWriter:
+			Xsl to apply after saving the XML file (leave empty for no
+			postprocessing):</p>
+		</td>
+		<td title="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;xsl:stylesheet version=&quot;1.0&quot;
+xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;
+xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
+  &lt;xsl:output method=&quot;xml&quot; indent=&quot;yes&quot;/&gt;
+  &lt;xsl:template match=&quot;root&quot;&gt;
+    &lt;xsl:copy&gt;
+      &lt;xsl:applytemplates/&gt;
+    &lt;/xsl:copy&gt;
+  &lt;/xsl:template&gt;
+  &lt;xsl:template match=&quot;record&quot;&gt;
+    &lt;xsl:copy&gt;
+      &lt;xsl:applytemplates/&gt;
+    &lt;/xsl:copy&gt;
+  &lt;/xsl:template&gt;
+  &lt;xsl:template match=&quot;LastName&quot;&gt;
+    &lt;newLastName&gt;
+      &lt;xsl:value-of select=&quot;.&quot;/&gt;
+    &lt;/newLastName&gt;
+  &lt;/xsl:template&gt;
+  &lt;xsl:template match=&quot;*&quot;&gt;
+    &lt;xsl:copy&gt;
+      &lt;xsl:applytemplates/&gt;
+    &lt;/xsl:copy&gt;
+  &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;"><p>Hover to see example</p>
+		</td>
+	</tr>
+</table>
+<h5>XLSFileWriter</h5>
+<p>The XLSFileWriter writes all records into one sheet(tab) of an XLS file.</p>
+<p>Note: this was not (re)tested recently. The original development and POI jar was way back around 2006. If you have any experience with the XLSFileWriter, please let me know.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>xlsWriter_SheetName</p>
+		</td>
+		<td>
+			<p>XLSWriter:
+			Sheet/tab name.</p>
+		</td>
+		<td>
+			<p>Sheet1</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>xlsWriter_AddHeader</p>
+		</td>
+		<td>
+			<p>XLSWriter:
+			Add a header row (true/false)</p>
+		</td>
+		<td>
+			<p>true</p>
+		</td>
+	</tr>
+</table>
+</div>
+
+
+
+<div id="text_txtdriver_configuration_publisher" class="content" style="display:none;">
+<h3>Publisher Configuration</h3>
+<h4>Common Publisher Options</h4>
+<p>These options are for the publisher, independent of any strategy used.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_impl_class</p>
+		</td>
+		<td>
+			<p>Enable or disable publisher channel (class). </p>
+			<p>
+			<b>Current implementations:</b>
+			<ul>
+			<li>info.vancauwenberge.filedriver.filepublisher.FileDriverPublicationShimImpl</li>
+			<li>info.vancauwenberge.filedriver.filepublisher.DisabledPublicationShimImpl</li>
+			</ul>
+			</p>
+		</td>
+		<td>
+			<p>Enabled</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_fileLocator</p>
+		</td>
+		<td>
+			<p>Publisher: File Locator Strategy (Class): </p>
+			<p><b>Current implementations:</b>
+			<ul>
+			<li>info.vancauwenberge.filedriver. filelocator.RegExpFileLocator</li>
+			</ul>
+			</p>
+		</td>
+		<td>
+			<p>info.vancauwenberge.filedriver.filelocator.RegExpFileLocator
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_FileSorter</p>
+		</td>
+		<td>
+			<p>Publisher: File Sorter Strategy (Class). Leave empty for no sorting:</p>
+			<p><b>Current implementations:</b>
+			<ul>
+			<li>info.vancauwenberge.filedriver.filesorter.FilePropertySorter</li>
+			</ul>
+			</p>
+		</td>
+		<td>
+			<p>info.vancauwenberge.filedriver.filesorter.FilePropertySorter</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_fileReader</p>
+		</td>
+		<td>
+			<p>Publisher: File Reader Strategy (Class): </p>
+			<p><b>Current implementations:</b>
+			<ul>
+			<li>info.vancauwenberge.filedriver.filereader.csv.CSVFileReader</li>
+			<li>info.vancauwenberge.filedriver.filereader.xml.XMLFileReader</li>
+			<li>info.vancauwenberge.filedriver.filereader.xls.XLSFileReader</li>
+			</ul>
+			</p>
+		</td>
+		<td>
+			<p>info.vancauwenberge.filedriver.filereader.csv.CSVFileReader</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_pollingInterval</p>
+		</td>
+		<td>
+			<p>Publisher: Polling interval (seconds):</p>
+		</td>
+		<td>
+			<p>80</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_metaData</p>
+		</td>
+		<td>
+			<p>Publisher: List of meta data elements that should be added(recordNumber,isLastRecord,filePath,fileName,fileSize) . The schema as given in the driver parameter 'schema' will be extended with all meta data elements listed.</p>
+		</td>
+		<td>
+			<p>recordNumber,isLastRecord</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_heartbeatInterval</p>
+		</td>
+		<td>
+			<p>Publisher: Heartbeat interval (minutes):</p>
+		</td>
+		<td>
+			<p>1</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_workDir</p>
+		</td>
+		<td>
+			<p>Publisher: Temporary work folder. All files are moved to a subdirectory (containing a date/time) of this directory prior to reading the file.</p>
+		</td>
+		<td>
+			<p>C:\workspace\DirXMLFileDriver\temp</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_command</p>
+		</td>
+		<td>
+			<p>Generated command: add (default), modify, delete, ‘dynamic’ or ‘Dynamic Input based’. Add, modify and delete are static options (every event is the same).</p>
+			<p>In Dynamic mode, the driver will first generate a query based on association. If One instance is returned, it will generate a modify, otherwise it will generate an add. ‘Dynamic Input based’ will first test to see if it should generate a delete event. If not, if follows the ‘Dynamic mode’. This gives in certain scenarios more freedom to use the filter merge authority setting (by avoiding a merge on the publisher channel).</p>
+			<p>Note: modify events will generate a query-back when a merge is needed. This can have serious performance consequences! For this reason, using 'modify' is not advised.</p>
+		</td>
+		<td>
+			<p>Add (Default)</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_command_fieldName</p>
+		</td>
+		<td>
+			<p>In case of ‘Dynamic Input based’, the field that determines if this is a delete event.</p>
+		</td>
+		<td>
+			<p>operation</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_command_delete_regexp</p>
+		</td>
+		<td>
+			<p>In case of ‘Dynamic Input based’, contains the regexp that identifies delete entries.</p>
+		</td>
+		<td>
+			<p>D</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_fileClean</p>
+		</td>
+		<td>
+			<p>How should processed files be cleaned up.</p>
+			<p><b>Current implementations:</b>
+			<ul>
+			<li>info.vancauwenberge.filedriver.filepubclean.NoPubCleaningStrategy</li>
+			<li>info.vancauwenberge.filedriver.filepubclean.AgePubCleaningStrategy</li>
+			</ul>
+			</p>
+		</td>
+		<td>
+			<p><br/>
+
+			</p>
+		</td>
+	</tr>
+</table>
+
+<h4>Strategy-specific Publisher Options</h4>
+<h5>RegExpFileLocator Options</h5>
+<p>The RegExpFileLocator is responsible for finding files that need to be processed. The given implementation scans a source folder, and selects all files that match the given regular expression.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>regExp-sourceFolder</p>
+		</td>
+		<td>
+			<p>RegExpFileLocator:
+			Source folder for files:</p>
+		</td>
+		<td>
+			<p>C:\source</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>regExp-regExp</p>
+		</td>
+		<td>
+			<p>RegExpFileLocator:
+			Regular expression for finding files.Use (?i) at start to make
+			case ignore regexp:</p>
+		</td>
+		<td>
+			<p>(?i).*\.csv</p>
+		</td>
+	</tr>
+</table>
+
+<h5>FilePropertySorter Options</h5>
+<p>The FilePropertySorter sorts the list of files returned by the file locator implementation, and sorts them (ascending or descending) on a given file property. The property can be any file attribute as exposed by the java file object.<p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>fileSort_SortMethod</p>
+		</td>
+		<td>
+			<p>FileSorter:
+			File sort methode:</p>
+		</td>
+		<td>
+			<p>getName</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>fileSort_SortOrderAsc</p>
+		</td>
+		<td>
+			<p>FileSorter:
+			Sort ascending (true/false):</p>
+		</td>
+		<td>
+			<p>true</p>
+		</td>
+	</tr>
+</table>
+<h5>CSVFileReader</h5>
+<p>The CSVFileReader reads CSV files (with or without header). It has the option to skip empty lines, use a given seperator, use the header names (if any) in stead of the given driver schema as field names, etc...</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>csvReader_skipEmptyLines</p>
+		</td>
+		<td>
+			<p>CSVReader:
+			skip empty lines (true/false)</p>
+		</td>
+		<td>
+			<p>True</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>csvReader_UseHeaderNames</p>
+		</td>
+		<td>
+			<p>CSVReader:
+			use the header names (true) or the driver schema given (false).
+			Using the header names has the advantage that the order of the
+			columns can change, without affecting your code. The downside is
+			that if the header names changes (eg: change in case), your code
+			will no longer work.</p>
+		</td>
+		<td>
+			<p>True</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>csvReader_hasHeader</p>
+		</td>
+		<td>
+			<p>CSVReader:
+			has the CSV file a header (true/false)</p>
+		</td>
+		<td>
+			<p>True</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>csvReader_forcedEncoding</p>
+		</td>
+		<td>
+			<p>CSVReader:
+			forced enoding of the xml file. Leave blank to use system default
+			encoding.</p>
+		</td>
+		<td>
+			<p>UTF-8</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>csvReader_seperator</p>
+		</td>
+		<td>
+			<p>CSVReader:
+			field separator</p>
+		</td>
+		<td>
+			<p>,</p>
+		</td>
+	</tr>
+</table>
+<h5>XMLFileReader</h5>
+<p>The XMLFileReader reads XML files. The expected format is ‘flat’:</p>
+<pre>
+&lt;root>
+  &lt;aRecord>
+    &lt;aField>avalue&lt;/aField>
+    &lt;anoherField>anotherValue&lt;/anotherField>
+  &lt;/aRecord>
+  &lt;aRecord>
+  ...
+  &lt;/aRecord>
+&lt;/root>
+</pre>
+<p>If the file is not in the given format, an optional preXslt can be applied to make it in this format. As with the CSV reader, you have the option to use the tag names (eg: aField in the example above) as field names, or use the schema given in the driver configuration.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>xmlReader_useTagNames</p>
+		</td>
+		<td>
+			<p>XMLFileReader:
+			Use the tag names from the XML document (true) or use the driver
+			schema given (false). Using the tag names has the advantage that
+			the order of the elements can change, without affecting your code.
+			The downside is that if the element names changes (eg: change in
+			case), your code will no longer work. The latter should not occur
+			in an XML file, because XML is case sensitive (making at in fact
+			another field when the case of the tag changes).</p>
+		</td>
+		<td>
+			<p>true</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>xmlReader_preXslt</p>
+		</td>
+		<td>
+			<p>XMLFileReader:
+			xsl to apply prior to processing the XML file (leave empty for no
+			pre-processing):</p>
+		</td>
+		<td title="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;xsl:stylesheet version=&quot;1.0&quot;
+xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;
+xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
+  &lt;xsl:output method=&quot;xml&quot; indent=&quot;yes&quot;/&gt;
+  &lt;xsl:template match=&quot;root&quot;&gt;
+    &lt;xsl:copy&gt;
+      &lt;xsl:applytemplates/&gt;
+    &lt;/xsl:copy&gt;
+    &lt;/xsl:template&gt;
+  &lt;xsl:template match=&quot;aRecord&quot;&gt;
+    &lt;xsl:copy&gt;
+      &lt;xsl:applytemplates/&gt;
+    &lt;/xsl:copy&gt;
+  &lt;/xsl:template&gt;
+  &lt;xsl:template match=&quot;schema&quot;&gt;
+    &lt;xsl:copy&gt;
+      &lt;xsl:applytemplates/&gt;
+    &lt;/xsl:copy&gt;
+  &lt;/xsl:template&gt;
+  &lt;xsl:template match=&quot;objectClass&quot;&gt;
+    &lt;newObjectClass&gt;
+      &lt;xsl:value-of select=&quot;.&quot;/&gt;
+    &lt;/newObjectClass&gt;
+  &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;"><p>Hover to see example</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>xmlReader_forcedEncoding</p>
+		</td>
+		<td>
+			<p>XMLFileReader:
+			forced enoding of the xml file. Leave blank to use the encoding
+			attribute inside the xml file (or system default when attribute
+			not given).</p>
+		</td>
+		<td>
+			<p style="background: transparent"><br/>
+
+			</p>
+		</td>
+	</tr>
+</table>
+
+<h5>XLSFileReader</h5>
+<p>The XLS file reader reads 1 tab of an Excel sheet. This reader will read the complete XLS file in memory.</p>
+<p>Note: this was not (re)tested recently. The original development and POI jar was way back around 2006. If you have any experience with the XLSFileWriter, please let me know.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>xlsReader_SheetName</p>
+		</td>
+		<td>
+			<p>XLSReader: Name of the sheet within the XLS file to read.</p>
+		</td>
+		<td>
+			<p>Sheet1</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>xlsReader_HasHeader</p>
+		</td>
+		<td>
+			<p>XLSReader: has the XLS sheet a header (true/false)</p>
+		</td>
+		<td>
+			<p>true</p>
+		</td>
+	</tr>
+</table>
+<h5>NoPubCleaningStrategy</h5>
+<p>This publisher cleaning strategy does not do any cleaning. All published files are kept on the system. This strategy has no parameters.</p>
+<h5>AgePubCleaningStrategy</h5>
+<p>This publisher cleaning strategy removes files that are older (last modify date) than a certain age.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pubclean_age_number</p>
+		</td>
+		<td>
+			<p>How many units should it be before cleaning the file</p>
+		</td>
+		<td>
+			<p>5</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pubclean_age_unit</p>
+		</td>
+		<td>
+			<p>The units of the above number. Possible values: Minutes, Hours, Days,
+			Weeks</p>
+		</td>
+		<td>
+			<p>Days</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pubclean_age_test_interval_number</p>
+		</td>
+		<td>
+			<p>How frequent should the age of files be tested.</p>
+		</td>
+		<td>
+			<p>10</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pubclean_age_test_interval_unit</p>
+		</td>
+		<td>
+			<p>The units of the above number. Possible values: Minutes, Hours, Days, Weeks</p>
+		</td>
+		<td>
+			<p>Minutes</p>
+		</td>
+	</tr>
+</table>
+
+</div>
+
+
 
 <!-- PACKAGE UNLOCKER -->
 <!-- PACKAGE UNLOCKER -->
 <!-- PACKAGE UNLOCKER -->
 
 <div id="text_unlock" class="content" style="display:none;">
+<h3>Package Unlocker</h3>
 	<ul>
 		<li><a href="#unlock_introduction">Intro</a></li>
 		<li><a href="#unlock_installation">Installation</a></li>

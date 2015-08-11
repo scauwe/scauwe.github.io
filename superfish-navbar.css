@@ -58,14 +58,17 @@
 	background: #EEEEEE;
 }
 .sf-navbar ul li:hover,
-.sf-navbar ul li.sfHover,
-.sf-navbar ul ul li {
+.sf-navbar ul li.sfHover{
 	background: #EEEEEE;
+}
+.sf-navbar ul ul li {
+	background: #FFFFFF;
+	border-bottom: thin dotted black;
 }
 .sf-navbar ul ul li:hover,
 .sf-navbar ul ul li.sfHover,
 .sf-navbar ul ul li.active {
-	background: #E6EEFF;
+	background: #EEEEEE;
 }
 .sf-navbar ul li.active > a,
 .sf-navbar li.sf-breadcrumb > a {
@@ -90,5 +93,5 @@
 .sf-arrows.sf-navbar ul > li:hover > .sf-with-ul:after,
 .sf-arrows.sf-navbar ul > .sfHover > .sf-with-ul:after {
 	border-color: transparent;
-	border-top-color: white;
+	border-top-color: black;
 }
