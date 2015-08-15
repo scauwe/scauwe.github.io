@@ -359,7 +359,7 @@ var ZCView = Backbone.View.extend({
 		<div id="menu">
 					<ul id="sample-menu-4" class="sf-menu sf-navbar">
 						<li>
-							<a href="#">About</a>
+							<a href="#about">About</a>
 							<ul>
 								<li><a href="#about_Me">Me</a></li>
 								<li><a href="#about_License">License</a></li>
@@ -416,6 +416,14 @@ var ZCView = Backbone.View.extend({
 <!-- ABOUT -->
 <!-- ABOUT -->
 <!-- ABOUT -->
+<div id="text_about" class="content" style="display:none;">
+<h3>About</h3>
+<ul>
+<li><a href="#about_Me">Me</a></li>
+<li><a href="#about_License">License</a></li>
+<li><a href="#about_Support">Support</a></li>
+</ul>
+</div>
 	
 <div id="text_about_Me" class="content" style="display:none;">
 <h3>About - Me</h3>
@@ -2097,8 +2105,10 @@ Steps:
 	</div>
 
 
-
+<div id="footer" style="position:relative;width:800px;margin-left: auto ;  margin-right: auto ;padding:0px; border-top:solid 1px black">
+<p>Copyright, <a href="#about_Me">Stefaan Van Cauwenberge</a></p>
 </div>
 
+</div>
 </body>
 </html>
