@@ -5,14 +5,43 @@
 	<title>VanCauwenberge.info</title>
 	<meta name="viewport" content="width=800">
 	<meta name="description" content="Vancauwenberge.info IDM extentions">
+	<meta name="author" content="Stefaan Van Cauwenberge">
+	<meta name="keywords" content="NetIQ, Novell, Generic file driver, association, shim, plugin, Designer, microfocus, IDM, eDirectory, driver, package, unlock, DirXML, trace, ">
 <style type="text/css">
+html,
 body {
-  margin: 0;
+   margin:0;
+   padding:0;
+   height:100%;
+}
+body {
   font-size: .9em;
   line-height: 1.4;
   color: #333333;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  padding: 0.4em;
+}
+#container{
+	position:relative;
+	min-height:100%;
+}
+#menuwrap{
+	position:relative;
+	width:800px;
+	margin-left: auto ;      /* center horizontal */
+	margin-right: auto ;     /* center horizontal */
+	padding:0em 0em 3em 0em; /* 3em is for the footer */
+}
+#footer {
+	position:absolute;
+	width:800px; 
+	bottom:0; 
+	height:4em;           /* little bit more than padding-bottom of content */
+	margin-left: auto ;   /* does not work to center since position is absolute */
+	margin-right: auto ;  /* does not work to center since position is absolute */
+	padding:0px; 
+	border-top:solid 1px black; 
+	left: 0px;   /* center horizontal */
+	right: 0px;  /* center horizontal */
 }
 .content{
   margin-left: 0;
@@ -88,7 +117,14 @@ label {
 	font-size:12px Arial;
 }  
 </style>
-
+<!--[if lt IE 7]>
+	<style media="screen" type="text/css">
+	#container {
+		height:100%;
+	}
+	</style>
+<![endif]-->
+	
 <!--http://users.tpg.com.au/j_birch/plugins/superfish/download/-->
 <!-- link to the CSS files for this menu type -->
 <link rel="stylesheet" media="screen" href="superfish.css">
@@ -107,47 +143,62 @@ label {
 var menu;
 
 function selectMenu(item){
-	//Destroy the old menu in order to reset the current path
-	if (menu !== undefined)
-		$(menu).superfish('destroy');
-	
-	//Hide all donate buttons
-	$('.donate').hide();
-	//Hide all content
-	$('.content').hide('slow');
-	//Remove all active classes
-	$('li.active').removeClass('active');
-
 	//Get the identifier of the menu to show
 	var path = $(item).attr('href');
 	var id = path.split('#');
 	id = id[id.length-1];
-	//Now show selected item
-	$('#menu_'+id).addClass('active');
+
+	//Test if we need to switch if not already visible
+	if ($('#text_'+id).is(':visible'))
+		return;
+	else{
+		//Destroy the old menu in order to reset the current path
+		if (menu !== undefined)
+			$(menu).superfish('destroy');
+	
+		//Hide all donate buttons
+		$('.donate').hide();
+		//Hide all content
+		$('.content').hide('slow');
+		//Remove all active classes
+		$('li.active').removeClass('active');
+
+		//Now show selected item
+		$('#menu_'+id).addClass('active');
 
 	
-	$('a[href="'+path+'"]')
-	  .parents('li')  // gets all list items that are ancestors of the link
-	  .addClass('active');
+		$('a[href="'+path+'"]')
+			.parents('li')  // gets all list items that are ancestors of the link
+			.addClass('active');
 
 /*	$(item)
 	  .parents('li')  // gets all list items that are ancestors of the link
 	  .addClass('active');*/
 	  
-	$('#text_'+id).show('slow');
+		$('#text_'+id).show('slow');
 
-	//Show corresponding donate button
-	id = id.split("_");
-	id = id[0];
-	$('#donate_'+id).show();
+		//Show corresponding donate button
+		id = id.split("_");
+		id = id[0];
+		$('#donate_'+id).show();
 	
-	//reinitialize Superfish menu	
-	menu = $('ul.sf-menu').superfish({
-		pathClass: 'active',
-		animation: {opacity:'show',height:'show'}
-	});
-	
+		//reinitialize Superfish menu	
+		menu = $('ul.sf-menu').superfish({
+			pathClass: 'active',
+			animation: {opacity:'show',height:'show'}
+		});
+	}
 }
+
+function locationHashChanged() {
+	selectMenu(
+	  $("ul.sf-menu")
+	  .find("a[href$='" + location.hash + "']") // gets all links that match the href
+	  .parents('li')  // gets all list items that are ancestors of the link
+	  .children('a'));  // walks down one level from all selected li's
+}
+
+window.onhashchange = locationHashChanged;
 
 $(document).ready(function(){
 	$('a[href^="#"]').click(function() {
@@ -354,8 +405,8 @@ var ZCView = Backbone.View.extend({
 <!-- MENU -->
 
 
-<div id="parent" style="position:relative;">
-	<div id="menuwrap" style="position:relative;width:800px;margin-left: auto ;  margin-right: auto ;padding:0px;">
+<div id="container">
+	<div id="menuwrap">
 		<div id="menu">
 					<ul id="sample-menu-4" class="sf-menu sf-navbar">
 						<li>
@@ -603,10 +654,13 @@ The editor view contains both a refresh and rescan button:
 
 <div id="text_enhTrace_Installation" class="content" style="display:none;">
 <h3>Installation</h3>
-<p>I am in the process of moving all plugins and extentions to <a href="https://github.com/scauwe/">github</a>, including an IDM update site. This extentions is the first one avaialable via the IDM/eclipse update feature. In order to install this plugin, add the following site as an update site to IDM:<br/>
-<pre>https://raw.githubusercontent.com/scauwe/IDMSite/master/</pre><br/>
-and try to update you IDM packages. This will now find this plugin. Select it and perform the update.
-</p>
+<p>I am in the process of moving all plugins and extensions to <a href="https://github.com/scauwe/">github</a>, including an IDM update site. This extension is the first one available via the IDM/eclipse update feature. Unfortunately, NetIQ removed the standard 'install software' feature from the eclipse platform. Luckily, they included a package update site feature that works more or less the same.</p>
+</p>In order to install this plugin, add the following site as a package update site to IDM:<br/>
+<pre>https://raw.githubusercontent.com/scauwe/IDMSite/master/</pre>
+and try to update you IDM packages. This will now find this plugin. Select it and perform the update.</p>
+<p>Adding an update site:<br/>
+<pre>Window &gt; Preferences &gt; NetQ &gt; Package Manager &gt; Online Updates </pre>
+Add a new update URL as defined above.</p>
 </div>
 
 
@@ -806,11 +860,6 @@ Main differentiators to NetIQ's driver:
 	<li>Publisher channel can add metadata about the file or record processed (eg: record number, filename, last record indicator, etc).</li>
 </ul>
 </p>
-<p>
-The original version I wrote in 2007 is located at <a href="http://www.novell.com/coolsolutions/tools/18671.html">http://www.novell.com/coolsolutions/tools/18671.html</a>. This update comes with an IDM 4 package making the installation simpler and has some new features and fixes (see <a href="#txtdriver_history">Version History</a>).
-<br/>
-See the referenced version for a list of the initial features.
-</p>
 </div>
 
 
@@ -872,6 +921,13 @@ See the referenced version for a list of the initial features.
 	<li>Shim feature: when receiving a modify event on the subscriber channel, the shim will query back for all missing attribute values in order to be able to write a complete record (no need for a stylesheet to query for missing attributes and keeping this stylesheet in sync with the schema).</li>
 	<li>Shim bug/feature: the subscriber channel now fully support add, modify and instance events. Instance and add events are assumed to contain all data and do not perform a query back. Only the modify event performs a query back</li>
 </ul>
+<h4>Initial release, back in 2007</h4>
+<p>
+The original version I wrote in 2007 is located at <a href="http://www.novell.com/coolsolutions/tools/18671.html">http://www.novell.com/coolsolutions/tools/18671.html</a>. It did not support packages or any of the cool things we can do now, but it already had the extensible architecture and same basic principles (produce and consume NDS, add meta data,...).
+<br/>
+See the <a href="http://www.novell.com/coolsolutions/tools/18671.html">referenced version</a> for a list of the initial features.
+</p>
+
 </div>
 
 
@@ -925,7 +981,7 @@ Placement based on a driverset GCV (idv.dit.data.users).
 <p>All configuration options should have a good description. For completeness, the configuration is also described here:</p>
 <p><ul>
 <li><a href="#txtdriver_configuration_driver">Driver</a></li>
-<li><a href="#txtdriver_configuration_subscriber">Subscriber</a</li>
+<li><a href="#txtdriver_configuration_subscriber">Subscriber</a></li>
 <li><a href="#txtdriver_configuration_publisher">Publisher</a></li>
 </ul></p>
 </div>
@@ -2110,7 +2166,7 @@ Steps:
 	</div>
 
 
-<div id="footer" style="position:relative;width:800px;margin-left: auto ;  margin-right: auto ;padding:0px; border-top:solid 1px black">
+<div id="footer">
 <p>Copyright, <a href="#about_Me">Stefaan Van Cauwenberge</a></p>
 </div>
 
