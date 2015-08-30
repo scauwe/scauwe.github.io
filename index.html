@@ -204,6 +204,19 @@ function locationHashChanged() {
 
 window.onhashchange = locationHashChanged;
 
+//Google analytics begin
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-66928318-1', 'auto');
+  ga('require', 'linkid', 'linkid.js');
+  //ga.send is called later
+  //ga('send', 'pageview');
+//Google analytics end
+
+
 $(document).ready(function(){
 	$('a[href^="#"]').click(function() {
 		selectMenu(this);
@@ -223,6 +236,8 @@ $(document).ready(function(){
 	
 	//Default to path_0 if no hash in url
 	if (path === undefined || path=='') {
+		//Tell google analytics that the root was requested.
+	  	ga('send', 'pageview');
 		path="about_Me";
 	}
 	selectMenu(
@@ -351,13 +366,6 @@ var ZCView = Backbone.View.extend({
 </script>
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-66928318-1', 'auto');
-  ga('send', 'pageview');
 
 </script>
 
@@ -426,54 +434,54 @@ var ZCView = Backbone.View.extend({
 		<div id="menu">
 					<ul id="sample-menu-4" class="sf-menu sf-navbar">
 						<li>
-							<a href="#about">About</a>
+							<a id="menuAbout" href="#about">About</a>
 							<ul>
-								<li><a href="#about_Me">Me</a></li>
-								<li><a href="#about_License">License</a></li>
-								<li><a href="#about_Support">Support</a></li>
+								<li><a id="menuAboutMe" href="#about_Me">Me</a></li>
+								<li><a id="menuAboutLicense" href="#about_License">License</a></li>
+								<li><a id="menuAboutSupport" href="#about_Support">Support</a></li>
 							</ul>
 						</li>
 						<li>
-							<a href="#enhTrace">Enhanced trace</a>
+							<a id="menuEnhTrace" href="#enhTrace">Enhanced trace</a>
 							<ul>
-								<li><a href="#enhTrace_Intro">Intro</a></li>
-								<li><a href="#enhTrace_Usage">User Guide</a></li>
-								<li><a href="#enhTrace_Installation">Installation</a></li>
-								<li><a href="#enhTrace_History">History &amp; limitations</a></li>
-								<li><a href="#enhTrace_Roadmap">Roadmap</a></li>
+								<li><a id="menuEnhTraceIntro" href="#enhTrace_Intro">Intro</a></li>
+								<li><a id="menuEnhTraceUsage" href="#enhTrace_Usage">User Guide</a></li>
+								<li><a id="menuEnhTraceInstallation" href="#enhTrace_Installation">Installation</a></li>
+								<li><a id="menuEnhTraceHistory" href="#enhTrace_History">History &amp; limitations</a></li>
+								<li><a id="menuEnhTraceRoadmap" href="#enhTrace_Roadmap">Roadmap</a></li>
 							</ul>
 						</li>
 						<li>
-							<a href="#ae">Association Editor</a>
+							<a id="menuAE" href="#ae">Association Editor</a>
 							<ul>
-								<li><a href="#ae_intro">Intro</a></li>
-								<li><a href="#ae_installation">Installation</a></li>
-								<li><a href="#ae_usage">User Guide</a></li>
-								<li><a href="#ae_history">Version History</a></li>
-								<li><a href="#ae_limitations">Known Limitations</a></li>
+								<li><a id="menuAEIntro" href="#ae_intro">Intro</a></li>
+								<li><a id="menuAEInstallation" href="#ae_installation">Installation</a></li>
+								<li><a id="menuAEUsage" href="#ae_usage">User Guide</a></li>
+								<li><a id="menuAEHistory" href="#ae_history">Version History</a></li>
+								<li><a id="menuAELimitation" href="#ae_limitations">Known Limitations</a></li>
 							</ul>
 						</li>
 						<li>
-							<a href="#txtdriver">Generic File Driver</a>
+							<a id="menuTxtDriver" href="#txtdriver">Generic File Driver</a>
 							<ul>
-								<li><a href="#txtdriver_intro">Introduction</a></li>
-								<li><a href="#txtdriver_history">Version History</a></li>
-								<li><a href="#txtdriver_installation">Installation</a></li>
-								<li><a href="#txtdriver_policies">Policies</a></li>
-								<li><a href="#txtdriver_configuration">Configuration</a>
+								<li><a id="menuTxtDriverIntro" href="#txtdriver_intro">Introduction</a></li>
+								<li><a id="menuTxtDriverHistory" href="#txtdriver_history">Version History</a></li>
+								<li><a id="menuTxtDriverInstallation" href="#txtdriver_installation">Installation</a></li>
+								<li><a id="menuTxtDriverPolicies" href="#txtdriver_policies">Policies</a></li>
+								<li><a id="menuTxtDriverConfiguration" href="#txtdriver_configuration">Configuration</a>
 									<ul>
-										<li><a href="#txtdriver_configuration_driver">Driver</a></li>
-										<li><a href="#txtdriver_configuration_subscriber">Subscriber</a></li>
-										<li><a href="#txtdriver_configuration_publisher">Publisher</a></li>
+										<li><a id="menuTxtDriverConfigurationDriver" href="#txtdriver_configuration_driver">Driver</a></li>
+										<li><a id="menuTxtDriverConfigurationSubscriber" href="#txtdriver_configuration_subscriber">Subscriber</a></li>
+										<li><a id="menuTxtDriverConfigurationPublisher" href="#txtdriver_configuration_publisher">Publisher</a></li>
 									</ul>
 								</li>
 							</ul>
 						</li>
 						<li>
-							<a href="#unlock">Package Unlocker</a>
+							<a id="menuUnloc" href="#unlock">Package Unlocker</a>
 							<ul>
-								<li><a href="#unlock_introduction">Intro</a></li>
-								<li><a href="#unlock_installation">Installation</a></li>
+								<li><a id="menuUnlocIntroduction" href="#unlock_introduction">Intro</a></li>
+								<li><a id="menuUnlocInstallation" href="#unlock_installation">Installation</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -486,20 +494,20 @@ var ZCView = Backbone.View.extend({
 <div id="text_about" class="content" style="display:none;">
 <h3>About</h3>
 <ul>
-<li><a href="#about_Me">Me</a></li>
-<li><a href="#about_License">License</a></li>
-<li><a href="#about_Support">Support</a></li>
+<li><a id="tocAboutMe" href="#about_Me">Me</a></li>
+<li><a id="tocAboutLicense" href="#about_License">License</a></li>
+<li><a id="tocAboutSupport" href="#about_Support">Support</a></li>
 </ul>
 </div>
 	
 <div id="text_about_Me" class="content" style="display:none;">
 <h3>About - Me</h3>
-<p>You can read about me on <a href="https://be.linkedin.com/in/stefaanvancauwenberge" target="_blank">linkedin</a>.</p>
+<p>You can read about me on <a id="linkedInProfile" href="https://be.linkedin.com/in/stefaanvancauwenberge" target="_blank">linkedin</a>.</p>
 </div>
 
 <div id="text_about_License" class="content" style="display:none;position:relative;width:100%;clear: left;">
 <h3>About - License</h3>
-<p>The software is provided 'as is' under the <a href="http://mozilla.org/MPL/2.0/" target="_blank">MPL (Mozilla Public License) 2.0</a>. Please read the full license to know the limitations.</p>
+<p>The software is provided 'as is' under the <a id="mpl20" href="http://mozilla.org/MPL/2.0/" target="_blank">MPL (Mozilla Public License) 2.0</a>. Please read the full license to know the limitations.</p>
 </div>
 
 <div id="text_about_Support" class="content" style="display:none;position:relative;width:100%;clear: left;">
@@ -507,14 +515,14 @@ var ZCView = Backbone.View.extend({
 <p>Support is based on best effort. I am in the process of moving my code to github.</p>
 <p>The following are support via github:</p>
 <ul>
-<li>Log issues for <a href="https://github.com/scauwe/IDM-Enh-Trace/issues">Enahnced Trace</a></li>
+<li>Log issues for <a id="githubEnhTrace" href="https://github.com/scauwe/IDM-Enh-Trace/issues">Enahnced Trace</a></li>
 </ul>
 <p>For the other packages, you can leave a message on the corresponding cool solutions page.</p>
 <p>
 <ul>
-<li><a href="https://www.netiq.com/communities/cool-solutions/cool_tools/unlocking-designer-project-you-created/#comments" target="_blank">Package Unlocker comments</a></li>
-<li><a href="https://www.netiq.com/communities/cool-solutions/cool_tools/generic-file-driver-idm-v-003/#comments" target="_blank">Generic File Driver comments</a></li>
-<li><a href="https://www.netiq.com/communities/cool-solutions/cool_tools/designer-association-modifier-plugin/#comments" target="_blank">Association editor comments</a></li>
+<li><a id="cooltoolsUnlock" href="https://www.netiq.com/communities/cool-solutions/cool_tools/unlocking-designer-project-you-created/#comments" target="_blank">Package Unlocker comments</a></li>
+<li><a id="cooltoolsTxtDriver" href="https://www.netiq.com/communities/cool-solutions/cool_tools/generic-file-driver-idm-v-003/#comments" target="_blank">Generic File Driver comments</a></li>
+<li><a id="cooltoolsAE" href="https://www.netiq.com/communities/cool-solutions/cool_tools/designer-association-modifier-plugin/#comments" target="_blank">Association editor comments</a></li>
 </ul>
 <p>If you want to support me, a donation will always help.</p>
 <p>
@@ -535,11 +543,11 @@ var ZCView = Backbone.View.extend({
 <div id="text_enhTrace" class="content" style="display:none;">
 <h3>Enhanced Trace</h3>
 <ul>
-<li><a href="#enhTrace_Intro">Introduction</a></li>
-<li><a href="#enhTrace_Usage">User Guide</a></li>
-<li><a href="#enhTrace_Installation">Installation</a></li>
-<li><a href="#enhTrace_History">History &amp; Limitations</a></li>
-<li><a href="#enhTrace_Roadmap">Roadmap</a></li>
+<li><a id="tocEnhTraceIntro" href="#enhTrace_Intro">Introduction</a></li>
+<li><a id="tocEnhTraceusage" href="#enhTrace_Usage">User Guide</a></li>
+<li><a id="tocEnhTraceInstallation" href="#enhTrace_Installation">Installation</a></li>
+<li><a id="tocEnhTraceHistory" href="#enhTrace_History">History &amp; Limitations</a></li>
+<li><a id="tocEnhTraceRoadmap" href="#enhTrace_Roadmap">Roadmap</a></li>
 </ul>
 </div>
 
@@ -717,11 +725,11 @@ Add a new update URL as defined above.</p>
 <div id="text_ae" class="content" style="display:none;">
 <h3>Association Editor</h3>
 <ul>
-<li><a href="#ae_intro">Introduction</a></li>
-<li><a href="#ae_installation">Installation</a></li>
-<li><a href="#ae_usage">User Guide</a></li>
-<li><a href="#ae_history">History</a></li>
-<li><a href="#ae_limitations">Known Limitations</a></li>
+<li><a id="tocAEIntro" href="#ae_intro">Introduction</a></li>
+<li><a id="tocAEInstallation" href="#ae_installation">Installation</a></li>
+<li><a id="tocAEUsage" href="#ae_usage">User Guide</a></li>
+<li><a id="tocAEHistory" href="#ae_history">History</a></li>
+<li><a id="tocAELimitations" href="#ae_limitations">Known Limitations</a></li>
 </ul>
 </div>
 
@@ -734,7 +742,7 @@ You all know the <a href="http://www.novell.com/coolsolutions/tools/15754.html"
 
 <div id="text_ae_installation" class="content" style="display:none;">
 <h3>Installation</h3>
-<p>I am in the process of migrating all my plugins to <a href="https://github.com/scauwe/">github</a>, including an automated update site. This plugin is however not yet migrated. Download is available from <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/designer-association-modifier-plugin/">Cool solutions</a>. Cool solutions does not allow upload of jars, so rename the attached zip to .jar and copy the jar to the plugins folder of your designer and restart designer if already running. I tested this with Designer 4.0.1 and 4.0.2 in Linux and Windows.</p>
+<p>I am in the process of migrating all my plugins to <a href="https://github.com/scauwe/" target="_blank">github</a>, including an automated update site. This plugin is however not yet migrated. Download is available from <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/designer-association-modifier-plugin/" target="_blank">Cool solutions</a>. Cool solutions does not allow upload of jars, so rename the attached zip to .jar and copy the jar to the plugins folder of your designer and restart designer if already running. I tested this with Designer 4.0.1 and 4.0.2 in Linux and Windows.</p>
 </div>
 
 
@@ -852,11 +860,11 @@ ldap paged search is somehow not fully implemented in eDirectory. Some ldap sear
 <div id="text_txtdriver" class="content" style="display:none;">
 <h3>Generic File Driver</h3>
 	<ul>
-		<li><a href="#txtdriver_intro">Introduction</a></li>
-		<li><a href="#txtdriver_history">Version History</a></li>
-		<li><a href="#txtdriver_installation">Installation</a></li>
-		<li><a href="#txtdriver_policies">Policies</a></li>
-		<li><a href="#txtdriver_configuration">Configuration</a></li>
+		<li><a id="tocTxtDriverIntro" href="#txtdriver_intro">Introduction</a></li>
+		<li><a id="tocTxtDriverHistory" href="#txtdriver_history">Version History</a></li>
+		<li><a id="tocTxtDriverInstallation" href="#txtdriver_installation">Installation</a></li>
+		<li><a id="tocTxtDriverPolicies" href="#txtdriver_policies">Policies</a></li>
+		<li><a id="tocTxtDriverConfiguration" href="#txtdriver_configuration">Configuration</a></li>
 	</ul>
 </div>
 
@@ -996,9 +1004,9 @@ Placement based on a driverset GCV (idv.dit.data.users).
 <h3>Configuration</h3>
 <p>All configuration options should have a good description. For completeness, the configuration is also described here:</p>
 <p><ul>
-<li><a href="#txtdriver_configuration_driver">Driver</a></li>
-<li><a href="#txtdriver_configuration_subscriber">Subscriber</a></li>
-<li><a href="#txtdriver_configuration_publisher">Publisher</a></li>
+<li><a id="tocTxtDriverConfigurationDriver" href="#txtdriver_configuration_driver">Driver</a></li>
+<li><a id="tocTxtDriverConfigurationSubscriber" href="#txtdriver_configuration_subscriber">Subscriber</a></li>
+<li><a id="tocTxtDriverConfigurationPublisher" href="#txtdriver_configuration_publisher">Publisher</a></li>
 </ul></p>
 </div>
 
@@ -2141,8 +2149,8 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 <div id="text_unlock" class="content" style="display:none;">
 <h3>Package Unlocker</h3>
 	<ul>
-		<li><a href="#unlock_introduction">Intro</a></li>
-		<li><a href="#unlock_installation">Installation</a></li>
+		<li><a id="tocUnlockIntroduction" href="#unlock_introduction">Intro</a></li>
+		<li><a id="tocUnlockInstallation" href="#unlock_installation">Installation</a></li>
 	</ul>
 </div>
 
@@ -2183,7 +2191,7 @@ Steps:
 
 
 <div id="footer">
-<p>Copyright, <a href="#about_Me">Stefaan Van Cauwenberge</a></p>
+<p>Copyright, <a id="footerAbout" href="#about_Me">Stefaan Van Cauwenberge</a></p>
 </div>
 
 </div>
