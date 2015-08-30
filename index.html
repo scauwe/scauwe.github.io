@@ -152,6 +152,10 @@ function selectMenu(item){
 	if ($('#text_'+id).is(':visible'))
 		return;
 	else{
+		//Google analytics: send new page and set current page
+		ga('set', 'page', '/'+id);
+		ga('send', 'pageview');
+
 		//Destroy the old menu in order to reset the current path
 		if (menu !== undefined)
 			$(menu).superfish('destroy');
@@ -345,6 +349,18 @@ var ZCView = Backbone.View.extend({
 
       
 </script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-66928318-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
 
 </head>
 
