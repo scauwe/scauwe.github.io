@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>VanCauwenberge.info</title>
+	<title>Generic File driver shim, Designer plugin (Trace, Associations, package unlocker) for NetIQ IDM</title>
 	<meta name="viewport" content="width=800">
-	<meta name="description" content="Vancauwenberge.info IDM extentions">
+	<meta name="description" content="Collection of IDM Designer plugins (Trace, Associations, package unlocker) and the Generic File Driver shim">
 	<meta name="author" content="Stefaan Van Cauwenberge">
 	<meta name="keywords" content="NetIQ, Novell, Generic file driver, association, shim, plugin, Designer, microfocus, IDM, eDirectory, driver, package, unlock, DirXML, trace, ">
 <style type="text/css">
@@ -175,16 +175,26 @@ function selectMenu(item){
 			.parents('li')  // gets all list items that are ancestors of the link
 			.addClass('active');
 
-/*	$(item)
-	  .parents('li')  // gets all list items that are ancestors of the link
-	  .addClass('active');*/
-	  
 		$('#text_'+id).show('slow');
+
+		//Limit the id to the 'root'
 
 		//Show corresponding donate button
 		id = id.split("_");
 		id = id[0];
 		$('#donate_'+id).show();
+	
+		//Set the page title
+		if (id=="about")
+			document.title="Van Cauwenberge.info";
+		else if (id=="enhTrace")
+			document.title="Enhanced Trace plugin - Van Cauwenberge.info";
+		else if (id=="txtdriver")
+			document.title="Generic File driver shim - Van Cauwenberge.info";
+		else if (id=="ae")
+			document.title="Association Editor plugin - Van Cauwenberge.info";
+		else if (id=="unlock")
+			document.title="Package Unlocker plugin - Van Cauwenberge.info";
 	
 		//reinitialize Superfish menu	
 		menu = $('ul.sf-menu').superfish({
@@ -218,6 +228,11 @@ window.onhashchange = locationHashChanged;
 
 
 $(document).ready(function(){
+	//Hide all donate buttons
+	$('.donate').hide();
+	//Hide all content
+	$('.content').hide();
+
 	$('a[href^="#"]').click(function() {
 		selectMenu(this);
 	});
@@ -270,159 +285,13 @@ $(document).ready(function(){
 	        $('.tooltip')
 	        .css({ top: mousey, left: mousex })	
 	});
-	
-
-
-	//Convert every 'title' attribute to copy
-/*	$('*[title]').each(function(i){
-        	var clip = new ZeroClipboard.Client();
-	        ZeroClipboard.setMoviePath("https://jonrohan.github.com/ZeroClipboard/javascripts/ZeroClipboard.swf");
-	        clip.setHandCursor(true);
-
-	        var code = $j("#" + $(this).attr('title')).html();
-	        clip.glue($(this));
-	        clip.addEventListener('mouseDown', function (client) {
-	            clip.setText(code);
-	        });
-
-	        //Add a complete event to let the user know the text was copied
-	        clip.addEventListener('complete', function (client, text) {
-	            alert("Copied text to clipboard: " + code);
-	        });
-	    });
-
-*/
-
-//ZeroClipboard.config( { swfPath: "http://zeroclipboard.org/javascripts/zc/v2.2.0/ZeroClipboard.swf?noCache=1439075667231" } );
-
-//http://stackoverflow.com/questions/25754186/zeroclipboard-mouse-events-dont-fire
-/*
-var ZCView = Backbone.View.extend({
-    events: {
-        'mouseenter': function() {
-            console.log('mouseenter');
-            alert('mouseenter');
-        },
-        'mouseover': function() {
-            console.log('mouseover');
-            alert('mouseover');
-        }
-    },
-    initialize: function() {
-        var client = new ZeroClipboard(this.el);
-
-        client.on("ready", function() {
-            console.log('ready');
-            alert('ready');
-        });
-        client.on("beforecopy", function() {
-            console.log('beforecopy');
-            alert('beforecopy');
-        });
-    }
-});
-*/
-//var v = new ZCView({el: '#src'});
-//var v = new ZCView({el: '.clip_button'});
-
-/*
-      var client = new ZeroClipboard( $('.clip_button') );
-      //var client = new ZeroClipboard( $('*[title]') );
-
-      client.on( 'ready', function(event) {
-        // console.log( 'movie is loaded' );
-
-        client.on( 'copy', function(event) {
-          event.clipboardData.setData('text/plain', event.target.title);
-        } );
-
-        client.on( 'aftercopy', function(event) {
-          console.log('Copied text to clipboard: ' + event.data['text/plain']);
-        } );
-      } );
-
-      client.on( 'error', function(event) {
-        // console.log( 'ZeroClipboard error of type "' + event.name + '": ' + event.message );
-        ZeroClipboard.destroy();
-      } );
-      
-      client.on('onMouseOver', function(){
-   	 alert("mouseOver"); // code to show tool tip goes here
-	});
-
-	client.on('onMouseOut', function(){
-	    console.log("mouseOut"); // code to hide tool tip goes here
-	});
-
-*/
-
 
 });
 
-
-
-
-      
 </script>
-
-<script>
-
-</script>
-
-
 </head>
 
 <body>
-
-<!-- DONATE BUTTONS -->
-<!-- DONATE BUTTONS -->
-<!-- DONATE BUTTONS -->
-
-<div id="donate_enhTrace" class="donate">
-<p>Support the <b>Enhanced Trace</b> plugin by making a donation</p>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
-">
-<input style="display: block;margin: 0 auto;text-align: center;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-</div>
-
-<div id="donate_ae" class="donate">
-<p>Support the <b>Association Editor</b> plugin by making a donation</p>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
-">
-<input style="display: block;margin: 0 auto;text-align: center;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-</div>
-
-<div id="donate_txtdriver" class="donate">
-<p>Support the <b>Generic File Driver</b> by making a donation</p>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
-">
-<input style="display: block;margin: 0 auto;text-align: center;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-</div>
-
-
-<div id="donate_unlock" class="donate">
-<p>Support the <b>Package Unlocker</b> plugin by making a donation</p>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
-">
-<input style="display: block;margin: 0 auto;text-align: center;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-</div>
-
 
 <!-- MENU -->
 <!-- MENU -->
@@ -491,7 +360,7 @@ var ZCView = Backbone.View.extend({
 <!-- ABOUT -->
 <!-- ABOUT -->
 <!-- ABOUT -->
-<div id="text_about" class="content" style="display:none;">
+<div id="text_about" class="content">
 <h3>About</h3>
 <ul>
 <li><a id="tocAboutMe" href="#about_Me">Me</a></li>
@@ -500,17 +369,17 @@ var ZCView = Backbone.View.extend({
 </ul>
 </div>
 	
-<div id="text_about_Me" class="content" style="display:none;">
+<div id="text_about_Me" class="content">
 <h3>About - Me</h3>
 <p>You can read about me on <a id="linkedInProfile" href="https://be.linkedin.com/in/stefaanvancauwenberge" target="_blank">linkedin</a>.</p>
 </div>
 
-<div id="text_about_License" class="content" style="display:none;position:relative;width:100%;clear: left;">
+<div id="text_about_License" class="content">
 <h3>About - License</h3>
 <p>The software is provided 'as is' under the <a id="mpl20" href="http://mozilla.org/MPL/2.0/" target="_blank">MPL (Mozilla Public License) 2.0</a>. Please read the full license to know the limitations.</p>
 </div>
 
-<div id="text_about_Support" class="content" style="display:none;position:relative;width:100%;clear: left;">
+<div id="text_about_Support" class="content">
 <h3>About - Support</h3>
 <p>Support is based on best effort. I am in the process of moving my code to github.</p>
 <p>The following are support via github:</p>
@@ -540,7 +409,7 @@ var ZCView = Backbone.View.extend({
 <!-- ENHANCED TRACE -->
 <!-- ENHANCED TRACE -->
 
-<div id="text_enhTrace" class="content" style="display:none;">
+<div id="text_enhTrace" class="content">
 <h3>Enhanced Trace</h3>
 <ul>
 <li><a id="tocEnhTraceIntro" href="#enhTrace_Intro">Introduction</a></li>
@@ -551,7 +420,7 @@ var ZCView = Backbone.View.extend({
 </ul>
 </div>
 
-<div id="text_enhTrace_Intro" class="content" style="display:none;position:relative;width:100%;clear: left;">
+<div id="text_enhTrace_Intro" class="content">
 <h3>Introduction</h3>
 <p>Tracing IDM drivers can be difficult, especially if you have a lot of policies. Designer has a colored trace view, but mixes all drivers. The log files on the server are missing the nice colors. </p>
 <p>This IDM designer plugin tries to make tracing IDM drivers simpler. It provides the following features:
@@ -565,7 +434,7 @@ var ZCView = Backbone.View.extend({
 </div>
 
 
-<div id="text_enhTrace_Usage" class="content" style="display:none;position:relative;width:100%;clear: left;">
+<div id="text_enhTrace_Usage" class="content">
 <h3>User Guide</h3>
 <h4><a name="start"></a>Starting the trace</h4>
 <p>Note: The Enhanced Trace plugin is optimized for <strong>trace level 3</strong>.</p>
@@ -676,7 +545,7 @@ The editor view contains both a refresh and rescan button:
 
 
 
-<div id="text_enhTrace_Installation" class="content" style="display:none;">
+<div id="text_enhTrace_Installation" class="content">
 <h3>Installation</h3>
 <p>I am in the process of moving all plugins and extensions to <a href="https://github.com/scauwe/">github</a>, including an IDM update site. This extension is the first one available via the IDM/eclipse update feature. Unfortunately, NetIQ removed the standard 'install software' feature from the eclipse platform. Luckily, they included a package update site feature that works more or less the same.</p>
 </p>In order to install this plugin, add the following site as a package update site to IDM:<br/>
@@ -689,7 +558,7 @@ Add a new update URL as defined above.</p>
 
 
 
-<div id="text_enhTrace_History" class="content" style="display:none;">
+<div id="text_enhTrace_History" class="content">
 <h3>History</h3>
 <h4>July 2015, version 0.1.0</h4>
 <ul>
@@ -707,7 +576,7 @@ Add a new update URL as defined above.</p>
 </div>
 
 
-<div id="text_enhTrace_Roadmap" class="content" style="display:none;">
+<div id="text_enhTrace_Roadmap" class="content">
 <h3>Roadmap</h3>
 <p>I'd love to add the following features:
 <ul>
@@ -721,9 +590,12 @@ Add a new update URL as defined above.</p>
 <!-- ASSOCIATION EDITOR -->
 <!-- ASSOCIATION EDITOR -->
 <!-- ASSOCIATION EDITOR -->
+<div itemscope itemtype="http://schema.org/SoftwareApplication">
 
-<div id="text_ae" class="content" style="display:none;">
-<h3>Association Editor</h3>
+<div id="text_ae" class="content">
+<h3 itemprop="name">Association Editor</h3>
+<link itemprop="applicationCategory" href="http://schema.org/IDMDesignerPlugin"/>
+<link itemprop="url" href="http://vancauwenberge.info/#ae"/>
 <ul>
 <li><a id="tocAEIntro" href="#ae_intro">Introduction</a></li>
 <li><a id="tocAEInstallation" href="#ae_installation">Installation</a></li>
@@ -734,19 +606,21 @@ Add a new update URL as defined above.</p>
 </div>
 
 
-<div id="text_ae_intro" class="content" style="display:none;">
+<div id="text_ae_intro" class="content">
 <h3>Introduction</h3>
-You all know the <a href="http://www.novell.com/coolsolutions/tools/15754.html" target="_blank"><b>DAModifier tool</b></a>? Nice tool, but it depends on the Novell Client and Windows OS. This designer plug-in allows you to do similar actions: import, modify or export IDM driver associations.
+<p>You all know the <a href="http://www.novell.com/coolsolutions/tools/15754.html" target="_blank"><b>DAModifier tool</b></a>? Nice tool, but it depends on the Novell Client and Windows OS. This designer plug-in allows you to do similar actions: import, modify or export IDM driver associations, but runs on <span itemprop="operatingSystem">any system Designer runs on</span>.</p>
+<p itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">This plugin received a <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/designer-association-modifier-plugin/#bottom">rating</a> of <span itemprop="ratingValue">5</span> (<span itemprop="ratingCount">2</span> votes, average 5 out of 5)</p>
+<p itemprop="offers" itemscope itemtype="http://schema.org/Offer">This software is <a href="http://mozilla.org/MPL/2.0/"><span itemprop="price">MPL 2.0</span></a></p>
 </div>
+	
 
-
-<div id="text_ae_installation" class="content" style="display:none;">
+<div id="text_ae_installation" class="content">
 <h3>Installation</h3>
 <p>I am in the process of migrating all my plugins to <a href="https://github.com/scauwe/" target="_blank">github</a>, including an automated update site. This plugin is however not yet migrated. Download is available from <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/designer-association-modifier-plugin/" target="_blank">Cool solutions</a>. Cool solutions does not allow upload of jars, so rename the attached zip to .jar and copy the jar to the plugins folder of your designer and restart designer if already running. I tested this with Designer 4.0.1 and 4.0.2 in Linux and Windows.</p>
 </div>
 
 
-<div id="text_ae_usage" class="content" style="display:none;">
+<div id="text_ae_usage" class="content">
 <h3>User Guide</h3>
 <h4>Open Dialogue</h4>
 <p>Right click on a driver object in the outline view or the driver connection in the modeler view and select Live ? Association Editor or right click on the application (in modeler or outline view) and select Driver > Live > Association Editor.
@@ -761,7 +635,7 @@ You all know the <a href="http://www.novell.com/coolsolutions/tools/15754.html"
 </p>
 <p>A dialogue will pop-up where you can select what you want to do.</p>
 <h4><b>Export associations.</b></h4>
-<p>Export associations will export the associations of the selected driver to a tab separated file. This file will contain the object DN (lpdap format), the associations state and the association value. Enter the required information (search base, ldap filter, association status and the target file) and press Start.
+<p>Export associations will export the associations of the selected driver to a tab separated file. This file will contain the object DN (ldap format), the associations state and the association value. Enter the required information (search base, ldap filter, association status and the target file) and press Start.
 
 <span class="center imagecaption" style="width: 549px;">
 	<a href="http://community.netiq.com/cfs-file.ashx/__key/CommunityServer.Components.UserFiles/00.00.02.71.07.Attached+Files/5734.associationeditorexport_5F00_0.png">
@@ -819,8 +693,7 @@ After pressing start, a monitor dialog is displayed, showing the progress. Upon 
 </p>
 </div>
 
-
-<div id="text_ae_history" class="content" style="display:none;">
+<div id="text_ae_history" class="content">
 <h3>Version History</h3>
 Version 0.3.1, 23-June-2015
 <ul>
@@ -843,22 +716,26 @@ Version 0.1.0, 14-SEPT-2012
 
 
 
-<div id="text_ae_limitations" class="content" style="display:none;">
+<div id="text_ae_limitations" class="content">
 <h3>Know limitations</h3>
 <p>
 ldap paged search is somehow not fully implemented in eDirectory. Some ldap searches will return duplicate entries when using paged searches. This is a known eDirectory issue. In order to work around this somehow, the search is sometimes split up into multiple searches. Still, no guarantee is given that objects will not be synchronized twice.
 </p>
 </div>
 
+</div>
 
 
 <!-- GENERIC FILE DRIVER -->
 <!-- GENERIC FILE DRIVER -->
 <!-- GENERIC FILE DRIVER -->
 
+<div itemscope itemtype="http://schema.org/SoftwareApplication">
+<link itemprop="applicationCategory" href="http://schema.org/IDMDesignerPlugin"/>
+<link itemprop="url" href="http://vancauwenberge.info/#txtdriver"/>
 
-<div id="text_txtdriver" class="content" style="display:none;">
-<h3>Generic File Driver</h3>
+<div id="text_txtdriver" class="content">
+<h3 itemprop="name">Generic File Driver</h3>
 	<ul>
 		<li><a id="tocTxtDriverIntro" href="#txtdriver_intro">Introduction</a></li>
 		<li><a id="tocTxtDriverHistory" href="#txtdriver_history">Version History</a></li>
@@ -869,7 +746,7 @@ ldap paged search is somehow not fully implemented in eDirectory. Some ldap sear
 </div>
 
 
-<div id="text_txtdriver_intro" class="content" style="display:none;">
+<div id="text_txtdriver_intro" class="content">
 <h3>Introduction</h3>
 <p>The Generic File Driver is similar to the Text Driver shipped with IDM, but has more options, and has the capability to read virtually any file type. Out of the box, the following file types are supported: XML, CSV and XLS (the latter using POI from Apache).</p>
 <p>
@@ -884,10 +761,12 @@ Main differentiators to NetIQ's driver:
 	<li>Publisher channel can add metadata about the file or record processed (eg: record number, filename, last record indicator, etc).</li>
 </ul>
 </p>
+<p itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">This driver shim received a <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/generic-file-driver-idm-v-003/#comments">rating</a> of <span itemprop="ratingValue">5</span> (<span itemprop="ratingCount">3</span> votes, average 5 out of 5)</p>
+<p itemprop="offers" itemscope itemtype="http://schema.org/Offer">This software is <a href="http://mozilla.org/MPL/2.0/"><span itemprop="price">MPL 2.0</span></a></p>
 </div>
 
 
-<div id="text_txtdriver_history" class="content" style="display:none;">
+<div id="text_txtdriver_history" class="content">
 <h3>Version History</h3>
 <h4>version 0.8A, 3-MARCH-2015 (package 0.7)</h4>
 <ul>
@@ -957,13 +836,13 @@ See the <a href="http://www.novell.com/coolsolutions/tools/18671.html">reference
 
 
 
-<div id="text_txtdriver_installation" class="content" style="display:none;">
+<div id="text_txtdriver_installation" class="content">
 <h3>Installation</h3>
 <p>I am in the process of migrating all my plugins to <a href="https://github.com/scauwe/">github</a>, including an automated update site. This plugin is however not yet migrated (and since it also contains a shim will never be 100% available via an Eclipse/Designer update site). Download is available from <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/generic-file-driver-idm-v-003/">Cool solutions</a>.</p>
 <p>The attached zip file (GenFileDriver_0_8A.zip) contains (beside some documentation) 2 main jar files and a lib folder. One jar is the package, one jar is the shim. The lib folder contains optional jars.</p>
 
 <p><b>Shim: GenFileDriverShim_0.7.jar</b>
-Copy the shim to you eDirectory server (DirXML's classes folder). If you want to use XLS support, also download poi from Apache. Restart eDirectory after this.
+Copy the shim to you eDirectory server (DirXML's classes folder). If you want to use XLS support, also download poi from Apache. Restart eDirectory after this. This shim should run on <span itemprop="operatingSystem">any IDM system where you can run a remote loader or IDM engine.</span>
 <br/>
 <b>Note:</b> if you have an older version of the shim, be sure to delete that jar.
 </p>
@@ -978,7 +857,7 @@ This folder contains some optional jars. These are only required if you plan to 
 </div>
 
 
-<div id="text_txtdriver_policies" class="content" style="display:none;">
+<div id="text_txtdriver_policies" class="content">
 <h3>Policies</h3>
 <p>The example driver configuration has only 3 policies; all of them on the publisher channel. If required, you could add the password policies as available from the standard text driver (by creating your own copy from Novell's package and adding this to the driver).</p>
 <p>
@@ -1000,7 +879,7 @@ Placement based on a driverset GCV (idv.dit.data.users).
 </div>
 
 
-<div id="text_txtdriver_configuration" class="content" style="display:none;">
+<div id="text_txtdriver_configuration" class="content">
 <h3>Configuration</h3>
 <p>All configuration options should have a good description. For completeness, the configuration is also described here:</p>
 <p><ul>
@@ -1013,7 +892,7 @@ Placement based on a driverset GCV (idv.dit.data.users).
 
 
 
-<div id="text_txtdriver_configuration_driver" class="content" style="display:none;">
+<div id="text_txtdriver_configuration_driver" class="content">
 <h3>Driver Configuration</h3>
 <table>
 	<tr valign="top">
@@ -1113,7 +992,7 @@ Placement based on a driverset GCV (idv.dit.data.users).
 
 
 
-<div id="text_txtdriver_configuration_subscriber" class="content" style="display:none;">
+<div id="text_txtdriver_configuration_subscriber" class="content">
 <h3>Subscriber Configuration</h3>
 <h4>Common Subscriber Options</h4>
 <p>These options are common for the subscriber, independent of the strategies used.</p>
@@ -1593,7 +1472,7 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 
 
 
-<div id="text_txtdriver_configuration_publisher" class="content" style="display:none;">
+<div id="text_txtdriver_configuration_publisher" class="content">
 <h3>Publisher Configuration</h3>
 <h4>Common Publisher Options</h4>
 <p>These options are for the publisher, independent of any strategy used.</p>
@@ -2140,13 +2019,13 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 
 </div>
 
-
+</div>
 
 <!-- PACKAGE UNLOCKER -->
 <!-- PACKAGE UNLOCKER -->
 <!-- PACKAGE UNLOCKER -->
 
-<div id="text_unlock" class="content" style="display:none;">
+<div id="text_unlock" class="content">
 <h3>Package Unlocker</h3>
 	<ul>
 		<li><a id="tocUnlockIntroduction" href="#unlock_introduction">Intro</a></li>
@@ -2154,7 +2033,7 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 	</ul>
 </div>
 
-<div id="text_unlock_introduction" class="content" style="display:none;">
+<div id="text_unlock_introduction" class="content">
 <h3>Introduction</h3>
 <p>When you are working with Designer and you create new packages, you can only modify the package in the project that created the package. Luckily, Designer allows you to use subversion, so you can share the project, resulting in all connected designer instances to share the same project, and thus being able to 'own' the same packages.</p>
 <p>
@@ -2166,7 +2045,7 @@ Note: only use this on packages that you are actually owning. If not, the vendor
 </p>
 </div>
 
-<div id="text_unlock_installation" class="content" style="display:none;">
+<div id="text_unlock_installation" class="content">
 <h3>Installation</h3>
 <p>I am in the process of migrating all my plugins to <a href="https://github.com/scauwe/">github</a>, including an automated update site. This plugin is however not yet migrated. Download is available from <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/unlocking-designer-project-you-created/">Cool solutions</a>.</p>
 <p>
@@ -2195,5 +2074,56 @@ Steps:
 </div>
 
 </div>
+
+
+<!-- DONATE BUTTONS -->
+<!-- DONATE BUTTONS -->
+<!-- DONATE BUTTONS -->
+
+<div id="donate_enhTrace" class="donate" style="display:none;">
+<p>Support the <b>Enhanced Trace</b> plugin by making a donation</p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input style="display: block;margin: 0 auto;text-align: center;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+</div>
+
+<div id="donate_ae" class="donate" style="display:none;">
+<p>Support the <b>Association Editor</b> plugin by making a donation</p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input style="display: block;margin: 0 auto;text-align: center;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+</div>
+
+<div id="donate_txtdriver" class="donate" style="display:none;">
+<p>Support the <b>Generic File Driver</b> by making a donation</p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input style="display: block;margin: 0 auto;text-align: center;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+</div>
+
+
+<div id="donate_unlock" class="donate" style="display:none;">
+<p>Support the <b>Package Unlocker</b> plugin by making a donation</p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input style="display: block;margin: 0 auto;text-align: center;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+</div>
+
 </body>
 </html>
