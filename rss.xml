@@ -2,18 +2,21 @@
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
 
-  <title>Generic File driver shim, Designer plugin (Trace, Associations, package unlocker) for NetIQ IDM</title>
+  <title>Van Cauwenberge.info</title>
   <link>http://vancauwenberge.info/</link>
-  <description>
-    IDM extentions and plugins
-  </description>
-  <language>de</language>
-  <copyright>Stefaan Van Cauwenberg</copyright>
-  <pubDate>Sun, 27 Sep 2015 21:09:54 +0200</pubDate>
-  <lastBuildDate>Sun, 27 Sep 2015 21:08:19 +0200</lastBuildDate>
-  <ttl>12</ttl>
+  <description>Generic File driver shim, Designer plugin (Trace, Associations, package unlocker) for NetIQ IDM</description>
+  <language>en</language>
+  <copyright>2007-2015, Stefaan Van Cauwenberg, All rights reserved.</copyright>
+  <ttl>1440</ttl>
 
   <atom:link href="vancauwenberge.info" rel="self" type="application/rss+xml" />
+
+<item>
+	<pubDate>2011-03-20T00:00:00+00:00</pubDate>
+	<title>RSS Tutorial</title>
+	<link>http://www.w3schools.com/webservices</link>
+	<description>New RSS tutorial on W3Schools</description>
+</item>
 
 </channel>
 </rss>
