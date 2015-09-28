@@ -1,22 +1,232 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:atom="http://www.w3.org/2005/Atom">
-<channel>
-
-  <title>Van Cauwenberge.info</title>
-  <link>http://vancauwenberge.info/</link>
-  <description>Generic File driver shim, Designer plugin (Trace, Associations, package unlocker) for NetIQ IDM</description>
-  <language>en</language>
-  <copyright>2007-2015, Stefaan Van Cauwenberg, All rights reserved.</copyright>
-  <ttl>1440</ttl>
-
-  <atom:link href="vancauwenberge.info" rel="self" type="application/rss+xml" />
-
-<item>
-	<pubDate>2011-03-20T00:00:00+00:00</pubDate>
-	<title>RSS Tutorial</title>
-	<link>http://www.w3schools.com/webservices</link>
-	<description>New RSS tutorial on W3Schools</description>
-</item>
-
-</channel>
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+	<channel>
+		<title>Generic File driver shim, Designer plugin (Trace, Associations, package unlocker) for NetIQ IDM</title>
+		<link>http://vancauwenberge.info/rss.xml</link>
+		<description>Collection of IDM Designer plugins (Trace, Associations, package unlocker) and the Generic File Driver shim</description>
+		<!--pubDate>Sun, 27 Sep 2015 18:03:13 +0000</pubDate-->
+	<item>
+			<title>Enhanced trace, version 0.1.0</title>
+			<description>&lt;ul>
+			&lt;li>Initial release&lt;/li>
+			&lt;li>
+		&lt;a name="limitations"/>Known limitations:
+				&lt;ul>
+					&lt;li>When running this plugin in a server with lots of drivers (eg >20), and each driver is tracing at level 3, the plugin can become a performance bottleneck, stressing Designer. Potential solution: apply the tree-view filter to the editor view as well (or: move the filter from the tree to the editor view).&lt;/li>
+					&lt;li>Initial opening of the enhanced trace editor is slow.&lt;/li>
+					&lt;li>Bigger XDS messages can get truncated in the trace. Under investigation. This is possible caused by the fact that these trace messages are broken down by eDirectory into several partial events, without any method to correlate between the two (or more) parts. The plugin is thus unable to find back the 'parent' event of the current partial event.&lt;/li>
+					&lt;li>Only tested in Designer 4.0 and 4.5 on Windows and Linux. If you are running something else, feel free to provide feedback.&lt;/li>
+					&lt;li>The label of the filter policy set (both on subscriber as on publisher) in the outline view is not visible if no trace messages are found for the given filter.&lt;/li>
+				&lt;/ul>
+			&lt;/li>
+		&lt;/ul></description>
+			<link>http://vancauwenberge.info/#enhTrace_History</link>
+			<guid>vancauwenberge.info/rss/20150827T000000</guid>
+			<pubDate>Thu, 27 August 2015 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
+			<title>New web site</title>
+			<description>&lt;p>I finally managed to set up my website. It collects all my plugins and extentions for NetIQ IDM. Although it looks like a dynamic website, this site is 100% static. It is created using a collection of scripting based on &lt;a href="https://jquery.com/">jQuery&lt;/a> and &lt;a href="http://users.tpg.com.au/j_birch/plugins/superfish/">Superfish&lt;/a>. Why? Just because I like the challenge.&lt;/p></description>
+			<link>http://vancauwenberge.info/</link>
+			<guid>vancauwenberge.info/rss/20150822T000000</guid>
+			<pubDate>Sat, 22 August 2015 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
+			<title>Association Editor, Version O.3.1</title>
+			<description>&lt;ul>
+			&lt;li>Bug fix: fixed issue with backslash during import of associations.&lt;/li>
+		&lt;/ul></description>
+			<link>http://vancauwenberge.info/#ae_history</link>
+			<guid>vancauwenberge.info/rss/20150623T000000</guid>
+			<pubDate>Tue, 23 June 2015 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
+			<title>Association Editor, Version O.3.0</title>
+			<description>&lt;ul>
+			&lt;li>Bug fix: fixed NPE during import of associations.&lt;/li>
+		&lt;/ul></description>
+			<link>http://vancauwenberge.info/#ae_history</link>
+			<guid>vancauwenberge.info/rss/20150621T000000</guid>
+			<pubDate>Sun, 21 June 2015 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
+			<title>Generic file driver, Version 0.8A (package 0.7)</title>
+			<description>&lt;ul>
+			&lt;li>Shim feature – general – reverted back to java 1.6 compatible ‘move file’ operation.&lt;/li>
+		&lt;/ul></description>
+			<link>http://vancauwenberge.info/#txtdriver_history</link>
+			<guid>vancauwenberge.info/rss/20150303T000000</guid>
+			<pubDate>Tue, 03 March 2015 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
+			<title>Generic file driver, Version 0.8 (package 0.7)</title>
+			<description>&lt;ul>
+			&lt;li>Package bug: fixed typo in example xslt template for XML publisher files. See &lt;a href="https://forums.netiq.com/showthread.php?51448-Driver-assoications-showing-up-in-CSV-data-output&amp;amp;p=247317#post247317">forum thread&lt;/a>.&lt;/li>
+			&lt;li>Technical – general refactoring of the shim.&lt;/li>
+			&lt;li>Shim feature - publisher - added option to remove old publisher files. Disabled by default for backward compatibility.&lt;/li>
+			&lt;li>Shim feature - publisher - added option to disable the publisher channel.&lt;/li>
+			&lt;li>Shim feature - publisher - added additional options in the command to generate ("Dynamic Input based" and "Delete")&lt;/li>
+			&lt;li>Shim feature - subscriber - added option to disable the "max number of records in generated files" by setting it to 0 (zero).&lt;/li>
+			&lt;li>Shim feature - subscriber - when a modify command is 'empty' (=all fields defined in the schema are missing), but the content indicates that the output file should be closed (eg: the file close field is set to true), no query back is performed in order to add a record to the output file. It is assumed that the only purpose of this modify command is to close the output file.&lt;/li>
+			&lt;li>Shim feature - general - added option to replace illegal ECMA script characters in field names (eg for calculating the association). Disabled by default for backward compatibility.&lt;/li>
+			&lt;li>Shim feature - general - added option to include the driver’s ECMA script libraries into the shim (for complex ECMA script operation). Disabled by default for backward compatibility.&lt;/li>
+		&lt;/ul></description>
+			<link>http://vancauwenberge.info/#txtdriver_history</link>
+			<guid>vancauwenberge.info/rss/20140914T000000</guid>
+			<pubDate>Sun, 14 September 2014 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
+			<title>Generic file driver, Version 0.7b (package 0.6)</title>
+			<description>&lt;ul>
+			&lt;li>Shim bug: case issue with the new configuration parameter to configure the command generated on the publisher channel&lt;/li>
+		&lt;/ul></description>
+			<link>http://vancauwenberge.info/#txtdriver_history</link>
+			<guid>vancauwenberge.info/rss/20140514T000000</guid>
+			<pubDate>Wed, 14 May 2014 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
+			<title>Generic file driver, Version 0.7 (package 0.6)</title>
+			<description>&lt;ul>
+			&lt;li>Shim bug: specifying no encoding on the XML reader caused an Exception (see also this &lt;a href="https://www.netiq.com/communities/cool-solutions/using-the-generic-file-driver-in-identity-manager-idm-with-xml-input-files/">cool solution post&lt;/a>)&lt;/li>
+			&lt;li>Shim feature: added option to configure the command generated on the publisher channel (add, modify or dynamic).&lt;/li>
+			&lt;li>Package bug: xml and xls file readers had invalid class names (see the same &lt;a href="https://www.netiq.com/communities/cool-solutions/using-the-generic-file-driver-in-identity-manager-idm-with-xml-input-files/">cool solutions post&lt;/a>)&lt;/li>
+			&lt;li>Package feature: changed xls entry field to multi-line&lt;/li>
+		&lt;/ul></description>
+			<link>http://vancauwenberge.info/#txtdriver_history</link>
+			<guid>vancauwenberge.info/rss/20140507T000000</guid>
+			<pubDate>Wed, 07 May 2014 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
+			<title>Association Editor, Version 0.2.0</title>
+			<description>&lt;ul>
+			&lt;li>Bug fix: fixed issues with modifying the state of not-associated objects.&lt;/li>
+			&lt;li>Enh.: remember last settings.&lt;/li>
+		&lt;/ul></description>
+			<link>http://vancauwenberge.info/#ae_history</link>
+			<guid>vancauwenberge.info/rss/20140305T000000</guid>
+			<pubDate>Wed, 05 March 2014 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
+			<title>Generic file driver, Version 0.6 (package 0.5)</title>
+			<description>&lt;ul>
+			&lt;li>
+		&lt;span style="font-size: 14px;line-height: 1.5em">Shim/package feature: Added configuration parameter to use &lt;a href="http://quartz-scheduler.org/">Quartz scheduler&lt;/a> to close subscriber generated files using a cron-like expression string.&lt;/span>
+	&lt;/li>
+			&lt;li>Shim feature: Added &lt;a href="http://slf4j.org/">slf4j&lt;/a> binding (separate jar) for Idm tracing, allowing Quartz logs to be shown in idm trace files.&lt;/li>
+			&lt;li>Shim bug: possible NPE when the publisher folder becomes unreachable (eg due to network outage).&lt;/li>
+			&lt;li>Shim feature: Added option for every strategy to receive driver shutdown notification by implementing IShutdown.&lt;/li>
+			&lt;li>Shim bug/feature: Return an empty instance document when we receive an associated query on the subscriber channel. Reason: support of the merge attribute filter rules in case of a 'sync' event.&lt;/li>
+		&lt;/ul></description>
+			<link>http://vancauwenberge.info/#txtdriver_history</link>
+			<guid>vancauwenberge.info/rss/20140228T000000</guid>
+			<pubDate>Fri, 28 February 2014 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
+			<title>Generic file driver, Version 0.5 (package 0.4)</title>
+			<description>&lt;ul>
+			&lt;li>Shim bug: Fixed an issue wrt the driver not adding the metadata on the publisher channel.&lt;/li>
+		&lt;/ul></description>
+			<link>http://vancauwenberge.info/#txtdriver_history</link>
+			<guid>vancauwenberge.info/rss/20130121T000000</guid>
+			<pubDate>Mon, 21 January 2013 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
+			<title>Association Editor, Version 0.1.0</title>
+			<description>&lt;ul>
+			&lt;li>First release (beta) of the association editor.&lt;/li>
+		&lt;/ul></description>
+			<link>http://vancauwenberge.info/#ae_history</link>
+			<guid>vancauwenberge.info/rss/20120914T000000</guid>
+			<pubDate>Fri, 14 September 2012 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
+			<title>Generic file driver, Version 0.4 (package 0.4)</title>
+			<description>&lt;ul>
+			&lt;li>Shim bug: Fixed an issue with the driver schema (appeared to be hard coded).&lt;/li>
+			&lt;li>Shim feature: Added beta support for query back. Query back only supported on publisher channel (when reading in a file). Feedback welcome.&lt;/li>
+			&lt;li>Package bug: Fixed an issue that caused the driver configuration not to be imported when the package was imported.&lt;/li>
+			&lt;li>Package bug: Changed creation policy from validating the Given Name to validating the Surname.&lt;/li>
+			&lt;li>Package feature: Added package 'Delimited Text Driver Password Synchronization Package' as an optional package for this driver.&lt;/li>
+			&lt;li>Package feature: Added remote loader prompts to the package.&lt;/li>
+		&lt;/ul></description>
+			<link>http://vancauwenberge.info/#txtdriver_history</link>
+			<guid>vancauwenberge.info/rss/20120424T000000</guid>
+			<pubDate>Tue, 24 April 2012 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
+			<title>Generic file driver, Version 0.3</title>
+			<description>&lt;ul>
+			&lt;li>Shim feature: automatic association and src-dn calculation (using ecmascript in the driver configuration). No longer need for style sheets for just creating association and src-dn values. The driver shim now does this for you.&lt;/li>
+			&lt;li>Shim bug: fixed missing remove-all-values on the publisher documents.&lt;/li>
+			&lt;li>Shim feature: added the ability (csv output files) to flush the file buffer after every record written (useful for when you are developing/testing your driver).&lt;/li>
+			&lt;li>Shim feature: when receiving a modify event on the subscriber channel, the shim will query back for all missing attribute values in order to be able to write a complete record (no need for a stylesheet to query for missing attributes and keeping this stylesheet in sync with the schema).&lt;/li>
+			&lt;li>Shim bug/feature: the subscriber channel now fully support add, modify and instance events. Instance and add events are assumed to contain all data and do not perform a query back. Only the modify event performs a query back&lt;/li>
+		&lt;/ul></description>
+			<link>http://vancauwenberge.info/#txtdriver_history</link>
+			<guid>vancauwenberge.info/rss/20111012T000000</guid>
+			<pubDate>Wed, 12 October 2011 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
+			<title>Package Unlocker, Version 1.0</title>
+			<description>&lt;p>First release of the package unlocker&lt;/p></description>
+			<link>http://vancauwenberge.info/#unlock_introduction</link>
+			<guid>vancauwenberge.info/rss/20111005T000000</guid>
+			<pubDate>Wed, 05 October 2011 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
+			<title>Generic file driver, Initial release</title>
+			<description>&lt;p>The original version I wrote in 2007 is located at &lt;a href="http://www.novell.com/coolsolutions/tools/18671.html">http://www.novell.com/coolsolutions/tools/18671.html&lt;/a>. It did not support packages or any of the cool things we can do now, but it already had the extensible architecture and same basic principles (produce and consume NDS, add meta data,...).&lt;/p>&lt;p>See the &lt;a href="http://www.novell.com/coolsolutions/tools/18671.html">referenced version&lt;/a> for a list of the initial features.&lt;/p></description>
+			<link>http://vancauwenberge.info/#txtdriver_history</link>
+			<guid>vancauwenberge.info/rss/20070219T000000</guid>
+			<pubDate>Mon, 19 February 2007 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+	</channel>
 </rss>
