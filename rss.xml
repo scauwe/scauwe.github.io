@@ -38,7 +38,7 @@
 			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
 		</item>
 		<item>
-			<title>Association Editor, Version O.3.1</title>
+			<title>Association Editor, Version 0.3.1</title>
 			<description>&lt;ul>
 			&lt;li>Bug fix: fixed issue with backslash during import of associations.&lt;/li>
 		&lt;/ul></description>
@@ -50,7 +50,7 @@
 			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
 		</item>
 		<item>
-			<title>Association Editor, Version O.3.0</title>
+			<title>Association Editor, Version 0.3.0</title>
 			<description>&lt;ul>
 			&lt;li>Bug fix: fixed NPE during import of associations.&lt;/li>
 		&lt;/ul></description>
