@@ -3,7 +3,7 @@
 	<channel>
 		<title>Van Cauwenberge.info</title>
 		<link>http://vancauwenberge.info/</link>
-		<description>Collection of IDM Designer plugins (Trace, Associations, package unlocker) and the Generic File Driver shim</description>
+		<description>Collection of IDM Designer plugins (Trace, Associations, package unlocker) and the Generic File Driver shim for NetIQ (Novell/Micro Focus)IDM</description>
 		<!--pubDate>Sun, 27 Sep 2015 18:03:13 +0000</pubDate-->
 	<item>
 			<title>Enhanced trace, version 0.1.0</title>
