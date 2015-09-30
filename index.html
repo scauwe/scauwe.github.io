@@ -411,6 +411,15 @@ $(document).ready(function(){
 <!-- HOME -->
 <div id="text_home" class="content">
 <!--h2>News</h2-->
+<p>
+<!--a href="rss.xml">Subscribe to feed news</a>
+<a target="_blank" href="feed://vancauwenberge.info/rss.xml"><img src="rss.png" alt="Subscribe via feed protocol" title="Subscribe via feed protocol"/></a-->
+<a target="_blank" href="http://feeds.feedburner.com/vancauwenbergeinfo"><img src="feedburner.png" alt="Subscribe via Feedburner" title="Subscribe via Feedburner"/></a>
+<a target="_blank" href="http://feedly.com/#subscription/feed/http://feeds.feedburner.com/VanCauwenbergeinfo"><img src="http://s3.feedly.com/feedburner/feedly.png" alt="Add to Feedly" title="Add to Feedly"></a>
+<a target="_blank" href="http://add.my.yahoo.com/rss?url=http://feeds.feedburner.com/VanCauwenbergeinfo"><img src="http://us.i1.yimg.com/us.yimg.com/i/us/my/addtomyyahoo4.gif" alt="Add to MyYahoo" title="Add to MyYahoo"></a>
+<a target="_blank" href="https://www.subtome.com/#/subscribe?feeds=http://feeds.feedburner.com/VanCauwenbergeinfo"><img src="http://www.subtome.com/subtome-feedburner.png" alt="Add to SubToMe" title="Add to SubToMe"></a>
+
+</p>
 <div typeof="sioc:Item foaf:Document">
 	<div>
 		<div class="rssDate" property="dc:date dc:created" content="2015-08-27T00:00:00" datatype="xsd:dateTime" rel="sioc:has_creator">
@@ -426,7 +435,7 @@ $(document).ready(function(){
 	<div property="content:encoded">
 		<ul>
 			<li>Initial release</li>
-			<li><a name="limitations"></a>Known limitations:
+			<li>Known limitations:
 				<ul>
 					<li>When running this plugin in a server with lots of drivers (eg &gt;20), and each driver is tracing at level 3, the plugin can become a performance bottleneck, stressing Designer. Potential solution: apply the tree-view filter to the editor view as well (or: move the filter from the tree to the editor view).</li>
 					<li>Initial opening of the enhanced trace editor is slow.</li>
