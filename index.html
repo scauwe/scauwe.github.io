@@ -2,6 +2,7 @@
 <html lang="en" xmlns:dc="http://purl.org/dc/terms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:content="http://purl.org/rss/1.0/modules/content/" sioc="http://rdfs.org/sioc/ns#" foaf="http://xmlns.com/foaf/0.1/">
 <head>
 	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="favicon.ico" type="favicon/ico" />
 	<link rel="alternate" type="application/rss+xml" title="Van Cauwenberge.info IDM plugins and extentions" href="rss.xml"/>
 	<title>Generic File driver shim, Designer plugin (Trace, Associations, package unlocker) for NetIQ IDM</title>
 	<meta name="viewport" content="width=800">
@@ -27,7 +28,7 @@ body {
 }
 #menuwrap{
 	position:relative;
-	width:800px;
+	width:808px;
 	margin-left: auto ;      /* center horizontal */
 	margin-right: auto ;     /* center horizontal */
 	padding:0em 0em 3em 0em; /* 3em is for the footer */
@@ -332,6 +333,18 @@ $(document).ready(function(){
 	        $('.tooltip')
 	        .css({ top: mousey, left: mousex })	
 	});
+	
+         $('#packageurl1').hide();
+	 $('#licensecheck1').click(function () {
+         var $this = $(this);
+         if ($this.is(':checked')) {
+             $('#packageurl1').show();
+             $('#licensecheckForm1').hide();
+         } else {
+             $('#packageurl1').hide();
+             $('#licensecheckForm1').show();
+         }
+     });
 
 });
 
@@ -433,9 +446,8 @@ $(document).ready(function(){
 	</div>
       
 	<div property="content:encoded">
-		<ul>
-			<li>Initial release</li>
-			<li>Known limitations:
+		<p>First release of the Enahnced trace plugin for IDM Designer. This first release supports drill down, filtering, fish-bone outline view, quick status view, etc...<br/>
+			Known limitations:
 				<ul>
 					<li>When running this plugin in a server with lots of drivers (eg &gt;20), and each driver is tracing at level 3, the plugin can become a performance bottleneck, stressing Designer. Potential solution: apply the tree-view filter to the editor view as well (or: move the filter from the tree to the editor view).</li>
 					<li>Initial opening of the enhanced trace editor is slow.</li>
@@ -443,8 +455,7 @@ $(document).ready(function(){
 					<li>Only tested in Designer 4.0 and 4.5 on Windows and Linux. If you are running something else, feel free to provide feedback.</li>
 					<li>The label of the filter policy set (both on subscriber as on publisher) in the outline view is not visible if no trace messages are found for the given filter.</li>
 				</ul>
-			</li>
-		</ul>
+		</p>
 	</div>
 </div>
 
@@ -478,9 +489,12 @@ $(document).ready(function(){
 		<div class="rssTitle" property="dc:title">Association Editor, Version O.3.1</div>
 	</div>
 	<div property="content:encoded">
+		<p>
+		This emergency release fixes an issue introduced in version 0.3.0.
 		<ul>
 			<li>Bug fix: fixed issue with backslash during import of associations.</li>
 		</ul>
+		</p>
 	</div>
 </div>
 <br/>
@@ -496,9 +510,12 @@ $(document).ready(function(){
 		<div class="rssTitle">Association Editor, Version O.3.0</div>
 	</div>
 	<div property="content:encoded">
+		<p>
+		This relase fixes a reported issue.		
 		<ul>
 			<li>Bug fix: fixed NPE during import of associations.</li>
 		</ul>
+		</p>
 	</div>
 </div>
 <br/>
@@ -514,9 +531,12 @@ $(document).ready(function(){
 		<div class="rssTitle" property="dc:title">Generic file driver, Version 0.8A (package 0.7)</div>
 	</div>
 	<div property="content:encoded">
+		<p>
+		It seems that this shim is used frequently in java 1.6 environment, so I had to role back to java 1.6 compatible API.		
 		<ul>
 			<li>Shim feature – general – reverted back to java 1.6 compatible ‘move file’ operation.</li>
 		</ul>
+		</p>
 	</div>
 </div>
 <br/>
@@ -532,6 +552,8 @@ $(document).ready(function(){
 		<div class="rssTitle" property="dc:title">Generic file driver, Version 0.8 (package 0.7)</div>
 	</div>
 	<div property="content:encoded">
+		<p>
+		This release of the generic driver shim fixes some minor issues, but mainly has a list of new features.		
 		<ul>
 			<li>Package bug: fixed typo in example xslt template for XML publisher files. See <a href="https://forums.netiq.com/showthread.php?51448-Driver-assoications-showing-up-in-CSV-data-output&amp;p=247317#post247317">forum thread</a>.</li>
 			<li>Technical – general refactoring of the shim.</li>
@@ -543,6 +565,7 @@ $(document).ready(function(){
 			<li>Shim feature - general - added option to replace illegal ECMA script characters in field names (eg for calculating the association). Disabled by default for backward compatibility.</li>
 			<li>Shim feature - general - added option to include the driver’s ECMA script libraries into the shim (for complex ECMA script operation). Disabled by default for backward compatibility.</li>
 		</ul>
+		</p>
 	</div>
 </div>
 <br/>
@@ -558,9 +581,12 @@ $(document).ready(function(){
 		<div class="rssTitle" property="dc:title">Generic file driver, Version 0.7b (package 0.6)</div>
 	</div>
 	<div property="content:encoded">
+		<p>
+		Emergency release: previous version contained a case issue with a new shim parameter.		
 		<ul>
 			<li>Shim bug: case issue with the new configuration parameter to configure the command generated on the publisher channel</li>
 		</ul>
+		</p>
 	</div>
 </div>
 <br/>
@@ -576,12 +602,15 @@ $(document).ready(function(){
 		<div class="rssTitle" property="dc:title">Generic file driver, Version 0.7 (package 0.6)</div>
 	</div>
 	<div property="content:encoded">
+		<p>
+		This release fixes some minor issues and introduces a new feature: support for both add and modify commands on the publisher.		
 		<ul>
 			<li>Shim bug: specifying no encoding on the XML reader caused an Exception (see also this <a href="https://www.netiq.com/communities/cool-solutions/using-the-generic-file-driver-in-identity-manager-idm-with-xml-input-files/">cool solution post</a>)</li>
 			<li>Shim feature: added option to configure the command generated on the publisher channel (add, modify or dynamic).</li>
 			<li>Package bug: xml and xls file readers had invalid class names (see the same <a href="https://www.netiq.com/communities/cool-solutions/using-the-generic-file-driver-in-identity-manager-idm-with-xml-input-files/">cool solutions post</a>)</li>
 			<li>Package feature: changed xls entry field to multi-line</li>
 		</ul>
+		</p>
 	</div>
 </div>
 <br/>
@@ -597,10 +626,13 @@ $(document).ready(function(){
 		<div class="rssTitle" property="dc:title">Association Editor, Version 0.2.0</div>
 	</div>
 	<div property="content:encoded">
+		<p>
+		Fixed an issue when tryin to modify the association of not-associated objects.
 		<ul>
 			<li>Bug fix: fixed issues with modifying the state of not-associated objects.</li>
 			<li>Enh.: remember last settings.</li>
 		</ul>
+		</p>
 	</div>
 </div>
 <br/>
@@ -616,6 +648,8 @@ $(document).ready(function(){
 		<div class="rssTitle" property="dc:title">Generic file driver, Version 0.6 (package 0.5)</div>
 	</div>
 	<div property="content:encoded">
+		<p>
+		This release is mainly bug fixes and some internal API changes.
 		<ul>
 			<li><span style="font-size: 14px;line-height: 1.5em">Shim/package feature: Added configuration parameter to use <a href="http://quartz-scheduler.org/">Quartz scheduler</a> to close subscriber generated files using a cron-like expression string.</span></li>
 			<li>Shim feature: Added <a href="http://slf4j.org/">slf4j</a> binding (separate jar) for Idm tracing, allowing Quartz logs to be shown in idm trace files.</li>
@@ -623,6 +657,7 @@ $(document).ready(function(){
 			<li>Shim feature: Added option for every strategy to receive driver shutdown notification by implementing IShutdown.</li>
 			<li>Shim bug/feature: Return an empty instance document when we receive an associated query on the subscriber channel. Reason: support of the merge attribute filter rules in case of a 'sync' event.</li>
 		</ul>
+		</p>
 	</div>
 </div>
 <br/>
@@ -638,9 +673,12 @@ $(document).ready(function(){
 		<div class="rssTitle" property="dc:title">Generic file driver, Version 0.5 (package 0.4)</div>
 	</div>
 	<div property="content:encoded">
+		<p>
+		This release fixes a meta data issue in the shim.
 		<ul>
 			<li>Shim bug: Fixed an issue wrt the driver not adding the metadata on the publisher channel.</li>
 		</ul>
+		</p>
 	</div>
 </div>
 <br/>
@@ -656,9 +694,12 @@ $(document).ready(function(){
 		<div class="rssTitle" property="dc:title">Association Editor, Version 0.1.0</div>
 	</div>
 	<div property="content:encoded">
+		<p>
+		Association editor as a Designer plugin.
 		<ul>
 			<li>First release (beta) of the association editor.</li>
 		</ul>
+		</p>
 	</div>
 </div>
 <br/>
@@ -674,6 +715,8 @@ $(document).ready(function(){
 		<div class="rssTitle" property="dc:title">Generic file driver, Version 0.4 (package 0.4)</div>
 	</div>
 	<div property="content:encoded">
+		<p>
+		This releas fixes some issues in both the package and the shim. It also adds query back support on the publisher channel (beta).
 		<ul>
 			<li>Shim bug: Fixed an issue with the driver schema (appeared to be hard coded).</li>
 			<li>Shim feature: Added beta support for query back. Query back only supported on publisher channel (when reading in a file). Feedback welcome.</li>
@@ -682,6 +725,7 @@ $(document).ready(function(){
 			<li>Package feature: Added package 'Delimited Text Driver Password Synchronization Package' as an optional package for this driver.</li>
 			<li>Package feature: Added remote loader prompts to the package.</li>
 		</ul>
+		</p>
 	</div>
 </div>
 <br/>
@@ -948,9 +992,11 @@ The editor view contains both a refresh and rescan button:
 <h3>Installation</h3>
 <p>I am in the process of moving all plugins and extensions to <a href="https://github.com/scauwe/">github</a>, including an IDM update site. This extension is the first one available via the IDM/eclipse update feature. Unfortunately, NetIQ removed the standard 'install software' feature from the eclipse platform. Luckily, they included a package update site feature that works more or less the same.</p>
 </p>In order to install this plugin, add the following site as a package update site to IDM:<br/>
-<pre>https://raw.githubusercontent.com/scauwe/IDMSite/master/</pre>
+<pre><form id="licensecheckForm1"><input type="checkbox" name="license" value="license" id="licensecheck1">I have read and accept the <a href="http://mozilla.org/MPL/2.0/">MPL (Mozilla Public License) 2.0.</a> license (click checkbox to view the URL).</input></form></pre>
+<pre id="packageurl1">https://raw.githubusercontent.com/scauwe/IDMSite/master/</pre>
 and try to update you IDM packages. This will now find this plugin. Select it and perform the update.</p>
-<p>Adding an update site:<br/>
+<br/>
+<p>FYI: Adding an update site:<br/>
 <pre>Window &gt; Preferences &gt; NetQ &gt; Package Manager &gt; Online Updates </pre>
 Add a new update URL as defined above.</p>
 </div>
