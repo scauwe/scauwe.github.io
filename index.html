@@ -5,7 +5,6 @@
 	<link rel="shortcut icon" href="favicon.ico" type="favicon/ico" />
 	<link rel="alternate" type="application/rss+xml" title="Van Cauwenberge.info IDM plugins and extentions" href="rss.xml"/>
 	<title>Generic File driver shim, Designer plugin (Trace, Associations, package unlocker) for NetIQ IDM</title>
-	<meta name="viewport" content="width=810">
 	<meta name="description" content="Collection of IDM Designer plugins (Trace, Associations, package unlocker) and the Generic File Driver shim">
 	<meta name="author" content="Stefaan Van Cauwenberge">
 	<meta name="keywords" content="NetIQ, Novell, Generic file driver, association, shim, plugin, Designer, microfocus, IDM, eDirectory, driver, package, unlock, DirXML, trace, ">
@@ -1359,7 +1358,16 @@ This folder contains some optional jars. These are only required if you plan to 
 
 <div id="text_txtdriver_policies" class="content">
 <h3>Policies</h3>
-<p>The example driver configuration has only 3 policies; all of them on the publisher channel. If required, you could add the password policies as available from the standard text driver (by creating your own copy from Novell's package and adding this to the driver).</p>
+<p>This driver only has 6 policies; all of them for the publisher channel. 3 of the policies are purely for the publisher logfile generation, the 3 others are traditional publisher policies (matching, creation and placement).  If required, you could add the password policies as available from the standard text driver.</p>
+
+<p>
+<b>SVCGENFILES-itp-InitPubLogMessage</b><br/>
+Initialize the pubLogMessage variable for all add and modify operations.  The variable pubLogMessage will be used for the publisher log file messages.
+</p>
+<p>
+<b>SVCGENFILES-pub-etp-StripInitParams</b><br/>
+Strip the publisher state information from the document. If left in the document, it will generate an additional status message, resulting in an additional entry in the publisher log file. In order to prevent this additional log entry, we strip the publisher state information after it has been processed (around schema mapping).
+</p>
 <p>
 <b>SVCGENFILEB-pub-mp</b><br/>
 Match on Internet Email Address if any available.
@@ -1375,6 +1383,10 @@ Checks for mandatory attributes:
 <p>
 <b>SVCGENFILEB-pub-pp</b><br/>
 Placement based on a driverset GCV (idv.dit.data.users).
+</p>
+<p>
+<b>SVCGENFILES-otp-PubLogMessage</b><br/>
+Extend the status message to include the variable pubLogMessage if valued.
 </p>
 </div>
 
