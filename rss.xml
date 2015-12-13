@@ -10,7 +10,25 @@
   <title>VanCauwenberge.info</title>
   <link>http://vancauwenberge.info</link>
 </image>
-	<item>
+		<item>
+			<title>Generic file driver, Version 0.9 (package 0.8, sample config 0.1)</title>
+			<description>&lt;ul>
+			&lt;li>Shim bug: in certain conditions, doing a retry in the publisher channel on the first record of a file, caused the file not to be reprocessed when restarting the driver.&lt;/li>
+			&lt;li>Shim bug: &lt;a href="https://forums.netiq.com/showthread.php?54688-Generic-Text-Driver-Subscriber-Options">forum issue&lt;/a> with time limited subscriber files. &lt;/li>
+			&lt;li>Package feature: split up of package into base and sample configuration.&lt;/li>
+			&lt;li>Package feature: added Managed System Information Package as an optional package.&lt;/li>
+			&lt;li>Shim feature – publisher – new option to generate a log file for the publisher channel: every status message received as a result of a record, is written to a log file. Base package includes new configuration parameters.&lt;/li>
+			&lt;li>Shim feature – subscriber – added option to keep a local copy of the generated files.&lt;/li>
+			&lt;li>Shim feature – subscriber – changed file closing when maxRecordsPerFile is defined. Previously, when  maxRecordsPerFile was set to n, the file was closed just before writing the (n+1)th file. New implementation closes the file after writing the nth record.&lt;/li>
+			&lt;/ul></description>
+			<link>http://vancauwenberge.info/#txtdriver_history</link>
+			<guid>vancauwenberge.info/rss/20151207T000000</guid>
+			<pubDate>Mon, 7 December 2015 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
 			<title>Enhanced trace, version 0.1.0</title>
 			<content:encoded>https://www.netiq.com/communities/cool-solutions/wp-content/uploads/sites/2/2015/06/DrillDownFishbone.png</content:encoded>
 			<description>&lt;ul>

@@ -22,6 +22,10 @@ body {
   color: #333333;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+img {
+	max-width: 100%; /* responsive design: max-width of image */
+	height: auto;    /* and auto-adapt height to above max width */
+}
 #container{
 	position:relative;
 	min-height:100%;
@@ -29,6 +33,7 @@ body {
 #menuwrap{
 	position:relative;
 	width:808px;
+	max-width: 90%;			/*responsive design: set maximum width*/
 	margin-left: auto ;      /* center horizontal */
 	margin-right: auto ;     /* center horizontal */
 	padding:0em 0em 3em 0em; /* 3em is for the footer */
@@ -49,9 +54,9 @@ body {
   margin-left: 0;
   margin-right: 0;
   background: #fff;
-  padding-left: 4em;
+  padding-left: 10%; /* 4em;*/
   padding-right: 0em;
-  padding-top: 4em;
+  padding-top: 10%; /*4em;*/
   padding-bottom: 0em;
   position: relative;
   left:-2em;
@@ -74,10 +79,14 @@ body {
 }
 .imagecaption{
   background-color: #EFEFEF;
-  padding: 1.4em;
+  padding: 2%; /*  responsive desing: use percentage */
+  max-width:100%; /* responsive desing */ 
 }
 .imagecaption a img{
   border: 1px solid #A9A9A9;
+}
+.indent1{
+  margin-left:1%;
 }
 table {
 	width:100%;
@@ -433,6 +442,30 @@ $(document).ready(function(){
 <a target="_blank" href="https://www.subtome.com/#/subscribe?feeds=http://feeds.feedburner.com/VanCauwenbergeinfo"><img src="http://www.subtome.com/subtome-feedburner.png" alt="Add to SubToMe" title="Add to SubToMe"></a>
 
 </p>
+<div typeof="sioc:Item foaf:Document">
+	<div>
+		<div class="rssDate" property="dc:date dc:created" content="2015-12-07T00:00:00" datatype="xsd:dateTime" rel="sioc:has_creator">
+			<span>
+				<div class="month">Dec</div>
+				<div class="day">7</div>
+				<div class="year">2015</div>
+			</span>
+		</div>
+		<div class="rssTitle" property="dc:title">Generic file driver, Version 0.9 (base package 0.8, sample config package 0.1)</div>
+	</div>
+      
+	<div property="content:encoded">
+		<ul>
+			<li>Shim bug: in certain conditions, doing a retry in the publisher channel on the first record of a file, caused the file not to be reprocessed when restarting the driver.</li>
+			<li>Shim bug: <a href="https://forums.netiq.com/showthread.php?54688-Generic-Text-Driver-Subscriber-Options">forum issue</a> with time limited subscriber files. </li>
+			<li>Package feature: split up of package into base and sample configuration.</li>
+			<li>Package feature: added Managed System Information Package as an optional package.</li>
+			<li>Shim feature – publisher – new option to generate a log file for the publisher channel: every status message received as a result of a record, is written to a log file. Base package includes new configuration parameters.</li>
+			<li>Shim feature – subscriber – added option to keep a local copy of the generated files.</li>
+			<li>Shim feature – subscriber – changed file closing when maxRecordsPerFile is defined. Previously, when  maxRecordsPerFile was set to n, the file was closed just before writing the (n+1)th file. New implementation closes the file after writing the nth record.</li>
+		</ul>
+	</div>
+</div>
 <div typeof="sioc:Item foaf:Document">
 	<div>
 		<div class="rssDate" property="dc:date dc:created" content="2015-08-27T00:00:00" datatype="xsd:dateTime" rel="sioc:has_creator">
@@ -885,7 +918,7 @@ $(document).ready(function(){
 <p>The trace is server specific. It uses an extended LDAP operation to a specific server to get the trace data directly from eDirectory running on that given server. Right click on the server object (in the outline view) running your driver, select Live -&gt; Trace. This will open and start the enhanced trace on the selected server.
 <br/>
 
-<span class="center imagecaption" style="width: 260px;">
+<span class="center imagecaption" style="width: 260px">
 	<a href="https://www.netiq.com/communities/cool-solutions/wp-content/uploads/sites/2/2015/06/EnhTraceStart.png">
 		<img  src="https://www.netiq.com/communities/cool-solutions/wp-content/uploads/sites/2/2015/06/EnhTraceStart.png" alt="Start Enhanced trace" />
 		<br/>
@@ -1215,6 +1248,19 @@ Main differentiators to NetIQ's driver:
 
 <div id="text_txtdriver_history" class="content">
 <h3>Version History</h3>
+<h4>version 0.9, 7-DECEMBER-2015 (package 0.8, sample config package 0.1)</h4>
+
+		<ul>
+			<li>Shim bug: in certain conditions, doing a retry in the publisher channel on the first record of a file, caused the file not to be reprocessed when restarting the driver.</li>
+			<li>Shim bug: <a href="https://forums.netiq.com/showthread.php?54688-Generic-Text-Driver-Subscriber-Options">forum issue</a> with time limited subscriber files. </li>
+			<li>Package feature: split up of package into base and sample configuration.</li>
+			<li>Package feature: added Managed System Information Package as an optional package.</li>
+			<li>Shim feature – publisher – new option to generate a log file for the publisher channel: every status message received as a result of a record, is written to a log file. Base package includes new configuration parameters.</li>
+			<li>Shim feature – subscriber – added option to keep a local copy of the generated files.</li>
+			<li>Shim feature – subscriber – changed file closing when maxRecordsPerFile is defined. Previously, when  maxRecordsPerFile was set to n, the file was closed just before writing the (n+1)th file. New implementation closes the file after writing the nth record.</li>
+		</ul>
+
+
 <h4>version 0.8A, 3-MARCH-2015 (package 0.7)</h4>
 <ul>
 	<li>Shim feature – general – reverted back to java 1.6 compatible ‘move file’ operation.</li>
@@ -1285,22 +1331,28 @@ See the <a href="http://www.novell.com/coolsolutions/tools/18671.html">reference
 
 <div id="text_txtdriver_installation" class="content">
 <h3>Installation</h3>
-<p>I am in the process of migrating all my plugins to <a href="https://github.com/scauwe/">github</a>, including an automated update site. This plugin is however not yet migrated (and since it also contains a shim will never be 100% available via an Eclipse/Designer update site). Download is available from <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/generic-file-driver-idm-v-003/">Cool solutions</a>.</p>
-<p>The attached zip file (GenFileDriver_0_8A.zip) contains (beside some documentation) 2 main jar files and a lib folder. One jar is the package, one jar is the shim. The lib folder contains optional jars.</p>
+<p>I am in the process of migrating all my plugins to <a href="https://github.com/scauwe/">github</a>, including an automated update site. This plugin is however not yet migrated (and since it also contains a shim will never be 100% available via an Eclipse/Designer update site). Download is available from <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/generic-file-driver-idm-v-003/"  target="_blank">Cool solutions</a>.</p>
+<p>The file attached to the Cool Solution (GenFileDriver_xxx.zip) contains (beside some documentation) all required jar files (the actual shim and 2 packages) and a lib folder. The lib folder contains some optional jars.</p>
 
-<p><b>Shim: GenFileDriverShim_0.7.jar</b>
+<h4>IDM Designer</h4>
+<p class="indent1"><b>Package: SVCGENFILEB_xxx.jar</b>
+This is the base package. Import this package into your designer project. Drag and drop the "Delimited Text" driver that is located under "Tools" and select the "Generic File Base" package, answering all the questions as needed.
+</p>
+<p class="indent1"><b>Package: SVCGENFILES_xxx.jar</b>
+This is a sample configuration. Import this package into your designer project.<br/><br/>
+From this point on, you can use this driver and modify it as any other driver in Designer.
+</p>
+<h4>IDM Server</h4>
+<p class="indent1"><b>Shim: GenFileDriverShim_xxx.jar</b>
 Copy the shim to you eDirectory server (DirXML's classes folder). If you want to use XLS support, also download poi from Apache. Restart eDirectory after this. This shim should run on <span itemprop="operatingSystem">any IDM system where you can run a remote loader or IDM engine.</span>
 <br/>
 <b>Note:</b> if you have an older version of the shim, be sure to delete that jar.
 </p>
-<p><b>Package: SVCGENFILEB_0.0.7.20140914233029.jar</b>
-Import this package into your designer project. Drag and drop the "Delimited Text" driver that is located under "Tools" and select the "Generic File Base" package, answering all the questions as needed.<br/>
-From this point on, you can use and modify it as any other driver.
-</p>
-<p>
+<p class="indent1">
 <b>lib folder</b>:
 This folder contains some optional jars. These are only required if you plan to use quartz scheduler to close the generated files using a cron-like string. Jars required when doing this are: quartz-2.2.1.jar, slf4j-api-1.7.5.jar and slf4j-idmTrace.jar.
 </p>
+
 </div>
 
 
