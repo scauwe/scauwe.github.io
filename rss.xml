@@ -11,6 +11,21 @@
   <link>http://vancauwenberge.info</link>
 </image>
 		<item>
+			<title>Package Unlocker, Version 1.0.1</title>
+			<description>&lt;ul>
+			&lt;li>Changed the warning text in agreement with NetIQ.&lt;/li>
+			&lt;li>Added about.html. &lt;/li>
+			&lt;li>General cleanup of plugin definition.&lt;/li>
+			&lt;li>Changed installation: jar in stead of folder&lt;/li>
+			&lt;/ul></description>
+			<link>http://vancauwenberge.info/#unlock_history</link>
+			<guid>vancauwenberge.info/rss/20160417T000000</guid>
+			<pubDate>Sun, 17 April 2016 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
 			<title>Generic file driver, Version 0.9 (package 0.8, sample config 0.1)</title>
 			<description>&lt;ul>
 			&lt;li>Shim bug: in certain conditions, doing a retry in the publisher channel on the first record of a file, caused the file not to be reprocessed when restarting the driver.&lt;/li>

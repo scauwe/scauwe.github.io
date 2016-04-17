@@ -415,6 +415,7 @@ $(document).ready(function(){
 							<ul>
 								<li><a id="menuUnlocIntroduction" href="#unlock_introduction">Intro</a></li>
 								<li><a id="menuUnlocInstallation" href="#unlock_installation">Installation</a></li>
+								<li><a id="menuUnlocHistory" href="#unlock_history">Version History</a></li>
 							</ul>
 						</li>
 						<li>
@@ -442,6 +443,28 @@ $(document).ready(function(){
 <a target="_blank" href="https://www.subtome.com/#/subscribe?feeds=http://feeds.feedburner.com/VanCauwenbergeinfo"><img src="http://www.subtome.com/subtome-feedburner.png" alt="Add to SubToMe" title="Add to SubToMe"></a>
 
 </p>
+
+<div typeof="sioc:Item foaf:Document">
+	<div>
+		<div class="rssDate" property="dc:date dc:created" content="2016-04-16T00:00:00" datatype="xsd:dateTime" rel="sioc:has_creator">
+			<span>
+				<div class="month">Apr</div>
+				<div class="day">16</div>
+				<div class="year">2016</div>
+			</span>
+		</div>
+		<div class="rssTitle" property="dc:title">Package Unlocker, Version 1.0.1</div>
+	</div>
+      
+	<div property="content:encoded">
+		<ul>
+			<li>Changed the warning text in agreement with NetIQ.</li>
+			<li>Added about.html</li>
+			<li>General cleanup of plugin definition.</li>
+			<li>Changed installation: jar in stead of folder</li>
+		</ul>
+	</div>
+</div>
 <div typeof="sioc:Item foaf:Document">
 	<div>
 		<div class="rssDate" property="dc:date dc:created" content="2015-12-07T00:00:00" datatype="xsd:dateTime" rel="sioc:has_creator">
@@ -1088,7 +1111,7 @@ Add a new update URL as defined above.</p>
 
 <div id="text_ae_intro" class="content">
 <h3>Introduction</h3>
-<p>You all know the <a href="http://www.novell.com/coolsolutions/tools/15754.html" target="_blank"><b>DAModifier tool</b></a>? Nice tool, but it depends on the Novell Client and Windows OS. This designer plug-in allows you to do similar actions: import, modify or export IDM driver associations, but runs on <span itemprop="operatingSystem">any system Designer runs on</span>.</p>
+<p>You all know the <a href="http://www.novell.com/coolsolutions/tools/15754.html" target="_blank"><b>DAModifier tool</b></a>? Nice tool, but it depends on the Novell Client and Windows OS. This designer plug-in allows you to do similar actions: import, modify or export IDM driver associations, but runs on <span itemprop="operatingSystem">any system Designer runs on</span>.</p>
 <p itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">NetIQ community members' <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/designer-association-modifier-plugin/#bottom" target="_blank">rating</a>: <img src="star_on1.png"/><img src="star_on1.png"/><img src="star_on1.png"/><img src="star_on1.png"/><img src="star_on1.png"/> (<span itemprop="ratingValue">5 stars</span>, <span itemprop="ratingCount">2</span> votes, average 5 out of 5)</p>
 <p itemprop="offers" itemscope itemtype="http://schema.org/Offer">This software is <a href="http://mozilla.org/MPL/2.0/"><span itemprop="price">MPL 2.0</span></a></p>
 </div>
@@ -2545,6 +2568,7 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 	<ul>
 		<li><a id="tocUnlockIntroduction" href="#unlock_introduction">Intro</a></li>
 		<li><a id="tocUnlockInstallation" href="#unlock_installation">Installation</a></li>
+		<li><a id="tocUnlockHistory" href="#unlock_history">Version history</a></li>
 	</ul>
 </div>
 
@@ -2569,9 +2593,7 @@ Note: only use this on packages that you are actually owning. If not, the vendor
 <p>
 Steps:
 <ol>
-	<li>Unzip the referenced file to the Designer 4 'plugins' folder, resulting in the following folder structure:
-<pre>[Designer root]\plugins\info.vancauwenberge.idm.1.0.0</pre>
-</li>
+	<li>Change the extentions of the <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/unlocking-designer-project-you-created/">included file</a> to '.jar' (Cool tools does not allow files with a jar extention) and copy the file to Designers plugin folder.</li>
 	<li>(Re)start designer, making sure your project is in 'developer' mode.</li>
 	<li>If you right-click on a locked package, you should have an additional menu item: <i>”Mark as 'Local'”</i>.</li>
 	<li>Selecting this menu item, will request a confirmation of your action. Pressing 'OK' will unlock the package, allowing you to create a new version.</li>
@@ -2582,6 +2604,20 @@ Steps:
 </p>
 </div>
 
+<div id="text_unlock_history" class="content" style="display:none;">
+<h3>Version History</h3>
+Version 1.0.1, 16-Apr-2016
+<ul>
+	<li>Changed the warning text in agreement with NetIQ.</li>
+	<li>Added about.html</li>
+	<li>General cleanup of plugin definition</li>
+	<li>Changed installation: jar in stead of folder</li>
+</ul>
+Version 1.0.0, 05-Oct-2011
+<ul>
+	<li>Initial release, contains the package unlocker and a package changelog viewer</li>
+</ul>
+</div>
 
 	<!--header menuwrap-->
 	</div>
