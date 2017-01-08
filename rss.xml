@@ -11,6 +11,18 @@
   <link>http://vancauwenberge.info</link>
 </image>
 		<item>
+			<title>Survey published</title>
+			<description>&lt;p>
+			I published &lt;a href="https://docs.google.com/forms/d/e/1FAIpQLSclQU3jwSA7O_mfSERYgd-_6xkt8GKnDfcjTzMY6ff5qJ6bfA/viewform">a survey&lt;/a> to see what the potential is for the Generic File Driver and a potential new Shim: &lt;a href="https://www.youtube.com/watch?v=RE85MDpL9qg">the Text Protocol Shim&lt;/a>.
+			&lt;/p></description>
+			<link>http://vancauwenberge.info/#unlock_history</link>
+			<guid>vancauwenberge.info/rss/20180108T000000</guid>
+			<pubDate>Sun, 8 Jan 2018 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
 			<title>Package Unlocker, Version 1.0.1</title>
 			<description>&lt;ul>
 			&lt;li>Changed the warning text in agreement with NetIQ.&lt;/li>
