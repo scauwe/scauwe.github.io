@@ -11,6 +11,19 @@
   <link>http://vancauwenberge.info</link>
 </image>
 		<item>
+			<title>Generic file driver, Version 1.0 (package 0.8, sample config 0.1)</title>
+			<description>&lt;ul>
+			&lt;li>Shim feature: provided an uncompressed jar, so that the shim can be discovered by the Windows remote loader. See &lt;a href="https://forums.netiq.com/showthread.php?55311-Generic-Driver-and-Remote-Load&p=265004#post265004">forum post&lt;/a>. Thanks AB!&lt;/li>
+			&lt;li>Release bug: Version 0.9 release seemed to have failed to include some features/bug fixes. All 0.9 fixes and features should now actually be included.&lt;/li>
+			&lt;/ul></description>
+			<link>http://vancauwenberge.info/#txtdriver_history</link>
+			<guid>vancauwenberge.info/rss/20170108T000000</guid>
+			<pubDate>Mon, 9 January 2017 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
 			<title>Survey published</title>
 			<description>&lt;p>
 			I published &lt;a href="https://docs.google.com/forms/d/e/1FAIpQLSclQU3jwSA7O_mfSERYgd-_6xkt8GKnDfcjTzMY6ff5qJ6bfA/viewform">a survey&lt;/a> to see what the potential is for the Generic File Driver and a potential new Shim: &lt;a href="https://www.youtube.com/watch?v=RE85MDpL9qg">the Text Protocol Shim&lt;/a>.

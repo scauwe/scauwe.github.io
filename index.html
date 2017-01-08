@@ -455,6 +455,25 @@ $(document).ready(function(){
 
 <div typeof="sioc:Item foaf:Document">
 	<div>
+		<div class="rssDate" property="dc:date dc:created" content="2017-01-09T00:00:00" datatype="xsd:dateTime" rel="sioc:has_creator">
+			<span>
+				<div class="month">Jan</div>
+				<div class="day">9</div>
+				<div class="year">2017</div>
+			</span>
+		</div>
+		<div class="rssTitle" property="dc:title">Generic file driver, Version 1.0 (base package 0.8, sample config package 0.1)</div>
+	</div>
+      
+	<div property="content:encoded">
+		<ul>
+			<li>Shim feature: provided an uncompressed jar, so that the shim can be discovered by the Windows remote loader. See <a href="https://forums.netiq.com/showthread.php?55311-Generic-Driver-and-Remote-Load&p=265004#post265004">forum post</a>. Thanks AB!</li>
+			<li>Release bug: Version 0.9 release seemed to have failed to include some features/bug fixes. All 0.9 fixes and features should now actually be included.</li>
+		</ul>
+	</div>
+</div>
+<div typeof="sioc:Item foaf:Document">
+	<div>
 		<div class="rssDate" property="dc:date dc:created" content="2017-01-08T00:00:00" datatype="xsd:dateTime" rel="sioc:has_creator">
 			<span>
 				<div class="month">Jan</div>
@@ -1297,6 +1316,11 @@ Main differentiators to NetIQ's driver:
 
 <div id="text_txtdriver_history" class="content">
 <h3>Version History</h3>
+<h4>version 1.0, 9-JAN-2017 (package 0.8, sample config package 0.1)</h4>
+		<ul>
+			<li>Shim feature: provided an uncompressed jar, so that the shim can be discovered by the Windows remote loader. See <a href="https://forums.netiq.com/showthread.php?55311-Generic-Driver-and-Remote-Load&p=265004#post265004">forum post</a>. Thanks AB!</li>
+			<li>Release bug: Version 0.9 release seemed to have failed to include some features/bug fixes. All 0.9 fixes and features should now actually be included.</li>
+		</ul>
 <h4>version 0.9, 7-DEC-2015 (package 0.8, sample config package 0.1)</h4>
 
 		<ul>
@@ -2658,7 +2682,7 @@ Version 1.0.0, 05-Oct-2011
 
 <!-- SURVEY CALL -->
 <div id="survey" class="survey" style="display:block;">
-<p>In order to support my work, I'd appreciate if you filled in <b><a href="https://docs.google.com/forms/d/e/1FAIpQLSclQU3jwSA7O_mfSERYgd-_6xkt8GKnDfcjTzMY6ff5qJ6bfA/viewform">this survey</a></b> about the Generic File driver and a new shim: the <a href="https://www.youtube.com/watch?v=RE85MDpL9qg">Text Protocol Shim</a>.</p>
+<p>In order to support my work, I'd appreciate if you filled out <b><a href="https://docs.google.com/forms/d/e/1FAIpQLSclQU3jwSA7O_mfSERYgd-_6xkt8GKnDfcjTzMY6ff5qJ6bfA/viewform">this survey</a></b> about the Generic File driver and a new shim: the <a href="https://www.youtube.com/watch?v=RE85MDpL9qg">Text Protocol Shim</a>.</p>
 </div>
 
 <!-- DONATE BUTTONS -->
