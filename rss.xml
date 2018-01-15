@@ -11,6 +11,20 @@
   <link>http://vancauwenberge.info</link>
 </image>
 		<item>
+			<title>Generic file driver, Version 1.1 (package 0.9, sample config 0.1)</title>
+			<description>&lt;ul>
+			&lt;li>Shim feature: Added option to define sensitive attributes&lt;/li>
+			&lt;li>Shim feature: Added ImageFileReader and RawFileReader&lt;/li>
+			&lt;li>Shim feature: CSVFileWriter: added option to always surround fields with quotes.&lt;/li>
+			&lt;/ul></description>
+			<link>http://vancauwenberge.info/#txtdriver_history</link>
+			<guid>vancauwenberge.info/rss/20170108T000000</guid>
+			<pubDate>Wed, 17 January 2018 00:00:00 UTC</pubDate>
+			<source>http://vancauwenberge.info/rss.xml</source>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Open_Source/Software/Computers/Security/Products_and_Tools/</category>
+			<category domain="http://www.dmoz.org/Computers/Security/Products_and_Tools/">Computers/Security/Products_and_Tools/</category>
+		</item>
+		<item>
 			<title>Generic file driver, Version 1.0 (package 0.8, sample config 0.1)</title>
 			<description>&lt;ul>
 			&lt;li>Shim feature: provided an uncompressed jar, so that the shim can be discovered by the Windows remote loader. See &lt;a href="https://forums.netiq.com/showthread.php?55311-Generic-Driver-and-Remote-Load&p=265004#post265004">forum post&lt;/a>. Thanks AB!&lt;/li>

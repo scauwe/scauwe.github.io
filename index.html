@@ -299,7 +299,7 @@ $(document).ready(function(){
 	//Hide all content
 	$('.content').hide();
 
-	$('a[href^="#"]').click(function() {
+	$('a[href^="#"][href!="#"]').click(function() {
 		selectMenu(this);
 	});
 	
@@ -413,8 +413,20 @@ $(document).ready(function(){
 								<li><a id="menuTxtDriverConfiguration" href="#txtdriver_configuration">Configuration</a>
 									<ul>
 										<li><a id="menuTxtDriverConfigurationDriver" href="#txtdriver_configuration_driver">Driver</a></li>
-										<li><a id="menuTxtDriverConfigurationSubscriber" href="#txtdriver_configuration_subscriber">Subscriber</a></li>
-										<li><a id="menuTxtDriverConfigurationPublisher" href="#txtdriver_configuration_publisher">Publisher</a></li>
+										<li><a id="menuTxtDriverConfigurationSubscriber" href="#txtdriver_configuration_subscriber">Subscriber</a>
+											<ul>
+												<li><a id="menuTxtDriverConfigurationSubscriberCommon" href="#txtdriver_configuration_subscriber_common">Common</a></li>
+												<li><a id="menuTxtDriverConfigurationSubscriberWriters" href="#txtdriver_configuration_subscriber_writers">File Writers</a></li>
+												<li><a id="menuTxtDriverConfigurationSubscriberOthers" href="#txtdriver_configuration_subscriber_others">Others</a></li>
+											</ul>
+										</li>
+										<li><a id="menuTxtDriverConfigurationPublisher" href="#txtdriver_configuration_publisher">Publisher</a>
+											<ul>
+												<li><a id="menuTxtDriverConfigurationPublisherCommon" href="#txtdriver_configuration_publisher_common">Common</a></li>
+												<li><a id="menuTxtDriverConfigurationPublisherReaders" href="#txtdriver_configuration_publisher_readers">File Readers</a></li>
+												<li><a id="menuTxtDriverConfigurationPublisherOthers" href="#txtdriver_configuration_publisher_others">Others</a></li>
+											</ul>
+										</li>
 									</ul>
 								</li>
 							</ul>
@@ -453,6 +465,26 @@ $(document).ready(function(){
 
 </p>
 
+<div typeof="sioc:Item foaf:Document">
+	<div>
+		<div class="rssDate" property="dc:date dc:created" content="2018-01-17T00:00:00" datatype="xsd:dateTime" rel="sioc:has_creator">
+			<span>
+				<div class="month">Jan</div>
+				<div class="day">17</div>
+				<div class="year">2018</div>
+			</span>
+		</div>
+		<div class="rssTitle" property="dc:title">Generic file driver, Version 1.1 (base package 0.9, sample config package 0.1)</div>
+	</div>
+      
+	<div property="content:encoded">
+		<ul>
+			<li>Shim feature: Added option to define sensitive attributes</li>
+			<li>Shim feature: Added ImageFileReader and RawFileReader</li>
+			<li>Shim feature: CSVFileWriter: added option to always surround fields with quotes.</li>
+		</ul>
+	</div>
+</div>
 <div typeof="sioc:Item foaf:Document">
 	<div>
 		<div class="rssDate" property="dc:date dc:created" content="2017-01-09T00:00:00" datatype="xsd:dateTime" rel="sioc:has_creator">
@@ -1316,6 +1348,12 @@ Main differentiators to NetIQ's driver:
 
 <div id="text_txtdriver_history" class="content">
 <h3>Version History</h3>
+<h4>version 1.1, 17-JAN-2018 (package 0.9, sample config package 0.1)</h4>
+		<ul>
+			<li>Shim feature: Added option to define sensitive attributes</li>
+			<li>Shim feature: Added ImageFileReader and RawFileReader</li>
+			<li>Shim feature: CSVFileWriter: added option to always surround fields with quotes.</li>
+		</ul>
 <h4>version 1.0, 9-JAN-2017 (package 0.8, sample config package 0.1)</h4>
 		<ul>
 			<li>Shim feature: provided an uncompressed jar, so that the shim can be discovered by the Windows remote loader. See <a href="https://forums.netiq.com/showthread.php?55311-Generic-Driver-and-Remote-Load&p=265004#post265004">forum post</a>. Thanks AB!</li>
@@ -1579,6 +1617,30 @@ Extend the status message to include the variable pubLogMessage if valued.
 
 <div id="text_txtdriver_configuration_subscriber" class="content">
 <h3>Subscriber Configuration</h3>
+<p>The subscriber configuration is split up into 3 parts:</p>
+<ul>
+	<li><a href="#txtdriver_configuration_subscriber_common">Common Subscriber Options</a></li>
+	<li><a href="#txtdriver_configuration_subscriber_writers">File Writer</a>
+		<ul>
+			<li>CSVFileWriter</li>
+			<li>XMLFileWriter</li>
+			<li>XLSFileWriter</li>
+		</ul>
+	</li>
+	<li><a href="#txtdriver_configuration_subscriber_others">Others</a>
+		<ul>
+			<li>BasicNewFileDecider</li>
+			<li>GUIDFileNameStrategy</li>
+			<li>SimpleDateFormatFileNameStrategy</li>
+			<li>EcmaScriptFileNameStrategy</li>
+		</ul>
+	</li>
+</ul>
+
+</div>
+
+<div id="text_txtdriver_configuration_subscriber_common" class="content">
+<h3>Subscriber Configuration</h3>
 <h4>Common Subscriber Options</h4>
 <p>These options are common for the subscriber, independent of the strategies used.</p>
 <table>
@@ -1661,6 +1723,9 @@ Extend the status message to include the variable pubLogMessage if valued.
 		</td>
 	</tr>
 </table>
+</div>
+
+<div id="text_txtdriver_configuration_subscriber_others" class="content">
 <h4>Strategy-specific Subscriber Options</h4>
 <h5>BasicNewFileDecider</h5>
 <p>This strategy decides when a new file should be started. The BasicNewFileDecider has several options included: maximum number of records, maximum age of the file, idle time or a manual control based on a field in the Add event received.</p>
@@ -1874,6 +1939,9 @@ Extend the status message to include the variable pubLogMessage if valued.
 		</td>
 	</tr>
 </table>
+</div>
+
+<div id="text_txtdriver_configuration_subscriber_writers" class="content">
 <h5>CSVFileWriter</h5>
 <p>The CSVFileWriter writes records in a CSV format. You can specify the seperator independent from the seperator from the CSV reader.</p>
 <table>
@@ -2055,10 +2123,7 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 </table>
 </div>
 
-
-
-<div id="text_txtdriver_configuration_publisher" class="content">
-<h3>Publisher Configuration</h3>
+<div id="text_txtdriver_configuration_publisher_common" class="content">
 <h4>Common Publisher Options</h4>
 <p>These options are for the publisher, independent of any strategy used.</p>
 <table>
@@ -2089,6 +2154,17 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 		</td>
 		<td>
 			<p>Enabled</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_sensitiveAttributes</p>
+		</td>
+		<td>
+			<p>Publisher: Comma separated list of sensitive attributes. These attribute values will have the "is-sensitive" attribute set when submitted on the publisher channel. You can use this to mask actual sensitive data or, in case of the ImageFileReader, mask the base64 image string that fills up the log file.</p>
+		</td>
+		<td>
+			<p>imageBytes</p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -2134,6 +2210,8 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 			<li>info.vancauwenberge.filedriver.filereader.csv.CSVFileReader</li>
 			<li>info.vancauwenberge.filedriver.filereader.xml.XMLFileReader</li>
 			<li>info.vancauwenberge.filedriver.filereader.xls.XLSFileReader</li>
+			<li>info.vancauwenberge.filedriver.filereader.image.ImageFileReader</li>
+			<li>info.vancauwenberge.filedriver.filereader.raw.RawFileReader</li>
 			</ul>
 			</p>
 		</td>
@@ -2239,89 +2317,22 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 			</p>
 		</td>
 	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_IsLogging</p>
+		</td>
+		<td>
+			<p>Enable or disable publisher file process logging</p>
+		</td>
+		<td>
+			<p>Enabled</p>
+		</td>
+	</tr>
 </table>
+</div>
 
-<h4>Strategy-specific Publisher Options</h4>
-<h5>RegExpFileLocator Options</h5>
-<p>The RegExpFileLocator is responsible for finding files that need to be processed. The given implementation scans a source folder, and selects all files that match the given regular expression.</p>
-<table>
-	<tr valign="top">
-		<th width="16%">
-			Option
-		</th>
-		<th width="68%"">
-			Description
-		</th>
-		<th width="16%">
-			Example value
-		</th>
-	</tr>
-	<tr valign="top">
-		<td>
-			<p>regExp-sourceFolder</p>
-		</td>
-		<td>
-			<p>RegExpFileLocator:
-			Source folder for files:</p>
-		</td>
-		<td>
-			<p>C:\source</p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td>
-			<p>regExp-regExp</p>
-		</td>
-		<td>
-			<p>RegExpFileLocator:
-			Regular expression for finding files.Use (?i) at start to make
-			case ignore regexp:</p>
-		</td>
-		<td>
-			<p>(?i).*\.csv</p>
-		</td>
-	</tr>
-</table>
 
-<h5>FilePropertySorter Options</h5>
-<p>The FilePropertySorter sorts the list of files returned by the file locator implementation, and sorts them (ascending or descending) on a given file property. The property can be any file attribute as exposed by the java file object.<p>
-<table>
-	<tr valign="top">
-		<th width="16%">
-			Option
-		</th>
-		<th width="68%"">
-			Description
-		</th>
-		<th width="16%">
-			Example value
-		</th>
-	</tr>
-	<tr valign="top">
-		<td>
-			<p>fileSort_SortMethod</p>
-		</td>
-		<td>
-			<p>FileSorter:
-			File sort methode:</p>
-		</td>
-		<td>
-			<p>getName</p>
-		</td>
-	</tr>
-	<tr valign="top">
-		<td>
-			<p>fileSort_SortOrderAsc</p>
-		</td>
-		<td>
-			<p>FileSorter:
-			Sort ascending (true/false):</p>
-		</td>
-		<td>
-			<p>true</p>
-		</td>
-	</tr>
-</table>
+<div id="text_txtdriver_configuration_publisher_readers" class="content">
 <h5>CSVFileReader</h5>
 <p>The CSVFileReader reads CSV files (with or without header). It has the option to skip empty lines, use a given seperator, use the header names (if any) instead of the given driver schema as field names, etc...</p>
 <table>
@@ -2402,6 +2413,7 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 		</td>
 	</tr>
 </table>
+
 <h5>XMLFileReader</h5>
 <p>The XMLFileReader reads XML files. The expected format is ‘flat’:</p>
 <pre>
@@ -2539,6 +2551,313 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 		</td>
 	</tr>
 </table>
+
+<h5>ImageFileReader</h5>
+<p>The Image file reader reads image files as supported by your java environment. By default, java supports PNG,GIF,JPEG and BMP. Since ImageReaders and Writers are java service (via SPI), this can be extended.<br/>
+The ImageFileReader generates the following predefined fields:
+<ul>
+<li>Properties of the image submitted on the pub. channel:
+<ul>
+<li>imageBytes: base64 encoded image bytes</li>
+<li>imageHeight</li>
+<li>imageWidth</li>
+<li>imageFormat</li>
+</ul>
+</li>
+<li>Properties of the original image:
+<ul>
+<li>srcHeight</li>
+<li>srcWidth</li>
+<li>srcFormat</li>
+</ul>
+</li>
+</ul>
+On top of these, you can still configure the publisher to submit file name, path, etc as required.
+Note: Images will be read and resized/transcoded in memory. Be sure to have enough memory for the images. Only one image will be in memory, but this image will be duplicated (if resizing) or even tripled (if transcoding)</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>imgReader_resize</p>
+		</td>
+		<td>
+			<p>Resize the image (true/false)</p>
+		</td>
+		<td>
+			<p>True</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>imgReader_resizeMode</p>
+		</td>
+		<td>
+			<p>Mode of resizing.
+			<ul>
+				<li>Exact: will resize to the given width and height, regardless of the input image. Aspect ratios might not be respected.</li>
+				<li>Max dimensions: will resize keeping aspect ratios. When both height and width are >0, the image will be resized until either the width or the height are reached. When either height or width are zero, the image is resized to the given height or width, alculating the other for keeping aspect rations.</li>
+			</ul></p>
+		</td>
+		<td>
+			<p>Exact</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>imgReader_resizePadding</p>
+		</td>
+		<td>
+			<p>Only when resize mode is Max dimensions.<br/>
+When padding is enabled, and both height and width >0, the image will be resized (keeping aspect ratio), centered, and the remaining spaces filled with the padding color.</p>
+		</td>
+		<td>
+			<p>No Padding</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>imgReader_resizePaddingColor</p>
+		</td>
+		<td>
+			<p>Only when Padding.<br/>
+Padding color is defiend as HEX RGB (eg:121212 for grey)</p>
+		</td>
+		<td>
+			<p>000000</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>imgReader_resizeY</p>
+		</td>
+		<td>
+			<p>New height of the image (in pixels).<br/>
+When resize mode is "Max dimensions": set to '0' to scale the width of image to "New width" and calculate the height to keep aspect ratio. At least "New height" or "New width" must be set &gt; 0.</p>
+		</td>
+		<td>
+			<p>250</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>imgReader_resizeX</p>
+		</td>
+		<td>
+			<p>New width of the image (in pixels).<br/>
+When resize mode is "Max dimensions": set to '0' to scale the height of image to "New height" and calculate the width to keep aspect ratio. At least "New height" or "New width" must be set &gt; 0.</p>
+		</td>
+		<td>
+			<p>200</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>imgReader_transcode</p>
+		</td>
+		<td>
+			<p>Transcode the image. (true/false)<br/>
+Caution:
+<ul>
+<li>transcoding is not supported between all formats. Supports depends on source and destination type, but also on things like color map etc. 'png' seems to be working for most input types.</li>
+<li>transocding does not keep image meta data (author, shooting date, etc)</li>
+</ul>
+Use at your own responsibility.</p>
+		</td>
+		<td>
+			<p>true</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>imgReader_transcodeFormat</p>
+		</td>
+		<td>
+			<p>Destination format.<br/>
+examples: png, gif, bmp, jpeg.</p>
+		</td>
+		<td>
+			<p>png</p>
+		</td>
+	</tr>
+</table>
+
+<h5>RawFileReader</h5>
+<p>The Raw file reader reads arbitrary files, both binary and text files. The content is submitted as one attribute value.<br/>
+Files will be read (and base64 encoded) in memory. Be sure to have enough memory depending on your expected file size. It is possible to limit the size of the files.<br/>
+The RawFileReader generates the following predefined fields:
+<ul>
+	<li>rawData</li>
+</ul>
+On top of these, you can still configure the publisher to submit file name, path, etc as required.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>rawReader_maxSize</p>
+		</td>
+		<td>
+			<p>Maximum file size (in bytes) to import. Make sure you have enough memory when you want to read large files. Set to '0' to disable this protection.</p>
+		</td>
+		<td>
+			<p>20000</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>rawReader_type</p>
+		</td>
+		<td>
+			<p>Binary or text.<br/>
+Binary files will be base64 encoded. Text files will be read (using the given encoding) and submitted as a string.</p>
+		</td>
+		<td>
+			<p>Binary</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>rawReader_typeText_Encoding</p>
+		</td>
+		<td>
+			<p>In case of text files: File encoding. Leave empty for platform default.</p>
+		</td>
+		<td>
+			<p>UTF-8</p>
+		</td>
+	</tr>
+</table>
+</div>
+
+
+<div id="text_txtdriver_configuration_publisher" class="content">
+<h3>Publisher Configuration</h3>
+<p>The publisher configuration is split up into 3 parts:</p>
+<ul>
+	<li><a href="#txtdriver_configuration_publisher_common">Common Publisher Options</a></li>
+	<li><a href="#txtdriver_configuration_publisher_readers">File Readers</a>
+		<ul>
+			<li>CSVFileReader</li>
+			<li>XMLFileReader</li>
+			<li>XLSFileReader</li>
+			<li>ImageFileReader</li>
+			<li>RawFileReader</li>
+		</ul>
+	</li>
+	<li><a href="#txtdriver_configuration_publisher_others">Others</a>
+		<ul>
+			<li>RegExpFileLocator Options</li>
+			<li>FilePropertySorter Options</li>
+			<li>NoPubCleaningStrategy</li>
+			<li>AgePubCleaningStrategy</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+
+<div id="text_txtdriver_configuration_publisher_others" class="content">
+<h4>Strategy-specific Publisher Options</h4>
+<h5>RegExpFileLocator Options</h5>
+<p>The RegExpFileLocator is responsible for finding files that need to be processed. The given implementation scans a source folder, and selects all files that match the given regular expression.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>regExp-sourceFolder</p>
+		</td>
+		<td>
+			<p>RegExpFileLocator:
+			Source folder for files:</p>
+		</td>
+		<td>
+			<p>C:\source</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>regExp-regExp</p>
+		</td>
+		<td>
+			<p>RegExpFileLocator:
+			Regular expression for finding files.Use (?i) at start to make
+			case ignore regexp:</p>
+		</td>
+		<td>
+			<p>(?i).*\.csv</p>
+		</td>
+	</tr>
+</table>
+
+<h5>FilePropertySorter Options</h5>
+<p>The FilePropertySorter sorts the list of files returned by the file locator implementation, and sorts them (ascending or descending) on a given file property. The property can be any file attribute as exposed by the java file object.<p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>fileSort_SortMethod</p>
+		</td>
+		<td>
+			<p>FileSorter:
+			File sort methode:</p>
+		</td>
+		<td>
+			<p>getName</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>fileSort_SortOrderAsc</p>
+		</td>
+		<td>
+			<p>FileSorter:
+			Sort ascending (true/false):</p>
+		</td>
+		<td>
+			<p>true</p>
+		</td>
+	</tr>
+</table>
+
 <h5>NoPubCleaningStrategy</h5>
 <p>This publisher cleaning strategy does not do any cleaning. All published files are kept on the system. This strategy has no parameters.</p>
 <h5>AgePubCleaningStrategy</h5>
@@ -2602,6 +2921,129 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 	</tr>
 </table>
 
+<h5>Common logging options</h5>
+<p>These are common logging settings for all publisher loggers (only one for now). Logging on the publisher channel will generate a log record for every status message received as a result of an add or modify event generated on the publisher channel.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_logFieldRecordNumber</p>
+		</td>
+		<td>
+			<p>Field name for the record number in the log file. Leave empty to not add it.</p>
+		</td>
+		<td>
+			<p>RecordNo</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_logFieldStatus</p>
+		</td>
+		<td>
+			<p>Field name for the status (Error, Retry, Succes etc) in the log file. Leave empty to not add it.</p>
+		</td>
+		<td>
+			<p>Status</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_logFieldStatusMessage</p>
+		</td>
+		<td>
+			<p>Field name for the status message in the log file. Leave empty to not add it.</p>
+		</td>
+		<td>
+			<p>StatusMessage</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_logFieldEventID</p>
+		</td>
+		<td>
+			<p>Field name for the status event id in the log file. Leave empty to not add it.</p>
+		</td>
+		<td>
+			<p>StatusEventID</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>pub_FileLogger</p>
+		</td>
+		<td>
+			<p>File Logging Strategy (object class implementing IPublisherLoggerStrategy). Determining how the publisher generates logfiles of the files processed.<br/>
+			<b>Current implementations: </b>
+			<ul>
+				<li>info.vancauwenberge.filedriver.filelogger.PublisherCSVLogger: Log to a CSV file</li>
+			</ul></p>
+		</td>
+		<td>
+			<p>info.vancauwenberge.filedriver.filelogger.PublisherCSVLogger</p>
+		</td>
+	</tr>
+</table>
+
+<h5>CSVLogger options</h5>
+<p>The Publisher CSVLogger will write the publisher logger to a CSV formatted file.</p>
+<table>
+	<tr valign="top">
+		<th width="16%">
+			Option
+		</th>
+		<th width="68%"">
+			Description
+		</th>
+		<th width="16%">
+			Example value
+		</th>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>csvLogger_WriteHeader</p>
+		</td>
+		<td>
+			<p>csvLogger: Write a header record(true/false).</p>
+		</td>
+		<td>
+			<p>true</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>csvLogger_Seperator</p>
+		</td>
+		<td>
+			<p>csvLogger: Seperator character.</p>
+		</td>
+		<td>
+			<p>,</p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<p>csvLogger_ForcedEncoding</p>
+		</td>
+		<td>
+			<p>csvLogger: Forced file encoding. Leave blank to use system default encoding.</p>
+		</td>
+		<td>
+			<p>UTF-8</p>
+		</td>
+	</tr>
+</table>
 </div>
 
 </div>
@@ -2680,10 +3122,11 @@ Version 1.0.0, 05-Oct-2011
 </div>
 </div>
 
-<!-- SURVEY CALL -->
+<!-- SURVEY CALL 
 <div id="survey" class="survey" style="display:block;">
 <p>If you like to support my work, I would appreciate it if you would take the time to filled out <b><a href="https://docs.google.com/forms/d/e/1FAIpQLSclQU3jwSA7O_mfSERYgd-_6xkt8GKnDfcjTzMY6ff5qJ6bfA/viewform">this survey</a></b> about the Generic File driver and a new shim: the <a href="https://www.youtube.com/watch?v=RE85MDpL9qg">Text Protocol Shim</a>.</p>
 </div>
+-->
 
 <!-- DONATE BUTTONS -->
 <!-- DONATE BUTTONS -->

@@ -69,7 +69,13 @@
 .sf-navbar ul ul li.sfHover,
 .sf-navbar ul ul li.active {
 	background: #EEEEEE;
+	font-weight: bold;
 }
+/*** indent the sublevel menu of the vertical menus***/
+.sf-navbar>li>ul>li>ul>li>ul {
+	margin-left: 30px;
+}
+
 .sf-navbar ul li.active > a,
 .sf-navbar li.sf-breadcrumb > a {
 	*font-weight: bold;
