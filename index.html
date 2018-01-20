@@ -242,7 +242,8 @@ function selectMenu(item){
 			.addClass('active');
 
 		$('#text_'+id).show('slow');
-
+ $("html, body").animate({ scrollTop: 0 }, "slow");
+ 
 		//Limit the id to the 'root'
 
 		//Show corresponding donate button
@@ -261,7 +262,7 @@ function selectMenu(item){
 			document.title="Association Editor plugin - Van Cauwenberge.info";
 		else if (id=="unlock")
 			document.title="Package Unlocker plugin - Van Cauwenberge.info";
-	
+
 		//reinitialize Superfish menu	
 		menu = $('ul.sf-menu').superfish({
 			pathClass: 'active',
@@ -416,15 +417,44 @@ $(document).ready(function(){
 										<li><a id="menuTxtDriverConfigurationSubscriber" href="#txtdriver_configuration_subscriber">Subscriber</a>
 											<ul>
 												<li><a id="menuTxtDriverConfigurationSubscriberCommon" href="#txtdriver_configuration_subscriber_common">Common</a></li>
-												<li><a id="menuTxtDriverConfigurationSubscriberWriters" href="#txtdriver_configuration_subscriber_writers">File Writers</a></li>
-												<li><a id="menuTxtDriverConfigurationSubscriberOthers" href="#txtdriver_configuration_subscriber_others">Others</a></li>
+												<li><a id="menuTxtDriverConfigurationSubscriberNewFile" href="#txtdriver_configuration_subscriber_bnf">New File Strategy</a></li>
+												<li><a id="menuTxtDriverConfigurationSubscriberOthersName" href="#txtdriver_configuration_subscriber_namers">Name Strategies</a>
+													<ul>
+														<li><a id="menuTxtDriverConfigurationSubscriberOthersNameGUID" href="#txtdriver_configuration_subscriber_namers_guid">GUID File Namer</a></li>
+														<li><a id="menuTxtDriverConfigurationSubscriberOthersNameDate" href="#txtdriver_configuration_subscriber_namers_date">Date File Namer</a></li>
+														<li><a id="menuTxtDriverConfigurationSubscriberOthersNameECMA" href="#txtdriver_configuration_subscriber_namers_ecma">ECMA File Namer</a></li>
+													</ul>
+												</li>
+												<li><a id="menuTxtDriverConfigurationSubscriberWriters" href="#txtdriver_configuration_subscriber_writers">Write Strategies</a>
+													<ul>
+														<li><a id="menuTxtDriverConfigurationSubscriberWritersCSV" href="#txtdriver_configuration_subscriber_writers_csv">CSV File Writer</a></li>
+														<li><a id="menuTxtDriverConfigurationSubscriberWritersXML" href="#txtdriver_configuration_subscriber_writers_xml">XML File Writer</a></li>
+														<li><a id="menuTxtDriverConfigurationSubscriberWritersXLS" href="#txtdriver_configuration_subscriber_writers_xls">XLS File Writer</a></li>
+													</ul>
+												</li>
 											</ul>
 										</li>
 										<li><a id="menuTxtDriverConfigurationPublisher" href="#txtdriver_configuration_publisher">Publisher</a>
 											<ul>
 												<li><a id="menuTxtDriverConfigurationPublisherCommon" href="#txtdriver_configuration_publisher_common">Common</a></li>
-												<li><a id="menuTxtDriverConfigurationPublisherReaders" href="#txtdriver_configuration_publisher_readers">File Readers</a></li>
-												<li><a id="menuTxtDriverConfigurationPublisherOthers" href="#txtdriver_configuration_publisher_others">Others</a></li>
+												<li><a id="menuTxtDriverConfigurationPublisherLocatorRegexp" href="#txtdriver_configuration_publisher_locator_regexp">RegExp File Locator</a></li>
+												<li><a id="menuTxtDriverConfigurationPublisherSorterProp" href="#txtdriver_configuration_publisher_sorter_prop">File Property Sorter</a></li>
+												<li><a id="menuTxtDriverConfigurationPublisherReaders" href="#txtdriver_configuration_publisher_readers">Read Strategies</a>
+													<ul>
+														<li><a id="menuTxtDriverConfigurationPublisherReadersCSV" href="#txtdriver_configuration_publisher_readers_csv">CSV File Reader</a></li>
+														<li><a id="menuTxtDriverConfigurationPublisherReadersXML" href="#txtdriver_configuration_publisher_readers_xml">XML File Reader</a></li>
+														<li><a id="menuTxtDriverConfigurationPublisherReadersXLS" href="#txtdriver_configuration_publisher_readers_xls">XLS File Reader</a></li>
+														<li><a id="menuTxtDriverConfigurationPublisherReadersImage" href="#txtdriver_configuration_publisher_readers_image">Image File Reader</a></li>
+														<li><a id="menuTxtDriverConfigurationPublisherReadersRaw" href="#txtdriver_configuration_publisher_readers_raw">Raw File Reader</a></li>
+													</ul>
+												</li>
+												<li><a id="menuTxtDriverConfigurationPublisherLoggingCSV" href="#txtdriver_configuration_publisher_logging_csv">CSV Logger</a></li>
+												<li><a id="menuTxtDriverConfigurationPublisherCleaners" href="#txtdriver_configuration_publisher_cleaners">File Clean Strategies</a>
+													<ul>
+														<li><a id="menuTxtDriverConfigurationPublisherCleanersNone" href="#txtdriver_configuration_publisher_cleaners_none">No Pub Cleaning Strategy</a></li>
+														<li><a id="menuTxtDriverConfigurationPublisherCleanersAge" href="#txtdriver_configuration_publisher_cleaners_age">Age Pub Cleaning Strategy</a></li>
+													</ul>
+												</li>
 											</ul>
 										</li>
 									</ul>
@@ -1326,15 +1356,21 @@ ldap paged search is somehow not fully implemented in eDirectory. Some ldap sear
 				<li><a id="tocTxtDriverConfigurationDriver" href="#txtdriver_configuration_driver">Driver</a></li>
 				<li><a id="tocTxtDriverConfigurationSubscriber" href="#txtdriver_configuration_publisher">Subscriber</a></li>
 				<ul>
-					<li><a id="tocTxtDriverConfigurationSubscriberCommon" href="#txtdriver_configuration_subscriber_common">Common Subscriber parameters</a></li>
-					<li><a id="tocTxtDriverConfigurationSubscriberWriters" href="#txtdriver_configuration_subscriber_writers">File Writer parameters</a></li>
-					<li><a id="tocTxtDriverConfigurationSubscriberOthers" href="#txtdriver_configuration_subscriber_others">Other Subscriber parameters</a></li>
+					<li><a href="#txtdriver_configuration_publisher_common">Common Publisher Options</a></li>
+					<li><a href="#txtdriver_configuration_publisher_locator_regexp">RegExp File Locator</a></li>
+					<li><a href="#txtdriver_configuration_publisher_sorter_prop">File Property Sorter</a></li>
+					<li><a href="#txtdriver_configuration_publisher_readers">File Read Strategies</a></li>
+					<li><a href="#txtdriver_configuration_publisher_logging_csv">CSV Logger</a></li>
+					<li><a href="#txtdriver_configuration_publisher_cleaners">File Clean Strategies</a></li>
 				</ul>
 				<li><a id="tocTxtDriverConfigurationPublisher" href="#txtdriver_configuration_publisher">Publisher</a></li>
 				<ul>
-					<li><a id="tocTxtDriverConfigurationPublisherCommon" href="#txtdriver_configuration_publisher_common">Common Publisher parameters</a></li>
-					<li><a id="tocTxtDriverConfigurationPublisherReaders" href="#txtdriver_configuration_publisher_readers">File Readers parameters</a></li>
-					<li><a id="tocTxtDriverConfigurationPublisherOthers" href="#txtdriver_configuration_publisher_others">Other Publisher parameters</a></li>
+					<li><a href="#txtdriver_configuration_publisher_common">Common Publisher Options</a></li>
+					<li><a href="#txtdriver_configuration_publisher_locator_regexp">RegExp File Locator</a></li>
+					<li><a href="#txtdriver_configuration_publisher_sorter_prop">File Property Sorter</a></li>
+					<li><a href="#txtdriver_configuration_publisher_readers">File Read Strategies</a></li>
+					<li><a href="#txtdriver_configuration_publisher_logging_csv">CSV Logger</a></li>
+					<li><a href="#txtdriver_configuration_publisher_cleaners">File Clean Strategies</a></li>
 				</ul>
 			</ul>
 		</li>
@@ -1524,17 +1560,21 @@ Extend the status message to include the variable pubLogMessage if valued.
 <p>
 	<ul>
 		<li><a id="tocTxtDriverConfigurationDriver" href="#txtdriver_configuration_driver">Driver</a></li>
-		<li><a id="tocTxtDriverConfigurationSubscriber" href="#txtdriver_configuration_publisher">Subscriber</a></li>
+		<li><a id="tocTxtDriverConfigurationSubscriber" href="#txtdriver_configuration_subscriber">Subscriber</a></li>
 		<ul>
-			<li><a id="tocTxtDriverConfigurationSubscriberCommon" href="#txtdriver_configuration_subscriber_common">Common Subscriber parameters</a></li>
-			<li><a id="tocTxtDriverConfigurationSubscriberWriters" href="#txtdriver_configuration_subscriber_writers">File Writer parameters</a></li>
-			<li><a id="tocTxtDriverConfigurationSubscriberOthers" href="#txtdriver_configuration_subscriber_others">Other Subscriber parameters</a></li>
+			<li><a href="#txtdriver_configuration_subscriber_common">Common Subscriber Options</a></li>
+			<li><a href="#txtdriver_configuration_subscriber_bnf">New File Strategy</a></li>
+			<li><a href="#txtdriver_configuration_subscriber_namers">File Name Strategies</a></li>
+			<li><a href="#txtdriver_configuration_subscriber_writers">File Writer Strategies</a></li>
 		</ul>
 		<li><a id="tocTxtDriverConfigurationPublisher" href="#txtdriver_configuration_publisher">Publisher</a></li>
 		<ul>
-			<li><a id="tocTxtDriverConfigurationPublisherCommon" href="#txtdriver_configuration_publisher_common">Common Publisher parameters</a></li>
-			<li><a id="tocTxtDriverConfigurationPublisherReaders" href="#txtdriver_configuration_publisher_readers">File Readers parameters</a></li>
-			<li><a id="tocTxtDriverConfigurationPublisherOthers" href="#txtdriver_configuration_publisher_others">Other Publisher parameters</a></li>
+			<li><a href="#txtdriver_configuration_publisher_common">Common Publisher Options</a></li>
+			<li><a href="#txtdriver_configuration_publisher_locator_regexp">RegExp File Locator</a></li>
+			<li><a href="#txtdriver_configuration_publisher_sorter_prop">File Property Sorter</a></li>
+			<li><a href="#txtdriver_configuration_publisher_readers">File Read Strategies</a></li>
+			<li><a href="#txtdriver_configuration_publisher_logging_csv">CSV Logger</a></li>
+			<li><a href="#txtdriver_configuration_publisher_cleaners">File Clean Strategies</a></li>
 		</ul>
 	</ul>
 </p>
@@ -1645,30 +1685,29 @@ Extend the status message to include the variable pubLogMessage if valued.
 
 <div id="text_txtdriver_configuration_subscriber" class="content">
 <h3>Subscriber Configuration</h3>
-<p>The subscriber configuration is split up into 3 parts:</p>
+<p>The subscriber configuration has the following 4 sections to configure:</p>
 <ul>
 	<li><a href="#txtdriver_configuration_subscriber_common">Common Subscriber Options</a></li>
-	<li><a href="#txtdriver_configuration_subscriber_writers">File Writer</a>
+	<li><a href="#txtdriver_configuration_subscriber_bnf">New File Strategy</a></li>
+	<li><a href="#txtdriver_configuration_subscriber_namers">File Name Strategies</a>
 		<ul>
-			<li>CSVFileWriter</li>
-			<li>XMLFileWriter</li>
-			<li>XLSFileWriter</li>
+			<li><a href="#txtdriver_configuration_subscriber_namers_guid">GUID Filename Strategy</a></li>
+			<li><a href="#txtdriver_configuration_subscriber_namers_date">SimpleDateFormat Filename Strategy</a></li>
+			<li><a href="#txtdriver_configuration_subscriber_namers_ecma">Ecmascript Filename Strategy</a></li>
 		</ul>
 	</li>
-	<li><a href="#txtdriver_configuration_subscriber_others">Others</a>
+	<li><a href="#txtdriver_configuration_subscriber_writers">File Write Strategies</a>
 		<ul>
-			<li>BasicNewFileDecider</li>
-			<li>GUIDFileNameStrategy</li>
-			<li>SimpleDateFormatFileNameStrategy</li>
-			<li>EcmaScriptFileNameStrategy</li>
+			<li><a id="menuTxtDriverConfigurationSubscriberWritersCSV" href="#txtdriver_configuration_subscriber_writers_csv">CSV File Writer</a></li>
+			<li><a id="menuTxtDriverConfigurationSubscriberWritersXML" href="#txtdriver_configuration_subscriber_writers_xml">XML File Writer</a></li>
+			<li><a id="menuTxtDriverConfigurationSubscriberWritersXLS" href="#txtdriver_configuration_subscriber_writers_xls">XLS File Writer</a></li>
 		</ul>
 	</li>
 </ul>
-
 </div>
 
 <div id="text_txtdriver_configuration_subscriber_common" class="content">
-<h3>Subscriber Configuration</h3>
+<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
 <h4>Common Subscriber Options</h4>
 <p>These options are common for the subscriber, independent of the strategies used.</p>
 <table>
@@ -1688,9 +1727,9 @@ Extend the status message to include the variable pubLogMessage if valued.
 			<p>sub_FileStartStrategy</p>
 		</td>
 		<td>
-			<p>Subscriber:
-			File Start Strategy (Class):<br>Current
-			implementations:<br>info.vancauwenberge.filedriver.filestart.BasicNewFileDecider</p>
+			<p>File Start Strategy (Class):<br>
+			Current implementations:<br>
+			info.vancauwenberge.filedriver.filestart.<a href="#txtdriver_configuration_subscriber_bnf">BasicNewFileDecider</a></p>
 		</td>
 		<td>
 			<p>info.vancauwenberge.filedriver.filestart.BasicNewFileDecider</p>
@@ -1701,10 +1740,10 @@ Extend the status message to include the variable pubLogMessage if valued.
 			<p>sub_FileNameStrategy</p>
 		</td>
 		<td>
-			<p style="margin-bottom: 0cm">Subscriber:
-			File Name Strategy (Class):<br>Current
-			implementations:<br>info.vancauwenberge.filedriver.filename.GUIDFileNameStrategy<br>info.vancauwenberge.filedriver.filename.SimpleDateFormatFileNameStrategy</p>
-			<p>info.vancauwenberge.filedriver.filename.EcmaScriptFileNameStrategy</p>
+			<p style="margin-bottom: 0cm">File Name Strategy (Class):<br>Current implementations:<br>
+			info.vancauwenberge.filedriver.filename.<a href="#txtdriver_configuration_subscriber_namers_guid">GUIDFileNameStrategy</a><br>
+			info.vancauwenberge.filedriver.filename.<a href="#txtdriver_configuration_subscriber_namers_date">SimpleDateFormatFileNameStrategy</a></br>
+			info.vancauwenberge.filedriver.filename.<a href="#txtdriver_configuration_subscriber_namers_ecma">EcmaScriptFileNameStrategy</a></p>
 		</td>
 		<td>
 			<p>info.vancauwenberge.filedriver.filename.SimpleDateFormatFileNameStrategy</p>
@@ -1715,9 +1754,10 @@ Extend the status message to include the variable pubLogMessage if valued.
 			<p>sub_FileWriteStrategy</p>
 		</td>
 		<td>
-			<p>Subscriber:
-			File Write Strategy (Class):<br>Current
-			implementations:<br>info.vancauwenberge.filedriver.filewriter.CSVFileWriter<br>info.vancauwenberge.filedriver.filewriter.XMLFileWriter<br>info.vancauwenberge.filedriver.filewriter.XLSFileWriter</p>
+			<p>File Write Strategy (Class):<br>Current implementations:<br>
+			info.vancauwenberge.filedriver.filewriter.<a href="#txtdriver_configuration_subscriber_writers_csv">CSVFileWriter</a><br>
+			info.vancauwenberge.filedriver.filewriter.<a href="#txtdriver_configuration_subscriber_writers_xml">XMLFileWriter</a><br>
+			info.vancauwenberge.filedriver.filewriter.<a href="#txtdriver_configuration_subscriber_writers_xls">XLSFileWriter</a></p>
 		</td>
 		<td>
 			<p>info.vancauwenberge.filedriver.filewriter.XMLFileWriter</p>
@@ -1728,14 +1768,10 @@ Extend the status message to include the variable pubLogMessage if valued.
 			<p>sub_WorkDir</p>
 		</td>
 		<td>
-			<p>Subscriber:
-			Work directory. All files will be created initially in the
-			directory. When the files are closed, they are moved to the
-			sub_DestFolder.</p>
+			<p>Work directory. All files will be created initially in the directory. When the files are closed, they are moved to the sub_DestFolder.</p>
 		</td>
 		<td>
-			<p>C:\workspace\DirXMLFileD
-			river\temp</p>
+			<p>C:\workspace\DirXMLFileDriver\temp</p>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -1743,8 +1779,7 @@ Extend the status message to include the variable pubLogMessage if valued.
 			<p>sub_DestFolder</p>
 		</td>
 		<td>
-			<p>Subscriber:
-			Destination directory:</p>
+			<p>Destination directory:</p>
 		</td>
 		<td>
 			<p>C:\workspace\DirXMLFileDriver</p>
@@ -1753,8 +1788,8 @@ Extend the status message to include the variable pubLogMessage if valued.
 </table>
 </div>
 
-<div id="text_txtdriver_configuration_subscriber_others" class="content">
-<h4>Strategy-specific Subscriber Options</h4>
+<div id="text_txtdriver_configuration_subscriber_bnf" class="content">
+<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
 <h5>BasicNewFileDecider</h5>
 <p>This strategy decides when a new file should be started. The BasicNewFileDecider has several options included: maximum number of records, maximum age of the file, idle time or a manual control based on a field in the Add event received.</p>
 <table>
@@ -1858,6 +1893,22 @@ Extend the status message to include the variable pubLogMessage if valued.
 		</td>
 	</tr>
 </table>
+</div>
+
+<div id="text_txtdriver_configuration_subscriber_namers" class="content">
+<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Name Strategies</h4>
+<p>File name strategies define how the name of the outputfile is defined. The following strategies are supported:</p>
+<ul>
+	<li><a href="#txtdriver_configuration_subscriber_namers_guid">GUID Filename Strategy</a></li>
+	<li><a href="#txtdriver_configuration_subscriber_namers_date">SimpleDateFormat Filename Strategy</a></li>
+	<li><a href="#txtdriver_configuration_subscriber_namers_ecma">Ecmascript Filename Strategy</a></li>
+</ul>
+</div>
+
+<div id="text_txtdriver_configuration_subscriber_namers_guid" class="content">
+<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Name Strategies<a href="#txtdriver_configuration_subscriber_namers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
 <h5>GUIDFileNameStrategy</h5>
 <p>The GUIDFileNameStrategy generates filenames containing a unique GUID. You have the option to prefix the GUID and to postfix the GUID. The postfix is typically a file extentions. The new filename will be &lt;prefix>GUID&lt;postfix></p>
 <table>
@@ -1897,8 +1948,13 @@ Extend the status message to include the variable pubLogMessage if valued.
 		</td>
 	</tr>
 </table>
+</div>
+
+<div id="text_txtdriver_configuration_subscriber_namers_date" class="content">
+<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Name Strategies<a href="#txtdriver_configuration_subscriber_namers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
 <h5>SimpleDateFormatFileNameStrategy</h5>
-<p>The SimpleDateFormatFileNameStrategy generates filesnames containing a date/time. Internally, a SimpleDateFormat is used.</p>
+<p>The SimpleDateFormatFileNameStrategy generates filesnames containing a date/time. Internally, a <a href="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html">SimpleDateFormat</a> is used.</p>
 <table>
 	<tr valign="top">
 		<th width="16%">
@@ -1917,7 +1973,7 @@ Extend the status message to include the variable pubLogMessage if valued.
 		</td>
 		<td>
 			<p>Date
-			FileNamer: Date format string(according to java.util.SimpleDateFormat).</p>
+			FileNamer: Date format string(according to <a href="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html">java.util.SimpleDateFormat</a>).</p>
 		</td>
 		<td>
 			<p>'NEW'_'FILE'_yyyyMMdd-HHmmssSSS.'out'</p>
@@ -1939,6 +1995,11 @@ Extend the status message to include the variable pubLogMessage if valued.
 		</td>
 	</tr>
 </table>
+</div>
+
+<div id="text_txtdriver_configuration_subscriber_namers_ecma" class="content">
+<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Name Strategies<a href="#txtdriver_configuration_subscriber_namers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
 <h5>EcmaScriptFileNameStrategy</h5>
 <p>The EcmaScriptFileNameStrategy uses an ECMA script expression to generate the file name. All record fields are defined as contextual parameters in the ECMA script.</p>
 <p>Eg: if your schema has a field ‘Email’, you can write the ECMA script Email+”.csv”, generating a file name like test@example.com.csv.</p>
@@ -1970,6 +2031,20 @@ Extend the status message to include the variable pubLogMessage if valued.
 </div>
 
 <div id="text_txtdriver_configuration_subscriber_writers" class="content">
+<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Write Strategies</h4>
+<p>File writer strategies define the format of the file written. The following formats are supported out of the box:
+<ul>
+	<li><a id="menuTxtDriverConfigurationSubscriberWritersCSV" href="#txtdriver_configuration_subscriber_writers_csv">CSV File Writer</a></li>
+	<li><a id="menuTxtDriverConfigurationSubscriberWritersXML" href="#txtdriver_configuration_subscriber_writers_xml">XML File Writer</a></li>
+	<li><a id="menuTxtDriverConfigurationSubscriberWritersXLS" href="#txtdriver_configuration_subscriber_writers_xls">XLS File Writer</a></li>
+</ul>
+</p>
+</div>
+
+<div id="text_txtdriver_configuration_subscriber_writers_csv" class="content">
+<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Write Strategies<a href="#txtdriver_configuration_subscriber_writers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
 <h5>CSVFileWriter</h5>
 <p>The CSVFileWriter writes records in a CSV format. You can specify the seperator independent from the seperator from the CSV reader.</p>
 <table>
@@ -2021,6 +2096,11 @@ Extend the status message to include the variable pubLogMessage if valued.
 		</td>
 	</tr>
 </table>
+</div>
+
+<div id="text_txtdriver_configuration_subscriber_writers_xml" class="content">
+<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Write Strategies<a href="#txtdriver_configuration_subscriber_writers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
 <h5>XMLFileWriter</h5>
 <p>The XMLFileWriter writes the data in an XML file. The format is the same is what is expected in the XMLFileReader. Optionally a post xslt can be applied to get a different format.</p>
 <table>
@@ -2109,6 +2189,11 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 		</td>
 	</tr>
 </table>
+</div>
+
+<div id="text_txtdriver_configuration_subscriber_writers_xls" class="content">
+<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Write Strategies<a href="#txtdriver_configuration_subscriber_writers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
 <h5>XLSFileWriter</h5>
 <p>The XLSFileWriter writes all records into one sheet(tab) of an XLS file.</p>
 <p>Note: this was not (re)tested recently. The original development and POI jar was way back around 2006. If you have any experience with the XLSFileWriter, please let me know.</p>
@@ -2152,6 +2237,7 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 </div>
 
 <div id="text_txtdriver_configuration_publisher_common" class="content">
+<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
 <h4>Common Publisher Options</h4>
 <p>These options are for the publisher, independent of any strategy used.</p>
 <table>
@@ -2203,7 +2289,7 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 			<p>Publisher: File Locator Strategy (Class): </p>
 			<p><b>Current implementations:</b>
 			<ul>
-			<li>info.vancauwenberge.filedriver. filelocator.RegExpFileLocator</li>
+			<li>info.vancauwenberge.filedriver. filelocator.<a href="#txtdriver_configuration_publisher_locator_regexp">RegExpFileLocator</a></li>
 			</ul>
 			</p>
 		</td>
@@ -2219,7 +2305,7 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 			<p>Publisher: File Sorter Strategy (Class). Leave empty for no sorting:</p>
 			<p><b>Current implementations:</b>
 			<ul>
-			<li>info.vancauwenberge.filedriver.filesorter.FilePropertySorter</li>
+			<li>info.vancauwenberge.filedriver.filesorter.<a href="#txtdriver_configuration_publisher_sorter_prop">FilePropertySorter</a></li>
 			</ul>
 			</p>
 		</td>
@@ -2232,14 +2318,14 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 			<p>pub_fileReader</p>
 		</td>
 		<td>
-			<p>Publisher: File Reader Strategy (Class): </p>
+			<p>Publisher: File Read Strategy (Class): </p>
 			<p><b>Current implementations:</b>
 			<ul>
-			<li>info.vancauwenberge.filedriver.filereader.csv.CSVFileReader</li>
-			<li>info.vancauwenberge.filedriver.filereader.xml.XMLFileReader</li>
-			<li>info.vancauwenberge.filedriver.filereader.xls.XLSFileReader</li>
-			<li>info.vancauwenberge.filedriver.filereader.image.ImageFileReader</li>
-			<li>info.vancauwenberge.filedriver.filereader.raw.RawFileReader</li>
+			<li>info.vancauwenberge.filedriver.filereader.csv.<a href="#txtdriver_configuration_publisher_readers_csv">CSVFileReader</a></li>
+			<li>info.vancauwenberge.filedriver.filereader.xml.<a href="#txtdriver_configuration_publisher_readers_xml">XMLFileReader</a></li>
+			<li>info.vancauwenberge.filedriver.filereader.xls.<a href="#txtdriver_configuration_publisher_readers_xls">XLSFileReader</a></li>
+			<li>info.vancauwenberge.filedriver.filereader.image.<a href="#txtdriver_configuration_publisher_readers_image">ImageFileReader</a></li>
+			<li>info.vancauwenberge.filedriver.filereader.raw.<a href="#txtdriver_configuration_publisher_readers_raw">RawFileReader</a></li>
 			</ul>
 			</p>
 		</td>
@@ -2334,8 +2420,8 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 			<p>How should processed files be cleaned up.</p>
 			<p><b>Current implementations:</b>
 			<ul>
-			<li>info.vancauwenberge.filedriver.filepubclean.NoPubCleaningStrategy</li>
-			<li>info.vancauwenberge.filedriver.filepubclean.AgePubCleaningStrategy</li>
+			<li>info.vancauwenberge.filedriver.filepubclean.<a href="#txtdriver_configuration_publisher_cleaners_none">NoPubCleaningStrategy</a></li>
+			<li>info.vancauwenberge.filedriver.filepubclean.<a href="#txtdriver_configuration_publisher_cleaners_age">AgePubCleaningStrategy</a></li>
 			</ul>
 			</p>
 		</td>
@@ -2359,8 +2445,23 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 </table>
 </div>
 
-
 <div id="text_txtdriver_configuration_publisher_readers" class="content">
+<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Read Strategies</h4>
+<p>File readers define the format of the file that can be read. Currently supported formats are:
+	<ul>
+		<li><a href="#txtdriver_configuration_publisher_readers_csv">CSV File Reader</a></li>
+		<li><a href="#txtdriver_configuration_publisher_readers_xml">XML File Reader</a></li>
+		<li><a href="#txtdriver_configuration_publisher_readers_xls">XLS File Reader</a></li>
+		<li><a href="#txtdriver_configuration_publisher_readers_image">Image File Reader</a></li>
+		<li><a href="#txtdriver_configuration_publisher_readers_raw">Raw File Reader</a></li>
+	</ul>
+</p>
+</div>
+
+<div id="text_txtdriver_configuration_publisher_readers_csv" class="content">
+<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Read Strategies<a href="#txtdriver_configuration_publisher_readers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
 <h5>CSVFileReader</h5>
 <p>The CSVFileReader reads CSV files (with or without header). It has the option to skip empty lines, use a given seperator, use the header names (if any) instead of the given driver schema as field names, etc...</p>
 <table>
@@ -2441,7 +2542,11 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 		</td>
 	</tr>
 </table>
+</div>
 
+<div id="text_txtdriver_configuration_publisher_readers_xml" class="content">
+<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Read Strategies<a href="#txtdriver_configuration_publisher_readers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
 <h5>XMLFileReader</h5>
 <p>The XMLFileReader reads XML files. The expected format is ‘flat’:</p>
 <pre>
@@ -2540,7 +2645,11 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 		</td>
 	</tr>
 </table>
+</div>
 
+<div id="text_txtdriver_configuration_publisher_readers_xls" class="content">
+<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Read Strategies<a href="#txtdriver_configuration_publisher_readers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
 <h5>XLSFileReader</h5>
 <p>The XLS file reader reads 1 tab of an Excel sheet. This reader will read the complete XLS file in memory.</p>
 <p>Note: this was not (re)tested recently. The original development and POI jar was way back around 2006. If you have any experience with the XLSFileWriter, please let me know.</p>
@@ -2579,7 +2688,11 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 		</td>
 	</tr>
 </table>
+</div>
 
+<div id="text_txtdriver_configuration_publisher_readers_image" class="content">
+<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Read Strategies<a href="#txtdriver_configuration_publisher_readers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
 <h5>ImageFileReader</h5>
 <p>The Image file reader reads image files as supported by your java environment. By default, java supports PNG,GIF,JPEG and BMP. Since ImageReaders and Writers are java service (via SPI), this can be extended.<br/>
 The ImageFileReader generates the following predefined fields:
@@ -2718,7 +2831,11 @@ examples: png, gif, bmp, jpeg.</p>
 		</td>
 	</tr>
 </table>
+</div>
 
+<div id="text_txtdriver_configuration_publisher_readers_raw" class="content">
+<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Read Strategies<a href="#txtdriver_configuration_publisher_readers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
 <h5>RawFileReader</h5>
 <p>The Raw file reader reads arbitrary files, both binary and text files. The content is submitted as one attribute value.<br/>
 Files will be read (and base64 encoded) in memory. Be sure to have enough memory depending on your expected file size. It is possible to limit the size of the files.<br/>
@@ -2779,32 +2896,33 @@ Binary files will be base64 encoded. Text files will be read (using the given en
 
 <div id="text_txtdriver_configuration_publisher" class="content">
 <h3>Publisher Configuration</h3>
-<p>The publisher configuration is split up into 3 parts:</p>
+<p>The publisher configuration has the following options and strategies:</p>
 <ul>
 	<li><a href="#txtdriver_configuration_publisher_common">Common Publisher Options</a></li>
-	<li><a href="#txtdriver_configuration_publisher_readers">File Readers</a>
+	<li><a href="#txtdriver_configuration_publisher_locator_regexp">RegExp File Locator</a></li>
+	<li><a href="#txtdriver_configuration_publisher_sorter_prop">File Property Sorter</a></li>
+	<li><a href="#txtdriver_configuration_publisher_readers">File Read Strategies</a>
 		<ul>
-			<li>CSVFileReader</li>
-			<li>XMLFileReader</li>
-			<li>XLSFileReader</li>
-			<li>ImageFileReader</li>
-			<li>RawFileReader</li>
+			<li><a href="#txtdriver_configuration_publisher_readers_csv">CSV File Reader</a></li>
+			<li><a href="#txtdriver_configuration_publisher_readers_xml">XML File Reader</a></li>
+			<li><a href="#txtdriver_configuration_publisher_readers_xls">XLS File Reader</a></li>
+			<li><a href="#txtdriver_configuration_publisher_readers_image">Image File Reader</a></li>
+			<li><a href="#txtdriver_configuration_publisher_readers_raw">Raw File Reader</a></li>
 		</ul>
 	</li>
-	<li><a href="#txtdriver_configuration_publisher_others">Others</a>
+	<li><a href="#txtdriver_configuration_publisher_logging_csv">CSV Logger</a></li>
+	<li><a href="#txtdriver_configuration_publisher_cleaners">File Clean Strategies</a>
 		<ul>
-			<li>RegExpFileLocator Options</li>
-			<li>FilePropertySorter Options</li>
-			<li>NoPubCleaningStrategy</li>
-			<li>AgePubCleaningStrategy</li>
+			<li><a href="#txtdriver_configuration_publisher_cleaners_none">No Pub Cleaning Strategy</a></li>
+			<li><a href="#txtdriver_configuration_publisher_cleaners_age">Age Pub Cleaning Strategy</a></li>
 		</ul>
 	</li>
 </ul>
 </div>
 
 
-<div id="text_txtdriver_configuration_publisher_others" class="content">
-<h4>Strategy-specific Publisher Options</h4>
+<div id="text_txtdriver_configuration_publisher_locator_regexp" class="content">
+<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
 <h5>RegExpFileLocator Options</h5>
 <p>The RegExpFileLocator is responsible for finding files that need to be processed. The given implementation scans a source folder, and selects all files that match the given regular expression.</p>
 <table>
@@ -2845,7 +2963,10 @@ Binary files will be base64 encoded. Text files will be read (using the given en
 		</td>
 	</tr>
 </table>
+</div>
 
+<div id="text_txtdriver_configuration_publisher_sorter_prop" class="content">
+<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
 <h5>FilePropertySorter Options</h5>
 <p>The FilePropertySorter sorts the list of files returned by the file locator implementation, and sorts them (ascending or descending) on a given file property. The property can be any file attribute as exposed by the java file object.<p>
 <table>
@@ -2885,9 +3006,32 @@ Binary files will be base64 encoded. Text files will be read (using the given en
 		</td>
 	</tr>
 </table>
+</div>
 
+<div id="text_txtdriver_configuration_publisher_cleaners" class="content">
+<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Cleaners</a></h4>
+<p>The publisher cleaning strategy determines how the files received are actually removed from the file system. Following strategies are available:</p>
+<ul>
+	<li>File Clean Strategies:</a>
+		<ul>
+			<li><a href="#txtdriver_configuration_publisher_cleaners_none">No Pub Cleaning Strategy</a></li>
+			<li><a href="#txtdriver_configuration_publisher_cleaners_age">Age Pub Cleaning Strategy</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div id="text_txtdriver_configuration_publisher_cleaners_none" class="content">
+<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Cleaners<a href="#txtdriver_configuration_publisher_cleaners"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
 <h5>NoPubCleaningStrategy</h5>
 <p>This publisher cleaning strategy does not do any cleaning. All published files are kept on the system. This strategy has no parameters.</p>
+</div>
+
+<div id="text_txtdriver_configuration_publisher_cleaners_age" class="content">
+<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
+<h4>File Cleaners<a href="#txtdriver_configuration_publisher_cleaners"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
 <h5>AgePubCleaningStrategy</h5>
 <p>This publisher cleaning strategy removes files that are older (last modify date) than a certain age.</p>
 <table>
@@ -2948,7 +3092,11 @@ Binary files will be base64 encoded. Text files will be read (using the given en
 		</td>
 	</tr>
 </table>
+</div>
 
+
+<div id="text_txtdriver_configuration_publisher_common" class="content">
+<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
 <h5>Common logging options</h5>
 <p>These are common logging settings for all publisher loggers (only one for now). Logging on the publisher channel will generate a log record for every status message received as a result of an add or modify event generated on the publisher channel.</p>
 <table>
@@ -3023,7 +3171,10 @@ Binary files will be base64 encoded. Text files will be read (using the given en
 		</td>
 	</tr>
 </table>
+</div>
 
+<div id="text_txtdriver_configuration_publisher_logging_csv" class="content">
+<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
 <h5>CSVLogger options</h5>
 <p>The Publisher CSVLogger will write the publisher logger to a CSV formatted file.</p>
 <table>
