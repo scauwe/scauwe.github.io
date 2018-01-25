@@ -182,6 +182,52 @@ label {
 	line-height:25px;
 }
 
+##breadcrum##
+#navcontainer { margin-left: 30px; }
+
+/*Fat Erik's Breadcrumbs*/
+#navlist
+{
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+#navlist li
+{
+display: inline;
+padding: 0;
+margin: 0;
+}
+
+#navlist li:before { content: "> "; }
+#navlist li:first-child:before { content: ""; }
+
+/*IE workaround*/
+/*All IE browsers*/
+* html #navlist li
+{
+background-image: url("images/gt.gif");
+background-repeat: no-repeat;
+background-position: 0 50%;
+padding: 0 0.5em 0 1em;
+margin: 0 1em 0 -1em;
+}
+
+/*Win IE browsers - hide from Mac IE\*/
+* html #navlist { height: 1%; }
+
+* html #navlist li
+{
+display: block;
+float: left;
+}
+
+/*End hide*/
+/*Mac IE 5*/
+* html #navlist li:first-child { background-image: none; }
+
+
 </style>
 <!--[if lt IE 7]>
 	<style media="screen" type="text/css">
@@ -448,11 +494,17 @@ $(document).ready(function(){
 														<li><a id="menuTxtDriverConfigurationPublisherReadersRaw" href="#txtdriver_configuration_publisher_readers_raw">Raw File Reader</a></li>
 													</ul>
 												</li>
-												<li><a id="menuTxtDriverConfigurationPublisherLoggingCSV" href="#txtdriver_configuration_publisher_logging_csv">CSV Logger</a></li>
+												
+												<li><a id="menuTxtDriverConfigurationPublisherLogging" href="#txtdriver_configuration_publisher_logger">Logging</a>
+													<ul>
+														<li><a id="menuTxtDriverConfigurationPublisherLoggingCommon" href="#txtdriver_configuration_publisher_logger_common">Common Option</a></li>
+														<li><a id="menuTxtDriverConfigurationPublisherLoggingCSV" href="#txtdriver_configuration_publisher_logging_csv">CSV Logger</a></li>
+													</ul>
+												</li>
 												<li><a id="menuTxtDriverConfigurationPublisherCleaners" href="#txtdriver_configuration_publisher_cleaners">File Clean Strategies</a>
 													<ul>
-														<li><a id="menuTxtDriverConfigurationPublisherCleanersNone" href="#txtdriver_configuration_publisher_cleaners_none">No Pub Cleaning Strategy</a></li>
-														<li><a id="menuTxtDriverConfigurationPublisherCleanersAge" href="#txtdriver_configuration_publisher_cleaners_age">Age Pub Cleaning Strategy</a></li>
+														<li><a id="menuTxtDriverConfigurationPublisherCleanersNone" href="#txtdriver_configuration_publisher_cleaners_none">No Cleaning Strategy</a></li>
+														<li><a id="menuTxtDriverConfigurationPublisherCleanersAge" href="#txtdriver_configuration_publisher_cleaners_age">Age Cleaning Strategy</a></li>
 													</ul>
 												</li>
 											</ul>
@@ -1356,12 +1408,10 @@ ldap paged search is somehow not fully implemented in eDirectory. Some ldap sear
 				<li><a id="tocTxtDriverConfigurationDriver" href="#txtdriver_configuration_driver">Driver</a></li>
 				<li><a id="tocTxtDriverConfigurationSubscriber" href="#txtdriver_configuration_publisher">Subscriber</a></li>
 				<ul>
-					<li><a href="#txtdriver_configuration_publisher_common">Common Publisher Options</a></li>
-					<li><a href="#txtdriver_configuration_publisher_locator_regexp">RegExp File Locator</a></li>
-					<li><a href="#txtdriver_configuration_publisher_sorter_prop">File Property Sorter</a></li>
-					<li><a href="#txtdriver_configuration_publisher_readers">File Read Strategies</a></li>
-					<li><a href="#txtdriver_configuration_publisher_logging_csv">CSV Logger</a></li>
-					<li><a href="#txtdriver_configuration_publisher_cleaners">File Clean Strategies</a></li>
+					<li><a href="#txtdriver_configuration_subscriber_common">Common Subscriber Options</a></li>
+					<li><a href="#txtdriver_configuration_subscriber_bnf">New File Strategy</a></li>
+					<li><a href="#txtdriver_configuration_subscriber_namers">File Name Strategies</a></li>
+					<li><a href="#txtdriver_configuration_subscriber_writers">File Write Strategies</a></li>
 				</ul>
 				<li><a id="tocTxtDriverConfigurationPublisher" href="#txtdriver_configuration_publisher">Publisher</a></li>
 				<ul>
@@ -1369,7 +1419,7 @@ ldap paged search is somehow not fully implemented in eDirectory. Some ldap sear
 					<li><a href="#txtdriver_configuration_publisher_locator_regexp">RegExp File Locator</a></li>
 					<li><a href="#txtdriver_configuration_publisher_sorter_prop">File Property Sorter</a></li>
 					<li><a href="#txtdriver_configuration_publisher_readers">File Read Strategies</a></li>
-					<li><a href="#txtdriver_configuration_publisher_logging_csv">CSV Logger</a></li>
+					<li><a href="#txtdriver_configuration_publisher_logger">Logging Option</a></li>
 					<li><a href="#txtdriver_configuration_publisher_cleaners">File Clean Strategies</a></li>
 				</ul>
 			</ul>
@@ -1379,6 +1429,22 @@ ldap paged search is somehow not fully implemented in eDirectory. Some ldap sear
 
 
 <div id="text_txtdriver_intro" class="content">
+
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_intro" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_intro">
+				<span itemprop="name">Introduction</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+	</ul>
+</div>
+
 <h3>Introduction</h3>
 <p>The Generic File Driver is similar to the Text Driver shipped with IDM, but has more options, and has the capability to read virtually any file type. Out of the box, the following file types are supported: XML, CSV and XLS (the latter using POI from Apache).</p>
 <p>
@@ -1399,6 +1465,20 @@ Main differentiators to NetIQ's driver:
 
 
 <div id="text_txtdriver_history" class="content">
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_history" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_history">
+				<span itemprop="name">Version History</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+	</ul>
+</div>
 <h3>Version History</h3>
 <h4>version 1.1, 17-JAN-2018 (package 0.9, sample config package 0.1)</h4>
 		<ul>
@@ -1493,6 +1573,20 @@ See the <a href="http://www.novell.com/coolsolutions/tools/18671.html">reference
 
 
 <div id="text_txtdriver_installation" class="content">
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_installation" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_installation">
+				<span itemprop="name">Installation</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+	</ul>
+</div>
 <h3>Installation</h3>
 <p>I am in the process of migrating all my plugins to <a href="https://github.com/scauwe/">github</a>, including an automated update site. This plugin is however not yet migrated (and since it also contains a shim will never be 100% available via an Eclipse/Designer update site). Download is available from <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/generic-file-driver-idm-v-003/"  target="_blank">Cool solutions</a>.</p>
 <p>The file attached to the Cool Solution (GenFileDriver_xxx.zip) contains (beside some documentation) all required jar files (the actual shim and 2 packages) and a lib folder. The lib folder contains some optional jars.</p>
@@ -1520,6 +1614,20 @@ This folder contains some optional jars. These are only required if you plan to 
 
 
 <div id="text_txtdriver_policies" class="content">
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_policies" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_policies">
+				<span itemprop="name">Policies</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+	</ul>
+</div>
 <h3>Policies</h3>
 <p>This driver only has 6 policies; all of them for the publisher channel. 3 of the policies are purely for the publisher logfile generation, the 3 others are traditional publisher policies (matching, creation and placement).  If required, you could add the password policies as available from the standard text driver.</p>
 
@@ -1555,6 +1663,20 @@ Extend the status message to include the variable pubLogMessage if valued.
 
 
 <div id="text_txtdriver_configuration" class="content">
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+	</ul>
+</div>
 <h3>Configuration</h3>
 <p>All configuration options should have a good description. For completeness, the configuration is also described here:</p>
 <p>
@@ -1565,7 +1687,7 @@ Extend the status message to include the variable pubLogMessage if valued.
 			<li><a href="#txtdriver_configuration_subscriber_common">Common Subscriber Options</a></li>
 			<li><a href="#txtdriver_configuration_subscriber_bnf">New File Strategy</a></li>
 			<li><a href="#txtdriver_configuration_subscriber_namers">File Name Strategies</a></li>
-			<li><a href="#txtdriver_configuration_subscriber_writers">File Writer Strategies</a></li>
+			<li><a href="#txtdriver_configuration_subscriber_writers">File Write Strategies</a></li>
 		</ul>
 		<li><a id="tocTxtDriverConfigurationPublisher" href="#txtdriver_configuration_publisher">Publisher</a></li>
 		<ul>
@@ -1573,7 +1695,7 @@ Extend the status message to include the variable pubLogMessage if valued.
 			<li><a href="#txtdriver_configuration_publisher_locator_regexp">RegExp File Locator</a></li>
 			<li><a href="#txtdriver_configuration_publisher_sorter_prop">File Property Sorter</a></li>
 			<li><a href="#txtdriver_configuration_publisher_readers">File Read Strategies</a></li>
-			<li><a href="#txtdriver_configuration_publisher_logging_csv">CSV Logger</a></li>
+			<li><a href="#txtdriver_configuration_publisher_logger">Logging Option</a></li>
 			<li><a href="#txtdriver_configuration_publisher_cleaners">File Clean Strategies</a></li>
 		</ul>
 	</ul>
@@ -1584,6 +1706,25 @@ Extend the status message to include the variable pubLogMessage if valued.
 
 
 <div id="text_txtdriver_configuration_driver" class="content">
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_driver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_driver">
+				<span itemprop="name">Driver</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+	</ul>
+</div>
 <h3>Driver Configuration</h3>
 <table>
 	<tr valign="top">
@@ -1684,6 +1825,25 @@ Extend the status message to include the variable pubLogMessage if valued.
 
 
 <div id="text_txtdriver_configuration_subscriber" class="content">
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber">
+				<span itemprop="name">Subscriber Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+	</ul>
+</div>
 <h3>Subscriber Configuration</h3>
 <p>The subscriber configuration has the following 4 sections to configure:</p>
 <ul>
@@ -1707,8 +1867,31 @@ Extend the status message to include the variable pubLogMessage if valued.
 </div>
 
 <div id="text_txtdriver_configuration_subscriber_common" class="content">
-<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>Common Subscriber Options</h4>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber">
+				<span itemprop="name">Subscriber Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_common" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_common">
+				<span itemprop="name">Common Subscriber Options</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+	</ul>
+</div>
+<h3>Common Subscriber Options</h3>
 <p>These options are common for the subscriber, independent of the strategies used.</p>
 <table>
 	<tr valign="top">
@@ -1789,8 +1972,31 @@ Extend the status message to include the variable pubLogMessage if valued.
 </div>
 
 <div id="text_txtdriver_configuration_subscriber_bnf" class="content">
-<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h5>BasicNewFileDecider</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber">
+				<span itemprop="name">Subscriber Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_bnf" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_bnf">
+				<span itemprop="name">Basic New File Decider</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+	</ul>
+</div>
+<h3>Basic New File Decider</h3>
 <p>This strategy decides when a new file should be started. The BasicNewFileDecider has several options included: maximum number of records, maximum age of the file, idle time or a manual control based on a field in the Add event received.</p>
 <table>
 	<tr valign="top">
@@ -1896,8 +2102,31 @@ Extend the status message to include the variable pubLogMessage if valued.
 </div>
 
 <div id="text_txtdriver_configuration_subscriber_namers" class="content">
-<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Name Strategies</h4>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber">
+				<span itemprop="name">Subscriber Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_namers" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_namers">
+				<span itemprop="name">File Name Strategies</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+	</ul>
+</div>
+<h3>File Name Strategies</h3>
 <p>File name strategies define how the name of the outputfile is defined. The following strategies are supported:</p>
 <ul>
 	<li><a href="#txtdriver_configuration_subscriber_namers_guid">GUID Filename Strategy</a></li>
@@ -1907,9 +2136,37 @@ Extend the status message to include the variable pubLogMessage if valued.
 </div>
 
 <div id="text_txtdriver_configuration_subscriber_namers_guid" class="content">
-<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Name Strategies<a href="#txtdriver_configuration_subscriber_namers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
-<h5>GUIDFileNameStrategy</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber">
+				<span itemprop="name">Subscriber Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_namers" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_namers">
+				<span itemprop="name">File Name Strategies</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_namers_guid" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_namers_guid">
+				<span itemprop="name">GUID File Name Strategy</span>
+			</a><meta itemprop="position" content="5" />
+		</li>
+	</ul>
+</div>
+
+<h3>GUIDFileNameStrategy</h3>
 <p>The GUIDFileNameStrategy generates filenames containing a unique GUID. You have the option to prefix the GUID and to postfix the GUID. The postfix is typically a file extentions. The new filename will be &lt;prefix>GUID&lt;postfix></p>
 <table>
 	<tr valign="top">
@@ -1951,9 +2208,36 @@ Extend the status message to include the variable pubLogMessage if valued.
 </div>
 
 <div id="text_txtdriver_configuration_subscriber_namers_date" class="content">
-<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Name Strategies<a href="#txtdriver_configuration_subscriber_namers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
-<h5>SimpleDateFormatFileNameStrategy</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber">
+				<span itemprop="name">Subscriber Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_namers" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_namers">
+				<span itemprop="name">File Name Strategies</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_namers_date" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_namers_date">
+				<span itemprop="name">SimpleDateFormat File Name Strategy</span>
+			</a><meta itemprop="position" content="5" />
+		</li>
+	</ul>
+</div>
+<h3>SimpleDateFormat File Name Strategy</h3>
 <p>The SimpleDateFormatFileNameStrategy generates filesnames containing a date/time. Internally, a <a href="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html">SimpleDateFormat</a> is used.</p>
 <table>
 	<tr valign="top">
@@ -1998,9 +2282,37 @@ Extend the status message to include the variable pubLogMessage if valued.
 </div>
 
 <div id="text_txtdriver_configuration_subscriber_namers_ecma" class="content">
-<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Name Strategies<a href="#txtdriver_configuration_subscriber_namers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
-<h5>EcmaScriptFileNameStrategy</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber">
+				<span itemprop="name">Subscriber Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_namers" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_namers">
+				<span itemprop="name">File Name Strategies</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_namers_ecma" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_namers_ecma">
+				<span itemprop="name">EcmaScript File Name Strategy</span>
+			</a><meta itemprop="position" content="5" />
+		</li>
+	</ul>
+</div>
+
+<h3>EcmaScript File Name Strategy</h3>
 <p>The EcmaScriptFileNameStrategy uses an ECMA script expression to generate the file name. All record fields are defined as contextual parameters in the ECMA script.</p>
 <p>Eg: if your schema has a field ‘Email’, you can write the ECMA script Email+”.csv”, generating a file name like test@example.com.csv.</p>
 <table>
@@ -2031,8 +2343,32 @@ Extend the status message to include the variable pubLogMessage if valued.
 </div>
 
 <div id="text_txtdriver_configuration_subscriber_writers" class="content">
-<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Write Strategies</h4>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber">
+				<span itemprop="name">Subscriber Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_writers" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_writers">
+				<span itemprop="name">File Write Strategies</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+	</ul>
+</div>
+
+<h3>File Write Strategies</h3>
 <p>File writer strategies define the format of the file written. The following formats are supported out of the box:
 <ul>
 	<li><a id="menuTxtDriverConfigurationSubscriberWritersCSV" href="#txtdriver_configuration_subscriber_writers_csv">CSV File Writer</a></li>
@@ -2043,9 +2379,36 @@ Extend the status message to include the variable pubLogMessage if valued.
 </div>
 
 <div id="text_txtdriver_configuration_subscriber_writers_csv" class="content">
-<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Write Strategies<a href="#txtdriver_configuration_subscriber_writers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
-<h5>CSVFileWriter</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber">
+				<span itemprop="name">Subscriber Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_writers" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_writers">
+				<span itemprop="name">File Write Strategies</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_writers_csv" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_writers_csv">
+				<span itemprop="name">CSV File Writer</span>
+			</a><meta itemprop="position" content="5" />
+		</li>
+	</ul>
+</div>
+<h3>CSV File Writer</h3>
 <p>The CSVFileWriter writes records in a CSV format. You can specify the seperator independent from the seperator from the CSV reader.</p>
 <table>
 	<tr valign="top">
@@ -2099,9 +2462,36 @@ Extend the status message to include the variable pubLogMessage if valued.
 </div>
 
 <div id="text_txtdriver_configuration_subscriber_writers_xml" class="content">
-<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Write Strategies<a href="#txtdriver_configuration_subscriber_writers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
-<h5>XMLFileWriter</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber">
+				<span itemprop="name">Subscriber Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_writers" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_writers">
+				<span itemprop="name">File Write Strategies</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_writers_xml" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_writers_xml">
+				<span itemprop="name">XML File Writer</span>
+			</a><meta itemprop="position" content="5" />
+		</li>
+	</ul>
+</div>
+<h3>XML File Writer</h3>
 <p>The XMLFileWriter writes the data in an XML file. The format is the same is what is expected in the XMLFileReader. Optionally a post xslt can be applied to get a different format.</p>
 <table>
 	<tr valign="top">
@@ -2192,9 +2582,36 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 </div>
 
 <div id="text_txtdriver_configuration_subscriber_writers_xls" class="content">
-<h3>Subscriber Configuration<a href="#txtdriver_configuration_subscriber"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Write Strategies<a href="#txtdriver_configuration_subscriber_writers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
-<h5>XLSFileWriter</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber">
+				<span itemprop="name">Subscriber Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_writers" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_writers">
+				<span itemprop="name">File Write Strategies</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_subscriber_writers_xls" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_subscriber_writers_xls">
+				<span itemprop="name">XLS File Writer</span>
+			</a><meta itemprop="position" content="5" />
+		</li>
+	</ul>
+</div>
+<h3>XLS File Writer</h3>
 <p>The XLSFileWriter writes all records into one sheet(tab) of an XLS file.</p>
 <p>Note: this was not (re)tested recently. The original development and POI jar was way back around 2006. If you have any experience with the XLSFileWriter, please let me know.</p>
 <table>
@@ -2237,8 +2654,32 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 </div>
 
 <div id="text_txtdriver_configuration_publisher_common" class="content">
-<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>Common Publisher Options</h4>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_common" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_common">
+				<span itemprop="name">Common Publisher Options</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+	</ul>
+</div>
+
+<h3>Common Publisher Options</h3>
 <p>These options are for the publisher, independent of any strategy used.</p>
 <table>
 	<tr valign="top">
@@ -2446,8 +2887,31 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 </div>
 
 <div id="text_txtdriver_configuration_publisher_readers" class="content">
-<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Read Strategies</h4>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_readers" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_readers">
+				<span itemprop="name">File Read Strategies</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+	</ul>
+</div>
+<h3>File Read Strategies</h3>
 <p>File readers define the format of the file that can be read. Currently supported formats are:
 	<ul>
 		<li><a href="#txtdriver_configuration_publisher_readers_csv">CSV File Reader</a></li>
@@ -2460,9 +2924,36 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 </div>
 
 <div id="text_txtdriver_configuration_publisher_readers_csv" class="content">
-<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Read Strategies<a href="#txtdriver_configuration_publisher_readers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
-<h5>CSVFileReader</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_readers" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_readers">
+				<span itemprop="name">File Read Strategies</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_readers_csv" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_readers_csv">
+				<span itemprop="name">CSV File Reader</span>
+			</a><meta itemprop="position" content="5" />
+		</li>
+	</ul>
+</div>
+<h3>CSV File Reader</h3>
 <p>The CSVFileReader reads CSV files (with or without header). It has the option to skip empty lines, use a given seperator, use the header names (if any) instead of the given driver schema as field names, etc...</p>
 <table>
 	<tr valign="top">
@@ -2545,9 +3036,37 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 </div>
 
 <div id="text_txtdriver_configuration_publisher_readers_xml" class="content">
-<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Read Strategies<a href="#txtdriver_configuration_publisher_readers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
-<h5>XMLFileReader</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_readers" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_readers">
+				<span itemprop="name">File Read Strategies</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_readers_xml" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_readers_xml">
+				<span itemprop="name">XML File Reader</span>
+			</a><meta itemprop="position" content="5" />
+		</li>
+	</ul>
+</div>
+
+<h3>XML File Reader</h3>
 <p>The XMLFileReader reads XML files. The expected format is ‘flat’:</p>
 <pre>
 &lt;root>
@@ -2648,9 +3167,36 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 </div>
 
 <div id="text_txtdriver_configuration_publisher_readers_xls" class="content">
-<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Read Strategies<a href="#txtdriver_configuration_publisher_readers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
-<h5>XLSFileReader</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_readers" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_readers">
+				<span itemprop="name">File Read Strategies</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_readers_xls" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_readers_xls">
+				<span itemprop="name">XLS File Reader</span>
+			</a><meta itemprop="position" content="5" />
+		</li>
+	</ul>
+</div>
+<h3>XLS File Reader</h3>
 <p>The XLS file reader reads 1 tab of an Excel sheet. This reader will read the complete XLS file in memory.</p>
 <p>Note: this was not (re)tested recently. The original development and POI jar was way back around 2006. If you have any experience with the XLSFileWriter, please let me know.</p>
 <table>
@@ -2691,9 +3237,36 @@ xmlns:fo=&quot;http://www.w3.org/1999/XSL/Format&quot;&gt;
 </div>
 
 <div id="text_txtdriver_configuration_publisher_readers_image" class="content">
-<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Read Strategies<a href="#txtdriver_configuration_publisher_readers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
-<h5>ImageFileReader</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_readers" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_readers">
+				<span itemprop="name">File Read Strategies</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_readers_image" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_readers_image">
+				<span itemprop="name">Image File Reader</span>
+			</a><meta itemprop="position" content="5" />
+		</li>
+	</ul>
+</div>
+<h5>Image File Reader</h5>
 <p>The Image file reader reads image files as supported by your java environment. By default, java supports PNG,GIF,JPEG and BMP. Since ImageReaders and Writers are java service (via SPI), this can be extended.<br/>
 The ImageFileReader generates the following predefined fields:
 <ul>
@@ -2834,9 +3407,36 @@ examples: png, gif, bmp, jpeg.</p>
 </div>
 
 <div id="text_txtdriver_configuration_publisher_readers_raw" class="content">
-<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Read Strategies<a href="#txtdriver_configuration_publisher_readers"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
-<h5>RawFileReader</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_readers" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_readers">
+				<span itemprop="name">File Read Strategies</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_readers_raw" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_readers_raw">
+				<span itemprop="name">Raw File Reader</span>
+			</a><meta itemprop="position" content="5" />
+		</li>
+	</ul>
+</div>
+<h5>Raw File Reader</h5>
 <p>The Raw file reader reads arbitrary files, both binary and text files. The content is submitted as one attribute value.<br/>
 Files will be read (and base64 encoded) in memory. Be sure to have enough memory depending on your expected file size. It is possible to limit the size of the files.<br/>
 The RawFileReader generates the following predefined fields:
@@ -2895,6 +3495,25 @@ Binary files will be base64 encoded. Text files will be read (using the given en
 
 
 <div id="text_txtdriver_configuration_publisher" class="content">
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+	</ul>
+</div>
 <h3>Publisher Configuration</h3>
 <p>The publisher configuration has the following options and strategies:</p>
 <ul>
@@ -2910,11 +3529,16 @@ Binary files will be base64 encoded. Text files will be read (using the given en
 			<li><a href="#txtdriver_configuration_publisher_readers_raw">Raw File Reader</a></li>
 		</ul>
 	</li>
-	<li><a href="#txtdriver_configuration_publisher_logging_csv">CSV Logger</a></li>
+	<li><a href="#txtdriver_configuration_publisher_logger">Logging option</a>
+		<ul>
+			<li><a href="#txtdriver_configuration_publisher_logger_common">Common Option</a></li>
+			<li><a href="#txtdriver_configuration_publisher_logging_csv">CSV Logger</a></li>
+		</ul>
+	</li>
 	<li><a href="#txtdriver_configuration_publisher_cleaners">File Clean Strategies</a>
 		<ul>
-			<li><a href="#txtdriver_configuration_publisher_cleaners_none">No Pub Cleaning Strategy</a></li>
-			<li><a href="#txtdriver_configuration_publisher_cleaners_age">Age Pub Cleaning Strategy</a></li>
+			<li><a href="#txtdriver_configuration_publisher_cleaners_none">No Cleaning Strategy</a></li>
+			<li><a href="#txtdriver_configuration_publisher_cleaners_age">Age Cleaning Strategy</a></li>
 		</ul>
 	</li>
 </ul>
@@ -2922,8 +3546,31 @@ Binary files will be base64 encoded. Text files will be read (using the given en
 
 
 <div id="text_txtdriver_configuration_publisher_locator_regexp" class="content">
-<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h5>RegExpFileLocator Options</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_locator_regexp" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_locator_regexp">
+				<span itemprop="name">RegExp File Locator Options</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+	</ul>
+</div>
+<h3>RegExp File Locator Options</h3>
 <p>The RegExpFileLocator is responsible for finding files that need to be processed. The given implementation scans a source folder, and selects all files that match the given regular expression.</p>
 <table>
 	<tr valign="top">
@@ -2966,8 +3613,31 @@ Binary files will be base64 encoded. Text files will be read (using the given en
 </div>
 
 <div id="text_txtdriver_configuration_publisher_sorter_prop" class="content">
-<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h5>FilePropertySorter Options</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_sorter_prop" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_sorter_prop">
+				<span itemprop="name">FileProperty Sorter Options</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+	</ul>
+</div>
+<h3>FileProperty Sorter Options</h3>
 <p>The FilePropertySorter sorts the list of files returned by the file locator implementation, and sorts them (ascending or descending) on a given file property. The property can be any file attribute as exposed by the java file object.<p>
 <table>
 	<tr valign="top">
@@ -3009,30 +3679,107 @@ Binary files will be base64 encoded. Text files will be read (using the given en
 </div>
 
 <div id="text_txtdriver_configuration_publisher_cleaners" class="content">
-<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Cleaners</a></h4>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_cleaners" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_cleaners">
+				<span itemprop="name">File Cleaners</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+	</ul>
+</div>
+<h3>File Cleaners</h3>
 <p>The publisher cleaning strategy determines how the files received are actually removed from the file system. Following strategies are available:</p>
 <ul>
 	<li>File Clean Strategies:</a>
 		<ul>
-			<li><a href="#txtdriver_configuration_publisher_cleaners_none">No Pub Cleaning Strategy</a></li>
-			<li><a href="#txtdriver_configuration_publisher_cleaners_age">Age Pub Cleaning Strategy</a></li>
+			<li><a href="#txtdriver_configuration_publisher_cleaners_none">No Cleaning Strategy</a></li>
+			<li><a href="#txtdriver_configuration_publisher_cleaners_age">Age Cleaning Strategy</a></li>
 		</ul>
 	</li>
 </ul>
 </div>
 
 <div id="text_txtdriver_configuration_publisher_cleaners_none" class="content">
-<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Cleaners<a href="#txtdriver_configuration_publisher_cleaners"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
-<h5>NoPubCleaningStrategy</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_cleaners" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_cleaners">
+				<span itemprop="name">File Cleaners</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_cleaners_none" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_cleaners_none">
+				<span itemprop="name">No Cleaning Strategy</span>
+			</a><meta itemprop="position" content="5" />
+		</li>
+	</ul>
+</div>
+<h3>No Cleaning Strategy</h3>
 <p>This publisher cleaning strategy does not do any cleaning. All published files are kept on the system. This strategy has no parameters.</p>
 </div>
 
 <div id="text_txtdriver_configuration_publisher_cleaners_age" class="content">
-<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h4>File Cleaners<a href="#txtdriver_configuration_publisher_cleaners"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h4>
-<h5>AgePubCleaningStrategy</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_cleaners" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_cleaners">
+				<span itemprop="name">File Cleaners</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_cleaners_age" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_cleaners_age">
+				<span itemprop="name">Age Cleaning Strategy</span>
+			</a><meta itemprop="position" content="5" />
+		</li>
+	</ul>
+</div>
+<h3>Age Cleaning Strategy</h3>
 <p>This publisher cleaning strategy removes files that are older (last modify date) than a certain age.</p>
 <table>
 	<tr valign="top">
@@ -3095,9 +3842,74 @@ Binary files will be base64 encoded. Text files will be read (using the given en
 </div>
 
 
-<div id="text_txtdriver_configuration_publisher_common" class="content">
-<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h5>Common logging options</h5>
+<div id="text_txtdriver_configuration_publisher_logger" class="content">
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_logger_common" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_logger_common">
+				<span itemprop="name">Logging</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+	</ul>
+</div>
+<h3>Logging</h3>
+<p>The publisher logging allows generating a log file for each file received. Log records contain the status received as a response to the add or modify XDS commands submitted by the shim.</p>
+<ul>
+	<li>Logging options:</a>
+		<ul>
+			<li><a href="#txtdriver_configuration_publisher_logger_common">Common Logging Options</a></li>
+			<li><a href="#txtdriver_configuration_publisher_logging_csv">CSV Logger Options</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div id="text_txtdriver_configuration_publisher_logger_common" class="content">
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_logger" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_logger">
+				<span itemprop="name">Logging</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_logger_common" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_logger_common">
+				<span itemprop="name">Common Logging Options</span>
+			</a><meta itemprop="position" content="5" />
+		</li>
+	</ul>
+</div>
+<h3>Common logging options</h3>
 <p>These are common logging settings for all publisher loggers (only one for now). Logging on the publisher channel will generate a log record for every status message received as a result of an add or modify event generated on the publisher channel.</p>
 <table>
 	<tr valign="top">
@@ -3163,7 +3975,7 @@ Binary files will be base64 encoded. Text files will be read (using the given en
 			<p>File Logging Strategy (object class implementing IPublisherLoggerStrategy). Determining how the publisher generates logfiles of the files processed.<br/>
 			<b>Current implementations: </b>
 			<ul>
-				<li>info.vancauwenberge.filedriver.filelogger.PublisherCSVLogger: Log to a CSV file</li>
+				<li>info.vancauwenberge.filedriver.filelogger.<a href="#txtdriver_configuration_publisher_logging_csv">PublisherCSVLogger</a>: Log to a CSV file</li>
 			</ul></p>
 		</td>
 		<td>
@@ -3174,8 +3986,36 @@ Binary files will be base64 encoded. Text files will be read (using the given en
 </div>
 
 <div id="text_txtdriver_configuration_publisher_logging_csv" class="content">
-<h3>Publisher Configuration<a href="#txtdriver_configuration_publisher"><img src="upArrow25.png" alt="Up" title="Go up"/></a></h3>
-<h5>CSVLogger options</h5>
+<div id="navcontainer">
+	<ul id="navlist" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver">
+				<span itemprop="name">Generic File Driver</span>
+			</a><meta itemprop="position" content="1" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration">
+				<span itemprop="name">Configuration</span>
+			</a><meta itemprop="position" content="2" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher">
+				<span itemprop="name">Publisher Configuration</span>
+			</a><meta itemprop="position" content="3" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_logger" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_logger">
+				<span itemprop="name">Logging</span>
+			</a><meta itemprop="position" content="4" />
+		</li>
+		<li id="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a href="#txtdriver_configuration_publisher_logging_csv" id="current" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="#txtdriver_configuration_publisher_logging_csv">
+				<span itemprop="name">CSV Logger Options</span>
+			</a><meta itemprop="position" content="5" />
+		</li>
+	</ul>
+</div>
+<h3>CSV Logger options</h3>
 <p>The Publisher CSVLogger will write the publisher logger to a CSV formatted file.</p>
 <table>
 	<tr valign="top">
