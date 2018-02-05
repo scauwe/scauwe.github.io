@@ -549,6 +549,23 @@ $(document).ready(function(){
 
 <div typeof="sioc:Item foaf:Document">
 	<div>
+		<div class="rssDate" property="dc:date dc:created" content="2018-02-047T00:00:00" datatype="xsd:dateTime" rel="sioc:has_creator">
+			<span>
+				<div class="month">Feb</div>
+				<div class="day">04</div>
+				<div class="year">2018</div>
+			</span>
+		</div>
+		<div class="rssTitle" property="dc:title">Association Editor, Version 0.4</div>
+	</div>
+	<div property="content:encoded">
+		<ul>
+			<li>Added support for Designer 4.6 LDAP and non-LDAP</li>
+		</ul>
+	</div>
+</div>
+<div typeof="sioc:Item foaf:Document">
+	<div>
 		<div class="rssDate" property="dc:date dc:created" content="2018-01-17T00:00:00" datatype="xsd:dateTime" rel="sioc:has_creator">
 			<span>
 				<div class="month">Jan</div>
@@ -1278,7 +1295,7 @@ Add a new update URL as defined above.</p>
 
 <div id="text_ae_installation" class="content">
 <h3>Installation</h3>
-<p>I am in the process of migrating all my plugins to <a href="https://github.com/scauwe/" target="_blank">github</a>, including an automated update site. This plugin is however not yet migrated. Download is available from <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/designer-association-modifier-plugin/" target="_blank">Cool solutions</a>. Cool solutions does not allow upload of jars, so rename the attached zip to .jar and copy the jar to the plugins folder of your designer and restart designer if already running. I tested this with Designer 4.0.1 and 4.0.2 in Linux and Windows.</p>
+<p>I am in the process of migrating all my plugins to <a href="https://github.com/scauwe/" target="_blank">github</a>, including an automated update site. This plugin is however not yet migrated. Download is available from <a href="https://www.netiq.com/communities/cool-solutions/cool_tools/designer-association-modifier-plugin/" target="_blank">Cool solutions</a>. Cool solutions does not allow upload of jars, so rename the attached zip to .jar and copy the jar to the plugins folder of your designer and restart designer if already running. I tested this with Designer 4.0.1 and 4.0.2 in Linux and Windows.Version 0.4 supports Designer 4.6 LDAP and non-LDAP.</p>
 </div>
 
 
@@ -1357,6 +1374,10 @@ After pressing start, a monitor dialog is displayed, showing the progress. Upon 
 
 <div id="text_ae_history" class="content">
 <h3>Version History</h3>
+Version 0.4, 04-Feb-2018
+<ul>
+	<li>Added support for Designer 4.6 LDAP and non-LDAP.</li>
+</ul>
 Version 0.3.1, 23-June-2015
 <ul>
 	<li>Bug fix: fixed issue with backslash during import of associations.</li>
