@@ -31,7 +31,7 @@ img {
 }
 #menuwrap{
 	position:relative;
-	width:810px;
+	width:1020px; /*810px;*/
 	max-width: 90%;			/*responsive design: set maximum width*/
 	margin-left: auto ;      /* center horizontal */
 	margin-right: auto ;     /* center horizontal */
@@ -39,7 +39,7 @@ img {
 }
 #footer {
 	position:absolute;
-	width:810px; 
+	width:1020px; /*810px;*/
 	max-width: 90%;			/*responsive design: set maximum width*/
 	bottom:0; 
 	height:4em;           /* little bit more than padding-bottom of content */
@@ -521,6 +521,15 @@ $(document).ready(function(){
 								<li><a id="menuUnlocHistory" href="#unlock_history">Version History</a></li>
 							</ul>
 						</li>
+						
+						<li>
+							<a id="menuTXTP" href="#txtp">Driver for Text Protocols</a>
+							<ul>
+								<li><a id="menuTXTPIntro" href="#txtp_Intro">Intro</a></li>
+								<li><a id="menuTXTPLicense" href="#txtp_License">License & Support</a></li>
+								<li><a id="menuTXTPDocumentation" href="#txtp_Documentation">Documentation</a></li>
+							</ul>
+						</li>
 						<li>
 							<a id="menuAbout" href="#about">About</a>
 							<ul>
@@ -546,10 +555,46 @@ $(document).ready(function(){
 <a target="_blank" href="https://www.subtome.com/#/subscribe?feeds=http://feeds.feedburner.com/VanCauwenbergeinfo"><img src="http://www.subtome.com/subtome-feedburner.png" alt="Add to SubToMe" title="Add to SubToMe"></a>
 
 </p>
-
 <div typeof="sioc:Item foaf:Document">
 	<div>
-		<div class="rssDate" property="dc:date dc:created" content="2018-02-047T00:00:00" datatype="xsd:dateTime" rel="sioc:has_creator">
+		<div class="rssDate" property="dc:date dc:created" content="2019-06-02T00:00:00" datatype="xsd:dateTime" rel="sioc:has_creator">
+			<span>
+				<div class="month">Jun</div>
+				<div class="day">02</div>
+				<div class="year">2019</div>
+			</span>
+		</div>
+		<div class="rssTitle" property="dc:title">Driver For Text Protocols, Version 1.0</div>
+	</div>
+	<div property="content:encoded">
+		<ul>
+			<li>Release of the non-open source Driver For Text Protocols, version 1.0</li>
+		</ul>
+	</div>
+</div>
+<div typeof="sioc:Item foaf:Document">
+	<div>
+		<div class="rssDate" property="dc:date dc:created" content="2018-12-11T00:00:00" datatype="xsd:dateTime" rel="sioc:has_creator">
+			<span>
+				<div class="month">Dec</div>
+				<div class="day">11</div>
+				<div class="year">2018</div>
+			</span>
+		</div>
+		<div class="rssTitle" property="dc:title">Generic file driver, Version 1.2 (base package 1.0, sample config package 0.1)</div>
+	</div>
+      
+	<div property="content:encoded">
+		<ul>
+			<li>Shim bug: Shim locked when an empty CSV file was published, and the driver was configured to use the schema from the CSV file (the shim waited for the schema forever).</li>
+			<li>Shim feature: Converted status to heartbeat events (to have the driverstorage updated).</li>
+			<li>Shim feature: Moving files now uses java 7 native move file method (and falls back to java 6 code when this fails). Note: shim is still compiled for older java 6 jre, but with java 7 source compatibility.</li>
+		</ul>
+	</div>
+</div>
+<div typeof="sioc:Item foaf:Document">
+	<div>
+		<div class="rssDate" property="dc:date dc:created" content="2018-02-04T00:00:00" datatype="xsd:dateTime" rel="sioc:has_creator">
 			<span>
 				<div class="month">Feb</div>
 				<div class="day">04</div>
@@ -1069,6 +1114,60 @@ $(document).ready(function(){
 </form>
 </p>
 </div>
+
+
+
+<!-- Driver For Text Protocols -->
+<!-- Driver For Text Protocols -->
+<!-- Driver For Text Protocols -->
+<div id="text_txtp" class="content">
+<h3>Driver For Text Protocols</h3>
+<ul>
+<li><a id="tocTXTPIntro" href="#txtp_Intro">Introduction</a></li>
+<li><a id="tocTXTPLicense" href="#txtp_License">License & Support</a></li>
+<li><a id="tocTXTPDocumentation" href="#txtp_Documentation">Documentation</a></li>
+</ul>
+</div>
+	
+<div id="text_txtp_Intro" class="content">
+<h3>Driver For Text Protocols - Introduction</h3>
+<p>The IDM connector for Text Protocols (universal) is a modular, template based shim, focused on text based protocols. Text base protocols are those protocols that are mainly used as a means to transfer the (text) content. As a result, the actual number of methods in the API’s are typically limited.</p>
+<p>
+Examples:
+<ul>
+<li>http: the content is for example the actual JSON, SOAP or XML message. Http is the means of transporting the content, with a limited number of API calls (PUT, GET, POST,…). Example: Google Apps</li>
+<li>Scripting: the content is the actual on the fly generated script. The protocol is the execution of the script. Example: Linux server account provisioning.
+This driver provides an extremely flexible but simple method to integrate with these text base protocols.</li>
+</ul>
+</p>
+<p>
+Flexibility and simplicity are provided via:
+
+
+<ul>
+<li>A plugable architecture in every important step of the process</li>
+<li>Javascript based configuration</li>
+<li>Velocity templates for formatting both the XDS and application commands (eliminates complex and hard to understand XSLT)</li>
+Example configuration for Google Apps (bidirectional) and Linux server account creation (subscriber) are provided.
+</p>
+<p>
+You can see how it works in the following short movie</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RE85MDpL9qg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<div id="text_txtp_License" class="content">
+<h3>Driver For Text Protocols - License & Support</h3>
+<p>The 'Driver For Text Protocols' is not open sourced. Please <a href="http://www.opns.be/#contact_us">contact OPNS</a> to get a quote, a demo version or to answer your questions. </p>
+</div>
+
+<div id="text_txtp_Documentation" class="content">
+<h3>Driver For Text Protocols - Documentation</h3>
+<p>All documentation is available <a href="http://www.opns.be/wp-content/uploads/sites/2/2019/06/Manual-1.0.pdf">online</a></p>
+<p>
+
+</p>
+</div>
+
 
 <!-- ENHANCED TRACE -->
 <!-- ENHANCED TRACE -->
